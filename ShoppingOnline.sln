@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingOnline.Client", "OnlineShoppingClothes.Client\ShoppingOnline.Client.csproj", "{301B7B9A-9AA5-4968-8BE1-647AD964712B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.DAL", "ShoppingOnline.DAL\ShoppingOnline.DAL.csproj", "{64CD4361-C31C-4648-886D-3AB52214AE15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.BLL", "ShoppingOnline.BLL\ShoppingOnline.BLL.csproj", "{F3E1DB45-20BC-4513-9E0C-456C2DD83884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.API", "ShoppingOnline.API\ShoppingOnline.API.csproj", "{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{D94E7321-BAE2-4D17-87C1-97935FB49D07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2ACE4D0B-7925-4DAB-88B6-4EA2E115B459}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7FADBFB8-B26E-48DE-AA66-DBDD39EE58D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{301B7B9A-9AA5-4968-8BE1-647AD964712B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301B7B9A-9AA5-4968-8BE1-647AD964712B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301B7B9A-9AA5-4968-8BE1-647AD964712B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301B7B9A-9AA5-4968-8BE1-647AD964712B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64CD4361-C31C-4648-886D-3AB52214AE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CD4361-C31C-4648-886D-3AB52214AE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CD4361-C31C-4648-886D-3AB52214AE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CD4361-C31C-4648-886D-3AB52214AE15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E1DB45-20BC-4513-9E0C-456C2DD83884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E1DB45-20BC-4513-9E0C-456C2DD83884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E1DB45-20BC-4513-9E0C-456C2DD83884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E1DB45-20BC-4513-9E0C-456C2DD83884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{301B7B9A-9AA5-4968-8BE1-647AD964712B} = {7FADBFB8-B26E-48DE-AA66-DBDD39EE58D7}
+		{64CD4361-C31C-4648-886D-3AB52214AE15} = {D94E7321-BAE2-4D17-87C1-97935FB49D07}
+		{F3E1DB45-20BC-4513-9E0C-456C2DD83884} = {D94E7321-BAE2-4D17-87C1-97935FB49D07}
+		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA} = {D94E7321-BAE2-4D17-87C1-97935FB49D07}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB38B0E7-3E68-4DC4-97CF-A7E10614A474}
+	EndGlobalSection
+EndGlobal
