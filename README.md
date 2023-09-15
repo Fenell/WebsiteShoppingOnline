@@ -10,7 +10,7 @@
 - Entity frameworl core 6
 - Auto mapper
 - Authentication, authorization with Asp net core Identity
--...
+- ...
 
 ## List of features
 
@@ -19,4 +19,5 @@
 - Lê Xuân Minh Chiến
 - Nguyễn Thành Vinh
 - Phạm Tuấn Long
+- Nguyễn Mạnh Hiếu
 	
