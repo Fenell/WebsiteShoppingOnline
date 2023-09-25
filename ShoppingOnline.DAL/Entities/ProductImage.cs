@@ -1,17 +1,12 @@
-﻿using ShoppingOnline.DAL.Common;
-using ShoppingOnline.DAL.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingOnline.DAL.Constants;
+using ShoppingOnline.DAL.Entities.Common;
 
 namespace ShoppingOnline.DAL.Entities;
-public class ProductImage : BaseDomainEntity
+public class ProductImage : BaseEntity
 {
 	public Guid ProducItemtId { get; set; }
-	public string ImageUrl { get; set; }
-	public string Position { get; set; }
-	public Status Status { get; set; }
-	public virtual ProductItem ProductItem { get; set; }
+	public string? ImageUrl { get; set; }
+	public int Position { get; set; }
+	public string Status { get; set; } = EntityStatus.Active;
+	public virtual ProductItem? ProductItem { get; set; }
 }

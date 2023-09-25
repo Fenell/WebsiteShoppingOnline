@@ -3,7 +3,10 @@ using ShoppingOnline.BLL.Exceptions;
 using System.Net;
 
 namespace ShoppingOnline.API.Middleware;
-
+/// <summary>
+/// Handle Exception dc bắn ra trong service hoặc controller
+/// </summary>
+/// 
 public class ExceptionMiddleware
 {
 	private readonly RequestDelegate _next;
@@ -24,8 +27,7 @@ public class ExceptionMiddleware
 			await HandlerExceptionAsync(context, ex);
 		}
 	}
-
-
+	
 	private async Task HandlerExceptionAsync(HttpContext httpContext, Exception ex)
 	{
 		HttpStatusCode statusCode = HttpStatusCode.InternalServerError;

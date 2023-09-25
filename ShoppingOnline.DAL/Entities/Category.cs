@@ -1,18 +1,13 @@
-﻿using ShoppingOnline.DAL.Common;
-using ShoppingOnline.DAL.Enum;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingOnline.DAL.Constants;
+using ShoppingOnline.DAL.Entities.Common;
 
 namespace ShoppingOnline.DAL.Entities;
-[Table("Category")]
-public class Category : BaseDomainEntity
+
+public class Category : BaseEntity
 {
-	public string Name { get; set; }
-	public string SeoTitle { get; set; }
-	public Status Status { get; set; }
-	public virtual IEnumerable<Product> Products { get; set; }
+	public string Name { get; set; } = null!;
+	public string? SeoTitle { get; set; }
+	public string Status { get; set; } = EntityStatus.Active;
+
+	public virtual IEnumerable<Product>? Products { get; set; }
 }

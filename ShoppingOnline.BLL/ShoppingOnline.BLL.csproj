@@ -13,14 +13,13 @@
 
 
   <ItemGroup>
-    <Folder Include="DataTransferObjects\" />
-    <Folder Include="Features\" />
     <Folder Include="Paging\" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="6.0.4" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
   </ItemGroup>

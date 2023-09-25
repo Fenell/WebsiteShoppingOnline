@@ -1,16 +1,12 @@
-﻿using ShoppingOnline.DAL.Common;
-using ShoppingOnline.DAL.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingOnline.DAL.Constants;
+using ShoppingOnline.DAL.Entities.Common;
 
 namespace ShoppingOnline.DAL.Entities;
-public class Promotion : BaseDomainEntity
+public class Promotion : BaseEntity
 {
-	public string Code { get; set; }
+	public string Code { get; set; } = null!;
 	public int DiscountPercent { get; set; }
-	public PromotionStatus PromotionStatus { get; set; }
-	public virtual IEnumerable<Order> Orders { get; set; }
+	public string PromotionStatus { get; set; } = EntityStatus.Active;
+	
+	public virtual IEnumerable<Order>? Orders { get; set; }
 }
