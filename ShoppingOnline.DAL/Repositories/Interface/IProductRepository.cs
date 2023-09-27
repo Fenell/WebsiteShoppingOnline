@@ -10,7 +10,7 @@ public interface IProductRepository : IGenericRepository<Product>
 {
 	Task<Guid> CreateProduct(Product product);
 	Task<bool> UpdateProduct(Product product);
-	Task<bool> DeleteProduct(Guid productId);
+	Task<bool> DeleteProduct(Product product);
 	Task<IEnumerable<Product>> GetAllProducts();
 	Task<Product> GetProductById(Guid productId);
 }

@@ -16,14 +16,31 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
 		_genericRepository = genericRepository;
 	}
 
-	public Task<Guid> CreateProduct(Product product)
+	public async Task<Guid> CreateProduct(Product product)
 	{
-		throw new NotImplementedException();
+		try
+		{
+			var request = await _genericRepository.CreateAsync(product);
+			return product.Id;
+		}
+		catch (Exception)
+		{
+			throw;
+		}
 	}
 
-	public Task<bool> DeleteProduct(Guid productId)
+	public async Task<bool> DeleteProduct(Product product)
 	{
-		throw new NotImplementedException();
+		try
+		{
+			var request = await _genericRepository.DeleteAsync(product);
+			return request;
+		}
+		catch (Exception)
+		{
+			return false;
+			throw;
+		}
 	}
 
 	public async Task<IEnumerable<Product>> GetAllProducts()
@@ -31,13 +48,22 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
 		return await _genericRepository.GetAllAsync();
 	}
 
-	public Task<Product> GetProductById(Guid productId)
+	public async Task<Product> GetProductById(Guid productId)
 	{
-		throw new NotImplementedException();
+		return await _genericRepository.GetByIdAsync(productId);
 	}
 
-	public Task<bool> UpdateProduct(Product product)
+	public async Task<bool> UpdateProduct(Product product)
 	{
-		throw new NotImplementedException();
+		try
+		{
+			var request = await _genericRepository.UpdateAsync(product);
+			return request;
+		}
+		catch (Exception)
+		{
+			return false;
+			throw;
+		}
 	}
 }

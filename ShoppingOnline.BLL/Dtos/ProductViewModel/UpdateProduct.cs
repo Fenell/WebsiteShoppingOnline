@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ShoppingOnline.BLL.Dtos.ProductViewModel;
-public class GetProducts
+public class UpdateProduct
 {
 	public Guid Id { get; set; }
 	public Guid CategoryId { get; set; }
@@ -18,9 +18,5 @@ public class GetProducts
 	public string? Description { get; set; }
 	public string? DefaultImage { get; set; }
 	public string Status { get; set; }
-	public DateTime CreatedAt { get; set; }
-	public string? CreatedBy { get; set; }
 	public DateTime UpdateAt { get; set; }
-	public string? UpdateBy { get; set; }
-	public bool IsDeleted { get; set; }
 }
