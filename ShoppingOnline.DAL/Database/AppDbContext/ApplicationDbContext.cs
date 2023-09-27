@@ -22,9 +22,9 @@ public class ApplicationDbContext : DbContext
 	public DbSet<OrderItem> OrderItems { get; set; }
 	public DbSet<Ratiting> Ratitings { get; set; }
 	public DbSet<Promotion> Promotions { get; set; }
+	public DbSet<SlideShow> SlideShows { get; set; }
 	
-	//Example
-	public DbSet<ExampleEntity> ExampleEntities { get; set; }
+
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
