@@ -15,8 +15,9 @@ public static class DataAccessServiceRegistration
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
 
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-		
-		
+		services.AddScoped<IProductRepository, ProductRepository>();
+
+
 		return services;
 	}
 }

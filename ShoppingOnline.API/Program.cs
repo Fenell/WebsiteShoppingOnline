@@ -1,5 +1,6 @@
 using ShoppingOnline.API.Middleware;
 using ShoppingOnline.BLL;
+using ShoppingOnline.BLL.Features.ProductApplication;
 using ShoppingOnline.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddCors(options =>
 		cfg.AllowAnyOrigin();
 	});
 });
+
+//DI
+builder.Services.AddScoped<IProductServices, ProductServices>();
 
 var app = builder.Build();
 
