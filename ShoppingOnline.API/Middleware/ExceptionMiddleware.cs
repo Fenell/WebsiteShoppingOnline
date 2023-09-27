@@ -1,4 +1,4 @@
-﻿using ShoppingOnline.API.Model;
+﻿using ShoppingOnline.API.Models;
 using ShoppingOnline.BLL.Exceptions;
 using System.Net;
 

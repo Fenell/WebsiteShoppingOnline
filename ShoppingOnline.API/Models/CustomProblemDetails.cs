@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShoppingOnline.API.Model;
+namespace ShoppingOnline.API.Models;
 
 public class CustomProblemDetails:ProblemDetails
 {

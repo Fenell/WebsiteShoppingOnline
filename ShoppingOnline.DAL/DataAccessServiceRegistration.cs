@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingOnline.DAL.Database.AppDbContext;
+using ShoppingOnline.DAL.Repositories.Implement;
+using ShoppingOnline.DAL.Repositories.Interface;
 
 namespace ShoppingOnline.DAL;
 
@@ -11,6 +13,9 @@ public static class DataAccessServiceRegistration
 	{
 		services.AddDbContext<ApplicationDbContext>(otp =>
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
+
+		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+		
 		
 		return services;
 	}

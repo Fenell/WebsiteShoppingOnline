@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingOnline.DAL.Entities;
-using ShoppingOnline.DAL.Entities.Example;
 using System.Reflection;
 
 namespace ShoppingOnline.DAL.Database.AppDbContext;
