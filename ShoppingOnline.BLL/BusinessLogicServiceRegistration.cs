@@ -67,6 +67,7 @@ public static class BusinessLogicServiceRegistration
 		services.AddScoped<IBrandServices, BrandServices>();
 
 
+
 		return services;
 	}
 }
