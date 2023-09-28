@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using ShoppingOnline.BLL.Features.BrandApplication;
 using ShoppingOnline.BLL.Features.Identity;
 using ShoppingOnline.BLL.Features.OrderApplication;
 using ShoppingOnline.BLL.Features.OrderItemApplication;
@@ -51,6 +52,7 @@ public static class BusinessLogicServiceRegistration
 		services.AddScoped<IProductItemServices, ProductItemsServices>();
 		services.AddScoped<IOrderServices, OrderServices>();
 		services.AddScoped<IOrderItemServices, OrderItemServices>();
+		services.AddScoped<IBrandServices, BrandServices>();
 
 		return services;
 	}

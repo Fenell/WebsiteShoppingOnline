@@ -32,6 +32,7 @@ public static class DataAccessServiceRegistration
 		services.AddScoped<IProductItemRepository, ProductItemRepository>();
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+		services.AddScoped<IBrandRepository, BrandRepository>();
 
 		return services;
 	}
