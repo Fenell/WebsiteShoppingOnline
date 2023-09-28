@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingOnline.API.DTO;
 using ShoppingOnline.DAL.Constants;
 using ShoppingOnline.DAL.Database.AppDbContext;
 using ShoppingOnline.DAL.Entities;
@@ -29,24 +30,20 @@ public class ProductImgsController : ControllerBase
 	}
 	[HttpPost]
 
-	//public Guid ProducItemtId { get; set; }
-	//public string? ImageUrl { get; set; }
-	//public int Position { get; set; }
-	//public string Status { get; set; } = EntityStatus.Active;
-	//public virtual ProductItem? ProductItem { get; set; }
-	public bool PostByParams(string ImageUrl, string Status, int Position)
+	public bool PostByParams(Guid ProducItemtId, string ImageUrl, string Status, int Position)
 	{
 		Guid id = Guid.NewGuid();
-		ProductImage sinhvien = new ProductImage
+		ProductImage productImg = new ProductImage
 		{
-			ProducItemtId = id,
+			ProducItemtId = ProducItemtId,
 			ImageUrl = ImageUrl,
 			Position = Position,
-			Status =Status
-};
+			Status =Status,
+			CreatedAt = DateTime.Now
+		};
 		try
 		{
-			_appContext.ProductImages.Add(sinhvien);
+			_appContext.ProductImages.Add(productImg);
 			_appContext.SaveChanges();
 			return true;
 		}
@@ -56,11 +53,16 @@ public class ProductImgsController : ControllerBase
 		}
 	}
 	[HttpPut("{id}")]
-	public bool Update(Guid id)
+	public bool Update(UpdateProductIMG productImage)
 	{
+		ProductImage productIMG = _appContext.ProductImages.Find(productImage.Id);
 		try
 		{
-			ProductImage productIMG = _appContext.ProductImages.Find(id);
+
+			productIMG.ImageUrl = productImage.ImageUrl;
+			productIMG.Position = productImage.Position;
+			//productIMG.Status = productImage.Status;
+			productIMG.UpdateAt = DateTime.Now;
 			_appContext.ProductImages.Update(productIMG);
 			_appContext.SaveChanges();
 			return true;
@@ -69,6 +71,8 @@ public class ProductImgsController : ControllerBase
 		{
 			return false;
 		}
+
+			
 	}
 	[HttpDelete("{id}")]
 	public bool Delete(Guid id)
@@ -76,6 +80,7 @@ public class ProductImgsController : ControllerBase
 		try
 		{
 			ProductImage productIMG = _appContext.ProductImages.Find(id);
+
 			_appContext.ProductImages.Remove(productIMG);
 			_appContext.SaveChanges();
 			return true;
