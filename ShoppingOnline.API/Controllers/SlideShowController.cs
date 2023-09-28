@@ -14,7 +14,7 @@ public class SlideShowController : ControllerBase
 	{
 		_appContext = context;
 	}
-	[HttpGet("getall product img")]
+	[HttpGet("getall slideshow img")]
 	public IEnumerable<SlideShow> GetAll()
 	{
 		return _appContext.SlideShows.ToList();
