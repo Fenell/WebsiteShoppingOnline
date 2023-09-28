@@ -13,4 +13,5 @@ public interface IOrderServices
 	Task<Guid> CreatedOrder(CreatedOrder createdOrder);
 	Task<bool> UpdateOrder(UpdateOrder updateOrder);
 	Task<bool> DeleteOrder(DeleteOrder deleteOrder);
+	Task<bool> DeleteHardOrder(DeleteOrder deletedOrder);
 }

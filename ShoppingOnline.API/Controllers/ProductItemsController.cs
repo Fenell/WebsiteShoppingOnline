@@ -38,4 +38,11 @@ public class ProductItemsController : ControllerBase
 		var request = await _services.DeleteProductItem(deleteProductItem);
 		return Ok(request);
 	}
+	[HttpDelete]
+	[Route("delete-hard-{id}")]
+	public async Task<IActionResult> DeleteHardProductItem(DeleteProductItem deleteProductItem)
+	{
+		var request = await _services.DeleteHardProductItem(deleteProductItem);
+		return Ok(request);
+	}
 }

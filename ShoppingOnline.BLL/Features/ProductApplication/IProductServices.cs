@@ -13,5 +13,6 @@ public interface IProductServices
 	Task<Guid> CreateProduct(CreateProduct create);
 	Task<bool> UpdateProduct(UpdateProduct update);
 	Task<bool> DeleteProduct(DeleteProduct deleteProduct);
+	Task<bool> DeleteHardProduct(DeleteProduct deleteProduct);
 	Task<GetProducts> GetProductById(Guid productId);
 }

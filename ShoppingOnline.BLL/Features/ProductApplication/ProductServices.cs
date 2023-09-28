@@ -37,6 +37,15 @@ public class ProductServices : IProductServices
 		return product.Id;
 	}
 
+	public async Task<bool> DeleteHardProduct(DeleteProduct deleteProduct)
+	{
+		var product = await _productRepository.GetByIdAsync(deleteProduct.Id);
+		if (product == null)
+			throw new NotFoundException(nameof(product), deleteProduct.Id);
+
+		return await _productRepository.DeleteAsync(product);
+	}
+
 	public async Task<bool> DeleteProduct(DeleteProduct deleteProduct)
 	{
 		var product = await _productRepository.GetProductById(deleteProduct.Id);

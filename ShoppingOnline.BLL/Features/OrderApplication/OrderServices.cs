@@ -31,6 +31,16 @@ public class OrderServices : IOrderServices
 		return request.Id;
 	}
 
+	public async Task<bool> DeleteHardOrder(DeleteOrder deletedOrder)
+	{
+		var request = await _orderRepository.GetByIdAsync(deletedOrder.Id);
+
+		if (request == null)
+			throw new NotFoundException(nameof(request), deletedOrder.Id);
+
+		return await _orderRepository.DeleteAsync(request);
+	}
+
 	public async Task<bool> DeleteOrder(DeleteOrder deleteOrder)
 	{
 		var request = await _orderRepository.GetByIdAsync(deleteOrder.Id);
