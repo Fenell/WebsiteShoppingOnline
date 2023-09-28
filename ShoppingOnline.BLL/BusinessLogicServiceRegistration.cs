@@ -2,11 +2,16 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using ShoppingOnline.BLL.Features.ColorFeature;
+using ShoppingOnline.BLL.Features.SizeFeature;
+
 using Microsoft.IdentityModel.Tokens;
 using ShoppingOnline.BLL.Features.Identity;
 using ShoppingOnline.BLL.OptionModels;
 using ShoppingOnline.DAL.Repositories.Implement;
 using ShoppingOnline.DAL.Repositories.Interface;
+
 using System.Reflection;
 using System.Text;
 
@@ -19,6 +24,10 @@ public static class BusinessLogicServiceRegistration
 		services.AddAutoMapper(config => config.AddExpressionMapping(),
 			Assembly.GetExecutingAssembly(), Assembly.GetEntryAssembly());
 
+		
+
+		services.AddScoped<IColorService, ColorService>();
+		services.AddScoped<ISizeService, SizeService>();
 
 		services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
 
@@ -46,6 +55,7 @@ public static class BusinessLogicServiceRegistration
 		services.AddScoped<IProductItemRepository, ProductItemRepository>();
 		services.AddScoped<IOrderRepository, OrderRepository>();
 		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
 
 
 		return services;

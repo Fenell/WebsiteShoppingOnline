@@ -13,7 +13,10 @@
 
 
   <ItemGroup>
+
+
     <Folder Include="MappingProfiles\" />
+
     <Folder Include="Paging\" />
   </ItemGroup>
 

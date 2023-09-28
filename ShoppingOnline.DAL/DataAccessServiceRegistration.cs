@@ -15,6 +15,10 @@ public static class DataAccessServiceRegistration
 	{
 		services.AddDbContext<ApplicationDbContext>(otp =>
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
+		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+		
+		services.AddScoped<IColorRepository, ColorRepository>();
+		services.AddScoped<ISizeRepository, SizeRepository>();
 
 
 		services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -28,6 +32,7 @@ public static class DataAccessServiceRegistration
 		
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
   
+
 		return services;
 	}
 }
