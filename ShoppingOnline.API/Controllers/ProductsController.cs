@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.Dtos.ProductViewModel;
 using ShoppingOnline.BLL.Features.ProductApplication;
@@ -7,6 +8,7 @@ using ShoppingOnline.DAL.Entities;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+//[Authorize]
 public class ProductsController : ControllerBase
 {
 	private readonly IProductServices _productServices;

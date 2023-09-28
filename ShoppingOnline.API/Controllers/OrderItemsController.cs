@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
 using ShoppingOnline.BLL.Dtos.ProductViewModel;
@@ -7,6 +8,7 @@ using ShoppingOnline.BLL.Features.OrderItemApplication;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+//[Authorize]
 public class OrderItemsController : ControllerBase
 {
 	private readonly IOrderItemServices _orderItemServices;
@@ -45,5 +47,12 @@ public class OrderItemsController : ControllerBase
 	{
 		var request = await _orderItemServices.DeleteOrderItem(delHardOrderItem);
 		return Ok(request);
+	}
+	[HttpPost]
+	public async Task<IActionResult> CreatedOrderItem(CreatedOrderItem createdOrderItem)
+	{
+		var request = await _orderItemServices.CreatedOrderItem(createdOrderItem);
+		var requestNew = await _orderItemServices.GetOrderItemsById(request);
+		return CreatedAtAction(nameof(GetOrderItemById), request, requestNew);
 	}
 }
