@@ -1,0 +1,81 @@
+﻿using AutoMapper;
+using ShoppingOnline.BLL.DataTransferObjects.Color.Requests;
+using ShoppingOnline.BLL.DataTransferObjects.ColorDTO;
+using ShoppingOnline.BLL.Exceptions;
+using ShoppingOnline.DAL.Entities;
+using ShoppingOnline.DAL.Repositories.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ShoppingOnline.BLL.Features.ColorFeature;
+public class ColorService : IColorService
+{
+	private readonly IColorRepository _colorRepository;
+	private readonly IMapper _mapper;
+
+	public ColorService(IColorRepository colorRepository, IMapper mapper)
+	{
+		_colorRepository = colorRepository;
+		_mapper = mapper;
+	}
+
+	public async Task<Guid> CreateColor(ColorCreateRequest request)
+	{
+		var colorCreate = _mapper.Map<Color>(request);
+		var result = await _colorRepository.CreateAsync(colorCreate);
+		return result;
+	}
+
+	public async Task DeleteColor(Guid id)
+	{
+		var color = await _colorRepository.GetByIdAsync(id);
+
+		if (color != null)
+		{
+			await _colorRepository.DeleteAsync(color);
+		}
+		else
+		{
+			throw new NotFoundException(nameof(Color), id);
+		}
+	}
+
+	public async Task<List<ColorViewModel>> GetAll()
+	{
+		var listColor = await _colorRepository.GetAllAsync();
+
+		var listColorDto = _mapper.Map<List<ColorViewModel>>(listColor);
+
+		return listColorDto;
+	}
+
+	public async Task<Color> GetById(Guid id)
+	{
+		var color = await _colorRepository.GetByIdAsync(id);
+
+		if (color is null)
+			throw new NotFoundException(nameof(Color), id);
+		return color;
+	}
+
+	public async Task UpdateColor(Guid id,ColorUpdateRequest request)
+	{
+		if (id == request.Id)
+		{
+			var updateColor =  _mapper.Map<Color>(request);
+			await _colorRepository.UpdateAsync(updateColor);
+		}
+		else
+		{
+			throw new NotFoundException(nameof(Color), id);
+		}
+	}
+
+	Task<ColorViewModel> IColorService.GetById(Guid id)
+	{
+		throw new NotImplementedException();
+	}
+}

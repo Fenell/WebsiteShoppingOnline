@@ -16,7 +16,8 @@ public static class DataAccessServiceRegistration
 
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 		
-		
+		services.AddScoped<IColorRepository, ColorRepository>();
+		services.AddScoped<ISizeRepository, SizeRepository>();
 		return services;
 	}
 }
