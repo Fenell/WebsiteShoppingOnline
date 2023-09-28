@@ -52,14 +52,6 @@ public class ColorService : IColorService
 		return listColorDto;
 	}
 
-	public async Task<Color> GetById(Guid id)
-	{
-		var color = await _colorRepository.GetByIdAsync(id);
-
-		if (color is null)
-			throw new NotFoundException(nameof(Color), id);
-		return color;
-	}
 
 	public async Task UpdateColor(Guid id,ColorUpdateRequest request)
 	{
@@ -74,8 +66,17 @@ public class ColorService : IColorService
 		}
 	}
 
-	Task<ColorViewModel> IColorService.GetById(Guid id)
+	public async Task<ColorViewModel> GetById(Guid id)
 	{
-		throw new NotImplementedException();
+		var color = await _colorRepository.GetByIdAsync(id);
+		if (color == null)
+		{
+			throw new NotFoundException(nameof(Color), id);
+		}
+		else
+		{
+			var colors = _mapper.Map<ColorViewModel>(color);
+			return colors;
+		}
 	}
 }

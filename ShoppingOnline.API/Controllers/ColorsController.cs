@@ -36,7 +36,7 @@ public class ColorsController : ControllerBase
 
 	[HttpGet]
 	[Route("get-by-id-{id}")]
-	public async Task<IActionResult> GetById(Guid id)
+	public async Task<IActionResult> GetByIdColor(Guid id)
 	{
 		var result = await _colorService.GetById(id);
 		return Ok(result);
