@@ -13,6 +13,14 @@
 
 
   <ItemGroup>
+
+
+    <Folder Include="DataTransferObjects\CategoryDTO\Request\" />
+
+
+    <Folder Include="Features\CategoryFeature\" />
+
+
     <Folder Include="MappingProfiles\" />
     <Folder Include="Paging\" />
   </ItemGroup>

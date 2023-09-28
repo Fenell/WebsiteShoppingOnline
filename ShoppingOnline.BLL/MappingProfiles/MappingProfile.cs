@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO;
+using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
 using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
 using ShoppingOnline.BLL.Dtos.OrderViewModel;
 using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
@@ -33,5 +35,10 @@ public class MappingProfile : Profile
 		CreateMap<OrderItem, GetOrderItems>().ReverseMap();
 		CreateMap<CreatedOrderItem, OrderItem>();
 		#endregion
+
+		CreateMap<Category, CategoryViewModel>();
+
+		CreateMap<CategoryCreateRequest, Category>();
+		CreateMap<CategoryUpdateRequest, Category>();
 	}
 }

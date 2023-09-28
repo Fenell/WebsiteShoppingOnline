@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using ShoppingOnline.BLL.Features.CategoryFeature;
 using ShoppingOnline.BLL.Features.Identity;
 using ShoppingOnline.BLL.OptionModels;
 using ShoppingOnline.DAL.Repositories.Implement;
@@ -19,6 +20,9 @@ public static class BusinessLogicServiceRegistration
 		services.AddAutoMapper(config => config.AddExpressionMapping(),
 			Assembly.GetExecutingAssembly(), Assembly.GetEntryAssembly());
 
+		
+
+		services.AddScoped<ICategoryService, CategoryService>();
 
 		services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
 

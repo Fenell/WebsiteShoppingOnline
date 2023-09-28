@@ -15,7 +15,9 @@ public static class DataAccessServiceRegistration
 	{
 		services.AddDbContext<ApplicationDbContext>(otp =>
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
-
+		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+		
+		services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 		services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
