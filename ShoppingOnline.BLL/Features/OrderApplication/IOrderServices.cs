@@ -12,4 +12,5 @@ public interface IOrderServices
 	Task<GetOrder> GetOrderById(Guid id);
 	Task<Guid> CreatedOrder(CreatedOrder createdOrder);
 	Task<bool> UpdateOrder(UpdateOrder updateOrder);
+	Task<bool> DeleteOrder(DeleteOrder deleteOrder);
 }

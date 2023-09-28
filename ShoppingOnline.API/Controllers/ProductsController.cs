@@ -41,4 +41,10 @@ public class ProductsController : ControllerBase
 		var request = await _productServices.UpdateProduct(updateProduct);
 		return Ok(request);
 	}
+	[HttpDelete]
+	public async Task<IActionResult> DeleteProduct(DeleteProduct deleteProduct)
+	{
+		var request = await _productServices.DeleteProduct(deleteProduct);
+		return Ok(request);
+	}
 }

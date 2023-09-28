@@ -41,4 +41,10 @@ public class OrdersController : ControllerBase
 		var request = await _orderServices.UpdateOrder(updateOrder);
 		return Ok(request);
 	}
+	[HttpDelete]
+	public async Task<IActionResult> DeleteOrder(DeleteOrder deleteOrder)
+	{
+		var request = await _orderServices.DeleteOrder(deleteOrder);
+		return Ok(request);
+	}
 }

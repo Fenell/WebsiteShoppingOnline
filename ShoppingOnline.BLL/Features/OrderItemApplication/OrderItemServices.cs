@@ -28,6 +28,16 @@ public class OrderItemServices : IOrderItemServices
 		return requestMap.Id;
 	}
 
+	public async Task<bool> DeleteOrderItem(DeleteOrderItem deleteOrderItem)
+	{
+		var request = await _orderItemRepository.GetByIdAsync(deleteOrderItem.Id);
+		if (request == null)
+			throw new NotFoundException(nameof(request), deleteOrderItem.Id);
+
+		request.IsDeleted = true;
+		return await _orderItemRepository.DeleteOrderItem(request);
+	}
+
 	public async Task<IEnumerable<GetOrderItems>> GetAllOrderItems()
 	{
 		var request = await _orderItemRepository.GetAllAsync();
