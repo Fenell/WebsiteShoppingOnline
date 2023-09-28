@@ -12,4 +12,6 @@ public interface IOrderItemServices
 	Task<GetOrderItems> GetOrderItemsById(Guid id);
 	Task<bool> UpdateOrderItem(UpdateOrderItem item);
 	Task<Guid> CreatedOrderItem(CreatedOrderItem item);
+	Task<bool> DeleteOrderItem(DeleteOrderItem deleteOrderItem);
+	Task<bool> DeleteHardOrderItem(DeleteOrderItem deletedHardOrderItem);
 }

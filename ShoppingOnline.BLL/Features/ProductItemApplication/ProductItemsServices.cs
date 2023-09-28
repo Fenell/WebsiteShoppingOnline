@@ -20,6 +20,27 @@ public class ProductItemsServices : IProductItemServices
 		_mapper = mapper;
 	}
 
+	public async Task<bool> DeleteHardProductItem(DeleteProductItem deletedHardProductItem)
+	{
+		var request = await _productItemRepository.GetByIdAsync(deletedHardProductItem.Id);
+
+		if (request == null)
+			throw new NotFoundException(nameof(request), deletedHardProductItem.Id);
+
+		return await _productItemRepository.DeleteAsync(request);
+	}
+
+	public async Task<bool> DeleteProductItem(DeleteProductItem deleteProductItem)
+	{
+		var request = await _productItemRepository.GetByIdAsync(deleteProductItem.Id);
+
+		if (request == null)
+			throw new NotFoundException(nameof(request), deleteProductItem.Id);
+		request.IsDeleted = true;
+
+		return await _productItemRepository.DeleteProductItem(request);
+	}
+
 	public async Task<GetProductItem> GetProductItemById(Guid id)
 	{
 		var productItem = await _productItemRepository.GetByIdAsync(id);

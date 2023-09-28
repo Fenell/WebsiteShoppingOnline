@@ -14,13 +14,11 @@ namespace ShoppingOnline.BLL.Features.OrderApplication;
 public class OrderServices : IOrderServices
 {
 	private readonly IOrderRepository _orderRepository;
-	private readonly IOrderItemRepository _itemRepository;
 	private readonly IMapper _mapper;
-	public OrderServices(IOrderRepository orderRepository, IMapper mapper, IOrderItemRepository itemRepository)
+	public OrderServices(IOrderRepository orderRepository, IMapper mapper)
 	{
 		_orderRepository = orderRepository;
 		_mapper = mapper;
-		_itemRepository = itemRepository;
 	}
 
 	public async Task<Guid> CreatedOrder(CreatedOrder createdOrder)
@@ -30,14 +28,28 @@ public class OrderServices : IOrderServices
 
 		await _orderRepository.CreateOrder(request);
 
-		foreach (var item in request.OrderItems)
-		{
-			item.ProductItemId = request.Id;
-			item.Quantity = createdOrder.Quantity;
-			item.Price = createdOrder.Price;
-			await _itemRepository.CreatedOrderItem(item);
-		}
 		return request.Id;
+	}
+
+	public async Task<bool> DeleteHardOrder(DeleteOrder deletedOrder)
+	{
+		var request = await _orderRepository.GetByIdAsync(deletedOrder.Id);
+
+		if (request == null)
+			throw new NotFoundException(nameof(request), deletedOrder.Id);
+
+		return await _orderRepository.DeleteAsync(request);
+	}
+
+	public async Task<bool> DeleteOrder(DeleteOrder deleteOrder)
+	{
+		var request = await _orderRepository.GetByIdAsync(deleteOrder.Id);
+
+		if (request == null)
+			throw new NotFoundException(nameof(request), deleteOrder.Id);
+
+		request.IsDeleted = true;
+		return await _orderRepository.DeleteOrder(request);
 	}
 
 	public async Task<GetOrder> GetOrderById(Guid id)

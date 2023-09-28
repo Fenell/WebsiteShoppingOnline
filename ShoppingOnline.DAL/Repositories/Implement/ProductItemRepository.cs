@@ -16,6 +16,20 @@ public class ProductItemRepository : GenericRepository<ProductItem>, IProductIte
 		_genericRepository = genericRepository;
 	}
 
+	public async Task<bool> DeleteProductItem(ProductItem productItem)
+	{
+		try
+		{
+			var request = await _genericRepository.UpdateAsync(productItem);
+			return true;
+		}
+		catch (Exception)
+		{
+			return false;
+			throw;
+		}
+	}
+
 	public async Task<IEnumerable<ProductItem>> GetProductItem()
 	{
 		return await _genericRepository.GetAllAsync();

@@ -29,6 +29,20 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
 		}
 	}
 
+	public async Task<bool> DeleteOrder(Order order)
+	{
+		try
+		{
+			var request = await _genericRepository.UpdateAsync(order);
+			return request;
+		}
+		catch (Exception)
+		{
+			return false;
+			throw;
+		}
+	}
+
 	public async Task<IEnumerable<Order>> GetAllOrders()
 	{
 		return await _genericRepository.GetAllAsync();
