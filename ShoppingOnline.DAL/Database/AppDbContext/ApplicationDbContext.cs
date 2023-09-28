@@ -7,6 +7,7 @@ using System.Reflection;
 namespace ShoppingOnline.DAL.Database.AppDbContext;
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+	
 	public ApplicationDbContext(DbContextOptions options) : base(options)
 	{
 	}
