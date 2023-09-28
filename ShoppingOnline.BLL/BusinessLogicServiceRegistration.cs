@@ -7,6 +7,7 @@ using ShoppingOnline.BLL.Features.ColorFeature;
 using ShoppingOnline.BLL.Features.SizeFeature;
 
 using Microsoft.IdentityModel.Tokens;
+using ShoppingOnline.BLL.Features.CategoryFeature;
 using ShoppingOnline.BLL.Features.Identity;
 using ShoppingOnline.BLL.OptionModels;
 using ShoppingOnline.DAL.Repositories.Implement;
@@ -26,6 +27,8 @@ public static class BusinessLogicServiceRegistration
 
 		
 
+
+		services.AddScoped<ICategoryService, CategoryService>();
 		services.AddScoped<IColorService, ColorService>();
 		services.AddScoped<ISizeService, SizeService>();
 
