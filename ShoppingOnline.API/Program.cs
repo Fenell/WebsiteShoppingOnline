@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using ShoppingOnline.API.Middleware;
 using ShoppingOnline.BLL;
 using ShoppingOnline.BLL.Features.OrderApplication;
@@ -15,9 +16,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddBusinessLogicLayerService();
+builder.Services.AddBusinessLogicLayerService(builder.Configuration);
 builder.Services.AddDataAccessLayerService(builder.Configuration);
 
+builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<IProductItemServices, ProductItemsServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderItemServices, OrderItemServices>();
 
 //Add CORS 
 builder.Services.AddCors(options =>
@@ -30,11 +35,34 @@ builder.Services.AddCors(options =>
 	});
 });
 
-//DI
-builder.Services.AddScoped<IProductServices, ProductServices>();
-builder.Services.AddScoped<IProductItemServices, ProductItemsServices>();
-builder.Services.AddScoped<IOrderServices, OrderServices>();
-builder.Services.AddScoped<IOrderItemServices, OrderItemServices>();
+
+//Add Swagger Bearer
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "TangWeb_Api", Version = "v1" });
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+	{
+		In = ParameterLocation.Header,
+		Description = "Please Bearer and then token in the field",
+		Name = "Authorization",
+		Type = SecuritySchemeType.ApiKey
+	});
+	c.AddSecurityRequirement(new OpenApiSecurityRequirement
+	{
+		{
+			new OpenApiSecurityScheme
+			{
+				Reference = new OpenApiReference
+				{
+					Type = ReferenceType.SecurityScheme,
+					Id = "Bearer"
+				}
+			},
+			new string[] { }
+		}
+	});
+});
+
 
 var app = builder.Build();
 
@@ -52,6 +80,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("policy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

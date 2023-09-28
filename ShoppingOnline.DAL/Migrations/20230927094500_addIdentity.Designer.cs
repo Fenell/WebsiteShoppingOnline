@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppingOnline.DAL.Database.AppDbContext;
 
@@ -11,9 +12,10 @@ using ShoppingOnline.DAL.Database.AppDbContext;
 namespace ShoppingOnline.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230927094500_addIdentity")]
+    partial class addIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,28 +221,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brand", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("313e7a81-9b89-4981-8389-477cb23cfabb"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "Adias",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("d80cd77c-a89b-4ff2-8f60-20bfe056c2ed"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "Nike",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Category", b =>
@@ -279,28 +259,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5bd691e4-bd41-47c3-bb5b-e23319511841"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "Polo",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("30f958f6-f5b0-4651-8918-5d02f8cb6cee"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "T-Shirt",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Color", b =>
@@ -336,28 +294,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Color", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "Đen",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("64718a33-4e12-4310-bfa6-459a3b03bac5"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "Trắng",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", b =>
@@ -502,6 +438,7 @@ namespace ShoppingOnline.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -526,23 +463,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("PromotionId");
 
                     b.ToTable("Order", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("46b23fc3-bf12-4104-8785-d650360181ed"),
-                            Address = "Thai Binh",
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            CustomerName = "Mai Tuan Dat",
-                            IsDeleted = false,
-                            Note = "Khach vip",
-                            OrderStatus = "SUCCESS",
-                            PhoneNumber = "1234567890",
-                            PromotionId = new Guid("6dfb12e5-04bc-4680-b953-4b53e8e56cb5"),
-                            Total = 259000m,
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.OrderItem", b =>
@@ -589,21 +509,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("ProductItemId");
 
                     b.ToTable("OrderItem", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d2dda39f-b2a0-467f-970d-1f9ded874aa0"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            OrderId = new Guid("46b23fc3-bf12-4104-8785-d650360181ed"),
-                            OrderStatus = "SUCCESS",
-                            Price = 259000m,
-                            ProductItemId = new Guid("18ec90bf-8932-4a59-bbb2-34de95ce9602"),
-                            Quantity = 1,
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Product", b =>
@@ -663,38 +568,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("38e3f05f-f89a-4fb3-8cb7-9262110d7d16"),
-                            BrandId = new Guid("313e7a81-9b89-4981-8389-477cb23cfabb"),
-                            CategoryId = new Guid("5bd691e4-bd41-47c3-bb5b-e23319511841"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            Description = "- Được kiểm tra hàng trước khi nhận hàng- Đổi hàng trong vòng 30 ngày kể từ khi nhận hàng",
-                            Discount = 275000m,
-                            IsDeleted = false,
-                            Name = "Regular.XL.2.3131",
-                            Price = 259000m,
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4dccaddc-9dbc-4f6d-a6c8-244be05d735f"),
-                            BrandId = new Guid("d80cd77c-a89b-4ff2-8f60-20bfe056c2ed"),
-                            CategoryId = new Guid("30f958f6-f5b0-4651-8918-5d02f8cb6cee"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            Description = "- Được kiểm tra hàng trước khi nhận hàng- Đổi hàng trong vòng 30 ngày kể từ khi nhận hàng",
-                            Discount = 275000m,
-                            IsDeleted = false,
-                            Name = "Regular L.3.2987",
-                            Price = 339000m,
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.ProductImage", b =>
@@ -784,34 +657,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("SizeId");
 
                     b.ToTable("ProductItem", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("18ec90bf-8932-4a59-bbb2-34de95ce9602"),
-                            ColorId = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            ProductId = new Guid("38e3f05f-f89a-4fb3-8cb7-9262110d7d16"),
-                            Quantity = 1,
-                            SizeId = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("3c0915db-2bcf-47f9-be6e-f39bc127abca"),
-                            ColorId = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            ProductId = new Guid("4dccaddc-9dbc-4f6d-a6c8-244be05d735f"),
-                            Quantity = 1,
-                            SizeId = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Promotion", b =>
@@ -849,19 +694,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotion", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6dfb12e5-04bc-4680-b953-4b53e8e56cb5"),
-                            Code = "xxxx-noi-em-anh-chien-de-giam-10%",
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            DiscountPercent = 10,
-                            IsDeleted = false,
-                            PromotionStatus = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Ratiting", b =>
@@ -941,28 +773,6 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Size", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "XL",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("468a7e91-42a7-4e09-9834-d3bc0ce2c2f5"),
-                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = "Le Xuan Minh Chien",
-                            IsDeleted = false,
-                            Name = "M",
-                            Status = "ACTIVE",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.SlideShow", b =>
