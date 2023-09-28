@@ -25,9 +25,14 @@ public static class DataAccessServiceRegistration
 			})
 			.AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
-		
+
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-  
+
+		services.AddScoped<IProductRepository, ProductRepository>();
+		services.AddScoped<IProductItemRepository, ProductItemRepository>();
+		services.AddScoped<IOrderRepository, OrderRepository>();
+		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
 		return services;
 	}
 }

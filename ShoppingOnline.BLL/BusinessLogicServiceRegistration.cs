@@ -4,6 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ShoppingOnline.BLL.Features.Identity;
+using ShoppingOnline.BLL.Features.OrderApplication;
+using ShoppingOnline.BLL.Features.OrderItemApplication;
+using ShoppingOnline.BLL.Features.ProductApplication;
+using ShoppingOnline.BLL.Features.ProductItemApplication;
 using ShoppingOnline.BLL.OptionModels;
 using ShoppingOnline.DAL.Repositories.Implement;
 using ShoppingOnline.DAL.Repositories.Interface;
@@ -42,11 +46,11 @@ public static class BusinessLogicServiceRegistration
 		});
 
 		services.AddTransient<IAuthService, AuthService>();
-		services.AddScoped<IProductRepository, ProductRepository>();
-		services.AddScoped<IProductItemRepository, ProductItemRepository>();
-		services.AddScoped<IOrderRepository, OrderRepository>();
-		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
+		services.AddScoped<IProductServices, ProductServices>();
+		services.AddScoped<IProductItemServices, ProductItemsServices>();
+		services.AddScoped<IOrderServices, OrderServices>();
+		services.AddScoped<IOrderItemServices, OrderItemServices>();
 
 		return services;
 	}

@@ -19,11 +19,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddBusinessLogicLayerService(builder.Configuration);
 builder.Services.AddDataAccessLayerService(builder.Configuration);
 
-builder.Services.AddScoped<IProductServices, ProductServices>();
-builder.Services.AddScoped<IProductItemServices, ProductItemsServices>();
-builder.Services.AddScoped<IOrderServices, OrderServices>();
-builder.Services.AddScoped<IOrderItemServices, OrderItemServices>();
-
 //Add CORS 
 builder.Services.AddCors(options =>
 {
