@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.Dtos.OrderViewModel;
 using ShoppingOnline.BLL.Features.OrderApplication;
@@ -6,6 +7,7 @@ using ShoppingOnline.BLL.Features.OrderApplication;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class OrdersController : ControllerBase
 {
 	private readonly IOrderServices _orderServices;
