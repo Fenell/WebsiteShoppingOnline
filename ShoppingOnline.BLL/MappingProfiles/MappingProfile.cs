@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
+using ShoppingOnline.BLL.Dtos.OrderViewModel;
 using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
 using ShoppingOnline.BLL.Dtos.ProductViewModel;
 using ShoppingOnline.DAL.Entities;
@@ -21,6 +23,15 @@ public class MappingProfile : Profile
 		#region ProductItems
 		CreateMap<ProductItem, GetProductItem>();
 		CreateMap<UpdateProductItem, ProductItem>();
+		#endregion
+		#region OrderMapping
+		CreateMap<Order, GetOrder>();
+		CreateMap<CreatedOrder, Order>();
+		CreateMap<UpdateOrder, Order>();
+		#endregion
+		#region OrderItems
+		CreateMap<OrderItem, GetOrderItems>().ReverseMap();
+		CreateMap<CreatedOrderItem, OrderItem>();
 		#endregion
 	}
 }

@@ -42,6 +42,8 @@ public class ProductItemsServices : IProductItemServices
 			throw new NotFoundException(nameof(request), updateProductItem.Id);
 
 		var productItemMap = _mapper.Map<UpdateProductItem, ProductItem>(updateProductItem, request);
+
+
 		var productItemUpdate = await _productItemRepository.UpdateProductItem(productItemMap);
 		return productItemUpdate;
 	}

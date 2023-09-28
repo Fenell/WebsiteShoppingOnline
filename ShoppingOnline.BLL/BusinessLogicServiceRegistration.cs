@@ -15,6 +15,8 @@ public static class BusinessLogicServiceRegistration
 
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IProductItemRepository, ProductItemRepository>();
+		services.AddScoped<IOrderRepository, OrderRepository>();
+		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
 		return services;
 	}

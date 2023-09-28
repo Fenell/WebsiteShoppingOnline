@@ -1,5 +1,7 @@
 using ShoppingOnline.API.Middleware;
 using ShoppingOnline.BLL;
+using ShoppingOnline.BLL.Features.OrderApplication;
+using ShoppingOnline.BLL.Features.OrderItemApplication;
 using ShoppingOnline.BLL.Features.ProductApplication;
 using ShoppingOnline.BLL.Features.ProductItemApplication;
 using ShoppingOnline.DAL;
@@ -31,6 +33,8 @@ builder.Services.AddCors(options =>
 //DI
 builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<IProductItemServices, ProductItemsServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderItemServices, OrderItemServices>();
 
 var app = builder.Build();
 
