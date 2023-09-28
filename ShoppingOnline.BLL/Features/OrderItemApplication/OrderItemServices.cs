@@ -69,7 +69,6 @@ public class OrderItemServices : IOrderItemServices
 			throw new NotFoundException(nameof(orderItem), item.Id);
 
 		orderItem.Quantity = item.Quantity;
-		orderItem.UpdateAt = DateTime.Now;
 
 		return await _orderItemRepository.UpdateAsync(orderItem);
 	}

@@ -12,5 +12,4 @@ public class UpdateOrderItem
 {
 	public Guid Id { get; set; }
 	public int Quantity { get; set; }
-	public DateTime UpdateAt { get; set; }
 }

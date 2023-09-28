@@ -7,7 +7,7 @@ using ShoppingOnline.BLL.Features.OrderApplication;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class OrdersController : ControllerBase
 {
 	private readonly IOrderServices _orderServices;
