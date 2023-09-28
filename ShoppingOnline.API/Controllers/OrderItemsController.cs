@@ -33,4 +33,17 @@ public class OrderItemsController : ControllerBase
 		var result = await _orderItemServices.UpdateOrderItem(updateOrderItem);
 		return Ok(result);
 	}
+	[HttpDelete]
+	public async Task<IActionResult> DeleteOrderItem(DeleteOrderItem deleteOrderItem)
+	{
+		var request = await _orderItemServices.DeleteOrderItem(deleteOrderItem);
+		return Ok(request);
+	}
+	[HttpDelete]
+	[Route("delete-hard-{id}")]
+	public async Task<IActionResult> DeleteHardOrderItem(DeleteOrderItem delHardOrderItem)
+	{
+		var request = await _orderItemServices.DeleteOrderItem(delHardOrderItem);
+		return Ok(request);
+	}
 }

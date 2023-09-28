@@ -12,4 +12,5 @@ public interface IOrderItemRepository : IGenericRepository<OrderItem>
 	Task<OrderItem> GetOrderItemById(Guid id);
 	Task<bool> UpdateOrderIte(OrderItem item);
 	Task<Guid> CreatedOrderItem(OrderItem item);
+	Task<bool> DeleteOrderItem(OrderItem orderItem);
 }

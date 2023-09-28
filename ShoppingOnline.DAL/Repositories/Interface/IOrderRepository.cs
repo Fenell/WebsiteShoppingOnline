@@ -12,4 +12,5 @@ public interface IOrderRepository : IGenericRepository<Order>
 	Task<Order> GetOrderById(Guid id);
 	Task<Guid> CreateOrder(Order order);
 	Task<bool> UpdateOrder(Order order);
+	Task<bool> DeleteOrder(Order order);
 }

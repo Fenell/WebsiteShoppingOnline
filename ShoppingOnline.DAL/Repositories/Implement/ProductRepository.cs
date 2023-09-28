@@ -33,7 +33,7 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
 	{
 		try
 		{
-			var request = await _genericRepository.DeleteAsync(product);
+			var request = await _genericRepository.UpdateAsync(product);
 			return request;
 		}
 		catch (Exception)
