@@ -1,4 +1,6 @@
-﻿namespace ShoppingOnline.BLL.DataTransferObjects.Example.Request;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShoppingOnline.BLL.DataTransferObjects.Example.Request;
 
 public class ExampleCreateRequest
 {

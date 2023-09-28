@@ -22,6 +22,167 @@ namespace ShoppingOnline.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
+                            ConcurrencyStamp = "b5ef3c9d-e618-4647-9be1-eb2fd98ee12a",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
+                            ConcurrencyStamp = "b2e585c7-48c1-4633-81ed-6baca3b1e4fa",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            RoleId = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf"
+                        },
+                        new
+                        {
+                            UserId = "9e224968-33e4-4652-b7b7-8574d048cdb9",
+                            RoleId = "cac43a6e-f7bb-4448-baaf-1add431ccbbf"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Brand", b =>
                 {
                     b.Property<Guid>("Id")
@@ -58,6 +219,28 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brand", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("313e7a81-9b89-4981-8389-477cb23cfabb"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "Adias",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("d80cd77c-a89b-4ff2-8f60-20bfe056c2ed"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "Nike",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Category", b =>
@@ -96,6 +279,28 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5bd691e4-bd41-47c3-bb5b-e23319511841"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "Polo",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("30f958f6-f5b0-4651-8918-5d02f8cb6cee"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "T-Shirt",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Color", b =>
@@ -131,6 +336,137 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Color", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "Đen",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("64718a33-4e12-4310-bfa6-459a3b03bac5"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "Trắng",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2e680803-70da-4d0d-a0c7-0afadbf8f42e",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = true,
+                            FirstName = "System",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPrD0wdU34+ctYbU6n2vQrjagAE9TJ4FWFiIbipI52H0/AwrnOzgRvM1jwuG4H//UA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a019a5cc-aed5-440d-ac3c-efcc2ea5ee95",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c2776e3e-beb9-4d0c-8d97-cb9e41716092",
+                            Email = "user@localhost.com",
+                            EmailConfirmed = true,
+                            FirstName = "System",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@LOCALHOST.COM",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELRAPRlQxyYlvSI7adgB3nq6T3FNMvqKziq2ivJbg97IRKLDe1AgMDfib3onCznveg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d181c6ed-ebc4-475f-9162-ff42a6290fe8",
+                            TwoFactorEnabled = false,
+                            UserName = "user@localhost.com"
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Order", b =>
@@ -166,7 +502,6 @@ namespace ShoppingOnline.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -191,6 +526,23 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("PromotionId");
 
                     b.ToTable("Order", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("46b23fc3-bf12-4104-8785-d650360181ed"),
+                            Address = "Thai Binh",
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            CustomerName = "Mai Tuan Dat",
+                            IsDeleted = false,
+                            Note = "Khach vip",
+                            OrderStatus = "SUCCESS",
+                            PhoneNumber = "1234567890",
+                            PromotionId = new Guid("6dfb12e5-04bc-4680-b953-4b53e8e56cb5"),
+                            Total = 259000m,
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.OrderItem", b =>
@@ -237,6 +589,21 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("ProductItemId");
 
                     b.ToTable("OrderItem", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d2dda39f-b2a0-467f-970d-1f9ded874aa0"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            OrderId = new Guid("46b23fc3-bf12-4104-8785-d650360181ed"),
+                            OrderStatus = "SUCCESS",
+                            Price = 259000m,
+                            ProductItemId = new Guid("18ec90bf-8932-4a59-bbb2-34de95ce9602"),
+                            Quantity = 1,
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Product", b =>
@@ -296,6 +663,38 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("38e3f05f-f89a-4fb3-8cb7-9262110d7d16"),
+                            BrandId = new Guid("313e7a81-9b89-4981-8389-477cb23cfabb"),
+                            CategoryId = new Guid("5bd691e4-bd41-47c3-bb5b-e23319511841"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            Description = "- Được kiểm tra hàng trước khi nhận hàng- Đổi hàng trong vòng 30 ngày kể từ khi nhận hàng",
+                            Discount = 275000m,
+                            IsDeleted = false,
+                            Name = "Regular.XL.2.3131",
+                            Price = 259000m,
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("4dccaddc-9dbc-4f6d-a6c8-244be05d735f"),
+                            BrandId = new Guid("d80cd77c-a89b-4ff2-8f60-20bfe056c2ed"),
+                            CategoryId = new Guid("30f958f6-f5b0-4651-8918-5d02f8cb6cee"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            Description = "- Được kiểm tra hàng trước khi nhận hàng- Đổi hàng trong vòng 30 ngày kể từ khi nhận hàng",
+                            Discount = 275000m,
+                            IsDeleted = false,
+                            Name = "Regular L.3.2987",
+                            Price = 339000m,
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.ProductImage", b =>
@@ -385,6 +784,34 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasIndex("SizeId");
 
                     b.ToTable("ProductItem", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("18ec90bf-8932-4a59-bbb2-34de95ce9602"),
+                            ColorId = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            ProductId = new Guid("38e3f05f-f89a-4fb3-8cb7-9262110d7d16"),
+                            Quantity = 1,
+                            SizeId = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("3c0915db-2bcf-47f9-be6e-f39bc127abca"),
+                            ColorId = new Guid("a0097f6c-3c63-4a8b-875a-80e0adfb4891"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            ProductId = new Guid("4dccaddc-9dbc-4f6d-a6c8-244be05d735f"),
+                            Quantity = 1,
+                            SizeId = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Promotion", b =>
@@ -422,6 +849,19 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotion", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6dfb12e5-04bc-4680-b953-4b53e8e56cb5"),
+                            Code = "xxxx-noi-em-anh-chien-de-giam-10%",
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            DiscountPercent = 10,
+                            IsDeleted = false,
+                            PromotionStatus = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Ratiting", b =>
@@ -501,6 +941,28 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Size", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3f12e4d9-0e48-4c32-b788-7769d2be7b2c"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "XL",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("468a7e91-42a7-4e09-9834-d3bc0ce2c2f5"),
+                            CreatedAt = new DateTime(2023, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = "Le Xuan Minh Chien",
+                            IsDeleted = false,
+                            Name = "M",
+                            Status = "ACTIVE",
+                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.SlideShow", b =>
@@ -539,6 +1001,57 @@ namespace ShoppingOnline.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SlideShow", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("ShoppingOnline.DAL.Entities.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ShoppingOnline.DAL.Entities.Order", b =>
