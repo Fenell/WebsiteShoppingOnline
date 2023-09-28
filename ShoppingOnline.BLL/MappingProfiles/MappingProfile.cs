@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO;
+using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
 using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
 using ShoppingOnline.BLL.Dtos.OrderViewModel;
 using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
@@ -39,5 +41,10 @@ public class MappingProfile : Profile
 		CreateMap<CreatedBrand, Brand>();
 		CreateMap<UpdateBrand, Brand>();
 		#endregion
+
+		CreateMap<Category, CategoryViewModel>();
+
+		CreateMap<CategoryCreateRequest, Category>();
+		CreateMap<CategoryUpdateRequest, Category>();
 	}
 }
