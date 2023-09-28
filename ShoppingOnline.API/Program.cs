@@ -1,6 +1,10 @@
 using Microsoft.OpenApi.Models;
 using ShoppingOnline.API.Middleware;
 using ShoppingOnline.BLL;
+using ShoppingOnline.BLL.Features.OrderApplication;
+using ShoppingOnline.BLL.Features.OrderItemApplication;
+using ShoppingOnline.BLL.Features.ProductApplication;
+using ShoppingOnline.BLL.Features.ProductItemApplication;
 using ShoppingOnline.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddBusinessLogicLayerService(builder.Configuration);
 builder.Services.AddDataAccessLayerService(builder.Configuration);
 
+builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<IProductItemServices, ProductItemsServices>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderItemServices, OrderItemServices>();
 
 //Add CORS 
 builder.Services.AddCors(options =>
@@ -26,6 +34,7 @@ builder.Services.AddCors(options =>
 		cfg.AllowAnyOrigin();
 	});
 });
+
 
 //Add Swagger Bearer
 builder.Services.AddSwaggerGen(c =>
@@ -53,6 +62,7 @@ builder.Services.AddSwaggerGen(c =>
 		}
 	});
 });
+
 
 var app = builder.Build();
 

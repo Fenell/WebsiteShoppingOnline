@@ -57,12 +57,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 		}
 	}
 
-	public async Task UpdateAsync(T entity)
+	public async Task<bool> UpdateAsync(T entity)
 	{
 		try
 		{
 			_context.Entry(entity).State = EntityState.Modified;
 			await _context.SaveChangesAsync();
+			return true;
 		}
 		catch (Exception e)
 		{
@@ -71,12 +72,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 		}
 	}
 
-	public async Task DeleteAsync(T entity)
+	public async Task<bool> DeleteAsync(T entity)
 	{
 		try
 		{
 			_context.Remove(entity);
 			await _context.SaveChangesAsync();
+			return true;
 		}
 		catch (Exception e)
 		{

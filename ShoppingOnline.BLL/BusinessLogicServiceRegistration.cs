@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ShoppingOnline.BLL.Features.Identity;
 using ShoppingOnline.BLL.OptionModels;
+using ShoppingOnline.DAL.Repositories.Implement;
+using ShoppingOnline.DAL.Repositories.Interface;
 using System.Reflection;
 using System.Text;
 
@@ -14,8 +16,9 @@ public static class BusinessLogicServiceRegistration
 {
 	public static IServiceCollection AddBusinessLogicLayerService(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddAutoMapper(config =>  config.AddExpressionMapping(),
+		services.AddAutoMapper(config => config.AddExpressionMapping(),
 			Assembly.GetExecutingAssembly(), Assembly.GetEntryAssembly());
+
 
 		services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
 
@@ -39,8 +42,12 @@ public static class BusinessLogicServiceRegistration
 		});
 
 		services.AddTransient<IAuthService, AuthService>();
-		
-		
+		services.AddScoped<IProductRepository, ProductRepository>();
+		services.AddScoped<IProductItemRepository, ProductItemRepository>();
+		services.AddScoped<IOrderRepository, OrderRepository>();
+		services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
+
 		return services;
 	}
 }

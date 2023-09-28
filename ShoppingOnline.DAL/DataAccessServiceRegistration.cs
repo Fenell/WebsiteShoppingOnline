@@ -16,6 +16,7 @@ public static class DataAccessServiceRegistration
 		services.AddDbContext<ApplicationDbContext>(otp =>
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
 
+
 		services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
 				options.Password.RequireUppercase = false;
@@ -25,9 +26,8 @@ public static class DataAccessServiceRegistration
 			.AddEntityFrameworkStores<ApplicationDbContext>()
 			.AddDefaultTokenProviders();
 		
-		
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+  
 		return services;
 	}
 }
