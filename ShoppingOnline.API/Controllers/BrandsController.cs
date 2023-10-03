@@ -1,24 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
 using ShoppingOnline.BLL.Features.BrandApplication;
 
 namespace ShoppingOnline.API.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class BrandsController : ControllerBase
 {
 	private readonly IBrandServices _brandServices;
+
 	public BrandsController(IBrandServices brandServices)
 	{
 		_brandServices = brandServices;
 	}
+
 	[HttpGet]
 	public async Task<IActionResult> GetAllBrands()
 	{
 		var request = await _brandServices.GetAllBrands();
 		return Ok(request);
 	}
+
 	[HttpGet]
 	[Route("brand-by-{id}")]
 	public async Task<IActionResult> GetBrandById(Guid id)
@@ -26,6 +32,7 @@ public class BrandsController : ControllerBase
 		var request = await _brandServices.GetBrandById(id);
 		return Ok(request);
 	}
+
 	[HttpPost]
 	public async Task<IActionResult> CreatedBrand(CreatedBrand createdBrand)
 	{
@@ -35,12 +42,14 @@ public class BrandsController : ControllerBase
 
 		return CreatedAtAction(nameof(GetBrandById), requestNew, request);
 	}
+
 	[HttpPut]
 	public async Task<IActionResult> UpdateBrand(UpdateBrand updateBrand)
 	{
 		var request = await _brandServices.UpdateBrand(updateBrand);
 		return Ok(request);
 	}
+
 	[HttpDelete]
 	public async Task<IActionResult> DeleteBrand(GetBrand getBrand)
 	{
