@@ -1,23 +1,22 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShoppingOnline.API.Middleware;
 using ShoppingOnline.BLL;
-using ShoppingOnline.BLL.Features.OrderApplication;
-using ShoppingOnline.BLL.Features.OrderItemApplication;
-using ShoppingOnline.BLL.Features.ProductApplication;
-using ShoppingOnline.BLL.Features.ProductItemApplication;
 using ShoppingOnline.DAL;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddBusinessLogicLayerService(builder.Configuration);
+builder.Services.AddDataAccessLayerService(builder.Configuration);
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddBusinessLogicLayerService(builder.Configuration);
-builder.Services.AddDataAccessLayerService(builder.Configuration);
+//builder.Services.AddSwaggerGen();
 
 //Add CORS 
 builder.Services.AddCors(options =>
@@ -30,30 +29,42 @@ builder.Services.AddCors(options =>
 	});
 });
 
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(cfg =>
+{
+	cfg.TokenValidationParameters = new TokenValidationParameters()
+	{
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateIssuerSigningKey = true,
+		ValidateLifetime = true,
+		ClockSkew = TimeSpan.Zero,
+		ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
+		ValidAudience = builder.Configuration["JWTSettings:Audience"],
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"]))
+	};
+});
+
 
 //Add Swagger Bearer
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "TangWeb_Api", Version = "v1" });
-	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-	{
-		In = ParameterLocation.Header,
-		Description = "Please Bearer and then token in the field",
-		Name = "Authorization",
-		Type = SecuritySchemeType.ApiKey
-	});
+	c.AddSecurityDefinition("Bearer",
+		new OpenApiSecurityScheme
+		{
+			In = ParameterLocation.Header,
+			Description = "Please Bearer and then token in the field",
+			Name = "Authorization",
+			Type = SecuritySchemeType.ApiKey
+		});
 	c.AddSecurityRequirement(new OpenApiSecurityRequirement
 	{
 		{
-			new OpenApiSecurityScheme
-			{
-				Reference = new OpenApiReference
-				{
-					Type = ReferenceType.SecurityScheme,
-					Id = "Bearer"
-				}
-			},
-			new string[] { }
+			new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, new string[] { }
 		}
 	});
 });

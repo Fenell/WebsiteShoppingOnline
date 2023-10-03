@@ -39,7 +39,12 @@ public class AuthService : IAuthService
 
 		var jwtSecurity = await GenerateToken(user);
 
-		return new() { Id = user.Id, Email = user.Email, Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurity) };
+		return new() 
+		{ 
+			Id = user.Id,
+			Email = user.Email, 
+			Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurity) 
+		};
 	}
 
 	public async Task<RegistrationResponse> Register(RegistrationRequest request)
@@ -83,8 +88,10 @@ public class AuthService : IAuthService
 
 		var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, user.UserName), new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-				new Claim(JwtRegisteredClaimNames.Email, user.Email), new Claim("uid", user.Id), new Claim("FirstName", user.FirstName ?? ""),
+				new Claim(JwtRegisteredClaimNames.Sub, user.UserName), 
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim(JwtRegisteredClaimNames.Email, user.Email), 
+				new Claim("uid", user.Id), new Claim("FirstName", user.FirstName ?? ""),
 				new Claim("LastName", user.LastName ?? "")
 			}
 			.Union(userClaims)
