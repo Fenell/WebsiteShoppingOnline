@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7FADBFB8-B26E-48DE-AA66-DBDD39EE58D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.Client", "ShoppingOnline.Client\ShoppingOnline.Client.csproj", "{5AD99B53-3637-45E1-B783-87679C480EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingOnline.Client", "ShoppingOnline.Client\ShoppingOnline.Client.csproj", "{5AD99B53-3637-45E1-B783-87679C480EE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
