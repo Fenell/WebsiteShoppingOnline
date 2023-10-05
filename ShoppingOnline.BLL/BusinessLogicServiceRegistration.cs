@@ -5,17 +5,17 @@ using Microsoft.Extensions.DependencyInjection;
 using ShoppingOnline.BLL.Features.ColorFeature;
 using ShoppingOnline.BLL.Features.SizeFeature;
 using Microsoft.IdentityModel.Tokens;
-using ShoppingOnline.BLL.Features.BrandApplication;
 using ShoppingOnline.BLL.Features.CategoryFeature;
 using ShoppingOnline.BLL.Features.Identity;
-using ShoppingOnline.BLL.Features.OrderApplication;
-using ShoppingOnline.BLL.Features.OrderItemApplication;
-using ShoppingOnline.BLL.Features.ProductApplication;
-using ShoppingOnline.BLL.Features.ProductItemApplication;
 using ShoppingOnline.BLL.OptionModels;
 
 using System.Reflection;
 using System.Text;
+using ShoppingOnline.BLL.Features.BrandFeature;
+using ShoppingOnline.BLL.Features.OrderFeature;
+using ShoppingOnline.BLL.Features.OrderItemFeature;
+using ShoppingOnline.BLL.Features.ProductFeature;
+using ShoppingOnline.BLL.Features.ProductItemFeature;
 
 namespace ShoppingOnline.BLL;
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
-using ShoppingOnline.BLL.Features.ProductItemApplication;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
+using ShoppingOnline.BLL.Features.ProductItemFeature;
 
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]

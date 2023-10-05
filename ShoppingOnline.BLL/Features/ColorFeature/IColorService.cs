@@ -1,5 +1,5 @@
-﻿using ShoppingOnline.BLL.DataTransferObjects.Color.Requests;
-using ShoppingOnline.BLL.DataTransferObjects.ColorDTO;
+﻿using ShoppingOnline.BLL.DataTransferObjects.ColorDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 using ShoppingOnline.DAL.Entities;
 using System;
 using System.Collections.Generic;
