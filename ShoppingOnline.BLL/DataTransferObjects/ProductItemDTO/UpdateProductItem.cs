@@ -1,12 +1,4 @@
-﻿using ShoppingOnline.BLL.Dtos.OrderViewModel;
-using ShoppingOnline.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingOnline.BLL.Dtos.ProductItemViewModel;
+﻿namespace ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 public class UpdateProductItem
 {
 	public Guid Id { get; set; }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingOnline.BLL.Dtos.ProductViewModel;
+﻿namespace ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
 public class DeleteProduct
 {
 	public Guid Id { get; set; }

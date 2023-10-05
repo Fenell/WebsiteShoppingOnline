@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.Features.BrandFeature;
 
 namespace ShoppingOnline.API.Controllers;

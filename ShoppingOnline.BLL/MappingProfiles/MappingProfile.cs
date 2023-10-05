@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO;
 using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
-using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
-using ShoppingOnline.BLL.Dtos.OrderViewModel;
-using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
-using ShoppingOnline.BLL.Dtos.ProductViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
+using ShoppingOnline.BLL.DataTransferObjects.OrderItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 using ShoppingOnline.DAL.Entities;
 using System;
 using System.Collections.Generic;

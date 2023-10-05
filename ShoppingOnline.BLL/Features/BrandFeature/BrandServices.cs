@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
-using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.Exceptions;
-using ShoppingOnline.BLL.Features.BrandFeature;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ShoppingOnline.BLL.Features.BrandApplication;
+namespace ShoppingOnline.BLL.Features.BrandFeature;
 public class BrandServices : IBrandServices
 {
 	private readonly IBrandRepository _brandRepository;

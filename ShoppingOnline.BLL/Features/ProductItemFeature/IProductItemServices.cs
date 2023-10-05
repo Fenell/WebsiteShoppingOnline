@@ -1,11 +1,6 @@
-﻿using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 
-namespace ShoppingOnline.BLL.Features.ProductItemApplication;
+namespace ShoppingOnline.BLL.Features.ProductItemFeature;
 public interface IProductItemServices
 {
 	Task<IEnumerable<GetProductItem>> GetProductItems();

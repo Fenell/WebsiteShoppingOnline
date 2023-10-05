@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ShoppingOnline.BLL.DataTransferObjects.Color.Requests;
 using ShoppingOnline.BLL.DataTransferObjects.ColorDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 using ShoppingOnline.BLL.DataTransferObjects.SizeDTO.Models;
 using ShoppingOnline.BLL.DataTransferObjects.SizeDTO.Requests;
 using ShoppingOnline.DAL.Entities;

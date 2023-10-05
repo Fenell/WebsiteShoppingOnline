@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using ShoppingOnline.BLL.Dtos.ProductItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ShoppingOnline.BLL.Features.ProductItemApplication;
+namespace ShoppingOnline.BLL.Features.ProductItemFeature;
 public class ProductItemsServices : IProductItemServices
 {
 	private readonly IProductItemRepository _productItemRepository;

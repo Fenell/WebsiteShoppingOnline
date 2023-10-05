@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingOnline.BLL.Dtos.ProductViewModel;
-using ShoppingOnline.BLL.Features.ProductApplication;
+using ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
+using ShoppingOnline.BLL.Features.ProductFeature;
 using ShoppingOnline.DAL.Entities;
 
 namespace ShoppingOnline.API.Controllers;

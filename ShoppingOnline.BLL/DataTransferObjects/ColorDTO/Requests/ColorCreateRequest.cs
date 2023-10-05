@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShoppingOnline.BLL.DataTransferObjects.Color.Requests;
+namespace ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 public class ColorCreateRequest
 {
 	[Required(ErrorMessage ="Tên không đúng định dạng!")]

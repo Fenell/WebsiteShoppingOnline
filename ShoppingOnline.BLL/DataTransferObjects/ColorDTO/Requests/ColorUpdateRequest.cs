@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingOnline.BLL.DataTransferObjects.Color.Requests;
+﻿namespace ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 public class ColorUpdateRequest
 {
 	public Guid Id { get; set; }

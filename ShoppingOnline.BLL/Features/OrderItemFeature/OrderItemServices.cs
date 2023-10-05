@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
-using ShoppingOnline.BLL.Dtos.OrderItemViewModel;
+using ShoppingOnline.BLL.DataTransferObjects.OrderItemDTO;
 using ShoppingOnline.BLL.Exceptions;
-using ShoppingOnline.DAL.Database.AppDbContext;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ShoppingOnline.BLL.Features.OrderItemApplication;
+namespace ShoppingOnline.BLL.Features.OrderItemFeature;
 public class OrderItemServices : IOrderItemServices
 {
 	private readonly IOrderItemRepository _orderItemRepository;

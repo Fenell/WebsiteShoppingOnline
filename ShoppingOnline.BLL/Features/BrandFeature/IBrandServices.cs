@@ -1,4 +1,4 @@
-﻿using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
+﻿using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

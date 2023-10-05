@@ -1,11 +1,6 @@
-﻿using ShoppingOnline.BLL.Dtos.OrderViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 
-namespace ShoppingOnline.BLL.Features.OrderApplication;
+namespace ShoppingOnline.BLL.Features.OrderFeature;
 public interface IOrderServices
 {
 	Task<IEnumerable<GetOrder>> GetOrders();

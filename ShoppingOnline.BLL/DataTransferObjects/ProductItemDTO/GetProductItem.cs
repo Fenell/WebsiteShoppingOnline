@@ -1,11 +1,4 @@
-﻿using ShoppingOnline.DAL.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingOnline.BLL.Dtos.ProductItemViewModel;
+﻿namespace ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 public class GetProductItem
 {
 	public Guid ProductId { get; set; }
