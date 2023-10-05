@@ -16,6 +16,7 @@ using ShoppingOnline.BLL.OptionModels;
 
 using System.Reflection;
 using System.Text;
+using ShoppingOnline.BLL.Features.BrandFeature;
 
 namespace ShoppingOnline.BLL;
 

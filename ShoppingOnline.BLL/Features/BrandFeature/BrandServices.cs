@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
 using ShoppingOnline.BLL.Exceptions;
+using ShoppingOnline.BLL.Features.BrandFeature;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
 using System;

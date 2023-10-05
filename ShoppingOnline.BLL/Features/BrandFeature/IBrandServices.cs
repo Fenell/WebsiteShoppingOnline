@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShoppingOnline.BLL.Features.BrandApplication;
+namespace ShoppingOnline.BLL.Features.BrandFeature;
 public interface IBrandServices
 {
 	Task<IEnumerable<GetBrand>> GetAllBrands();

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.Dtos.BrandItemViewModel;
-using ShoppingOnline.BLL.Features.BrandApplication;
+using ShoppingOnline.BLL.Features.BrandFeature;
 
 namespace ShoppingOnline.API.Controllers;
 
