@@ -1,0 +1,20 @@
+﻿
+
+@code {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		var authState = await AuthState;
+
+		if (authState.User.Identity is null || authState.User.Identity.IsAuthenticated == false)
+		{
+			NavigationManager.NavigateTo("login");
+		}
+	}
+
+}
