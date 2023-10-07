@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Newtonsoft.Json;
 using ShoppingOnline.Client.DataTransferObjects.CartDto;
 using ShoppingOnline.Client.DataTransferObjects.ColorDto;
@@ -23,7 +23,7 @@ public partial class ProductDetail
 
 	[Inject] private ILocalStorageService _localStorageService { get; set; }
 	[Inject] private NavigationManager _navigationManager { get; set; }
-	[Inject] private IToastService ToastService { get; set; }
+	[Inject] private ISnackbar Snackbar { get; set; }
 
 
 	private GetProduct _getProducts { get; set; }
@@ -61,7 +61,7 @@ public partial class ProductDetail
 				{
 					if (_cartDto.Quantity > x.Quantity)
 					{
-						ToastService.ShowError($"There is only {x.Quantity} product left in stock !");
+						Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Warning);
 						return;
 					}
 					_lstcartDto = new List<CartDto>();
@@ -82,7 +82,7 @@ public partial class ProductDetail
 							var totalQuantity = item.Quantity + _cartDto.Quantity;
 							if (totalQuantity > x.Quantity)
 							{
-								ToastService.ShowError($"Sản phẩm trong kho chỉ còn {x.Quantity}");
+								Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Warning);
 								return;
 							}
 							item.Quantity += _cartDto.Quantity;
@@ -96,16 +96,15 @@ public partial class ProductDetail
 				}
 
 				await _localStorageService.SetItemAsync("abc", _lstcartDto);
-				ToastService.ShowSuccess("Add to card succcer !");
+				Snackbar.Add("Thêm vào giỏ hàng thành công !", Severity.Success);
 				_navigationManager.NavigateTo("shopping-cart");
 			}
 
 		}
 		if (check1 == false)
 		{
-			ToastService.ShowError("Product out of stock !");
+			Snackbar.Add("Sản phẩm hết hàng !", Severity.Error);
 		}
 
 	}
-
 }

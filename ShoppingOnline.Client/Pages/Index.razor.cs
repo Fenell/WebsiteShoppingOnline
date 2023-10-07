@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using ShoppingOnline.Client.DataTransferObjects.ProductDto;
 using ShoppingOnline.Client.Services.ProductClient;
 
