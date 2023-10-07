@@ -1,14 +1,24 @@
 ﻿@inherits LayoutComponentBase
+@using Blazored.Toast.Configuration;
+
 
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="2"
+                IconType="IconType.FontAwesome"
+                ErrorIcon="error_outline"
+                InfoIcon="fa fa-info"
+                SuccessIcon="fa fa-thumbs-up"
+                WarningIcon="fa fa-exclamation" />
+
 <div>
-	<NavMenu></NavMenu>
-	<div class="container">
-		@Body
-	</div>
-	<_Footer></_Footer>
+    <NavMenu></NavMenu>
+    <div class="container">
+        @Body
+    </div>
+    <_Footer></_Footer>
 </div>
 

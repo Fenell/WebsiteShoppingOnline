@@ -7,7 +7,7 @@ using ShoppingOnline.BLL.Features.ProductItemFeature;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class ProductItemsController : ControllerBase
 {
 	private readonly IProductItemServices _services;

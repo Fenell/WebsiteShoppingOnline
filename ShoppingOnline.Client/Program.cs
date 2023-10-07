@@ -1,15 +1,19 @@
 using Blazored.LocalStorage;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using ShoppingOnline.Client;
 using ShoppingOnline.Client.Services.ColorClient;
 using ShoppingOnline.Client.Services.ProductClient;
+using ShoppingOnline.Client.Services.ProductItemClient;
 using ShoppingOnline.Client.Services.SizeClient;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Services.AddBlazoredToast();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddMudServices();
@@ -18,6 +22,7 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped<IProductClientServices, ProductClientServices>();
 builder.Services.AddScoped<ISizeClientServices, SizeClientServices>();
 builder.Services.AddScoped<IColorClientServices, ColorClientServices>();
+builder.Services.AddScoped<IProductItemClientServices, ProductItemClientServices>();
 
 
 //LocalStorage
