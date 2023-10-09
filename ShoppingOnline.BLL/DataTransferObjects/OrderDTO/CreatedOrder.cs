@@ -1,4 +1,6 @@
-﻿namespace ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
+﻿using ShoppingOnline.DAL.Entities;
+
+namespace ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 public class CreatedOrder
 {
 	public Guid PromotionId { get; set; }
@@ -10,7 +12,5 @@ public class CreatedOrder
 	public string? PaymentMethod { get; set; } = null!;
 	public decimal Total { get; set; }
 
-	public Guid ProductItemId { get; set; }
-	public int Quantity { get; set; }
-	public decimal Price { get; set; }
+	public List<OrderItemDto>? OrderItems { get; set; }
 }

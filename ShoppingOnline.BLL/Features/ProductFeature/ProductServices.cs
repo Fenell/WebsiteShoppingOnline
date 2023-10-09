@@ -24,7 +24,8 @@ public class ProductServices : IProductServices
 			{
 				ColorId = create.ColorId,
 				SizeId = create.SizeId,
-				Quantity = create.Quantity
+				Quantity = create.Quantity,
+				ProductImages = new List<ProductImage>()
 			}
 		};
 		await _productRepository.CreateProduct(product);

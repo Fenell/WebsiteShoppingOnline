@@ -3,6 +3,7 @@ using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
+using System.Net;
 
 namespace ShoppingOnline.BLL.Features.OrderFeature;
 public class OrderServices : IOrderServices
@@ -17,8 +18,25 @@ public class OrderServices : IOrderServices
 
 	public async Task<Guid> CreatedOrder(CreatedOrder createdOrder)
 	{
-		var request = _mapper.Map<CreatedOrder, Order>(createdOrder);
-		request.Total = createdOrder.Quantity * createdOrder.Price;
+		var request = new Order()
+		{
+			PromotionId = createdOrder.PromotionId,
+			CustomerName = createdOrder.CustomerName,
+			Address = createdOrder.Address,
+			PhoneNumber = createdOrder.PhoneNumber,
+			Note = createdOrder.Note,
+			Total = createdOrder.Total,
+		};
+		request.OrderItems = new List<OrderItem>();
+		foreach (var item in createdOrder.OrderItems)
+		{
+			var orderItem = new OrderItem()
+			{
+				ProductItemId = item.ProductItemId,
+				Quantity = item.Quantity,
+				Price = item.Price,
+			};
+		}
 
 		await _orderRepository.CreateOrder(request);
 

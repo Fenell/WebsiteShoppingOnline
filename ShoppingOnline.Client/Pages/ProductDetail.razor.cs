@@ -49,10 +49,18 @@ public partial class ProductDetail
 	{
 		_lstcartDto = await _localStorageService.GetItemAsync<List<CartDto>>("abc");
 
+		if (_cartDto.Size == null || _cartDto.Color == null || _cartDto.Quantity == 0)
+		{
+			Snackbar.Add($"Bạn chưa chọn size, màu hoặc số lượng !", Severity.Warning);
+			return;
+		}
 		_cartDto.IdProduct = _getProducts.Id;
+		_cartDto.Price = _getProducts.Price;
 		bool check1 = false;
 		foreach (var x in _getProductItems)
 		{
+			_cartDto.Id = x.Id;
+
 			if (x.ProductId == _cartDto.IdProduct && x.ColorId.ToString() == _cartDto.Color && x.SizeId.ToString() == _cartDto.Size && x.Quantity > 0)
 			{
 
@@ -61,7 +69,7 @@ public partial class ProductDetail
 				{
 					if (_cartDto.Quantity > x.Quantity)
 					{
-						Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Warning);
+						Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Normal);
 						return;
 					}
 					_lstcartDto = new List<CartDto>();
@@ -82,7 +90,7 @@ public partial class ProductDetail
 							var totalQuantity = item.Quantity + _cartDto.Quantity;
 							if (totalQuantity > x.Quantity)
 							{
-								Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Warning);
+								Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm và trong giỏ hàng bạn đã có {item.Quantity} sản phẩm !", Severity.Normal);
 								return;
 							}
 							item.Quantity += _cartDto.Quantity;

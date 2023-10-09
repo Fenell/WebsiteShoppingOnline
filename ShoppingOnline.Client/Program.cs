@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using ShoppingOnline.Client;
 using ShoppingOnline.Client.Services.ColorClient;
+using ShoppingOnline.Client.Services.OrderClient;
 using ShoppingOnline.Client.Services.ProductClient;
 using ShoppingOnline.Client.Services.ProductItemClient;
 using ShoppingOnline.Client.Services.SizeClient;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IProductClientServices, ProductClientServices>();
 builder.Services.AddScoped<ISizeClientServices, SizeClientServices>();
 builder.Services.AddScoped<IColorClientServices, ColorClientServices>();
 builder.Services.AddScoped<IProductItemClientServices, ProductItemClientServices>();
+builder.Services.AddScoped<IOrderClientServices, OrderClientServices>();
 
 
 //LocalStorage

@@ -1,6 +1,7 @@
 ﻿namespace ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 public class GetProductItem
 {
+	public Guid Id { get; set; }
 	public Guid ProductId { get; set; }
 	public Guid ColorId { get; set; }
 	public Guid SizeId { get; set; }
