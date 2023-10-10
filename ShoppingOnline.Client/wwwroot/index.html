@@ -8,6 +8,10 @@
     <base href="/" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="ShoppingOnline.Client.styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/loadingStyle.css" type="text/css">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -22,11 +26,11 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+    <div id="app">
+        <div>loading...</div>
+        <!--<span class="loader"></span>-->
     </div>
+
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
@@ -44,6 +48,48 @@
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/mixitup.min.js"></script>
     <script src="js/main.js"></script>
+
+    <!--External login js-->
+    <script src="js/externalLogin/loginGoogle.js"></script>
+    <script>
+        function reveal() {
+                var reveals = document.querySelectorAll(".reveal");
+
+                for (var i = 0; i < reveals.length; i++) {
+                    var windowHeight = window.innerHeight;
+                    var elementTop = reveals[i].getBoundingClientRect().top;
+                    var elementVisible = 150;
+
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveals[i].classList.add("active");
+                    } else {
+                        reveals[i].classList.remove("active");
+                    }
+                }
+            }
+
+            window.addEventListener("scroll", reveal);
+
+        </script>
+    <!--<script>
+        const elements = document.querySelectorAll('.reveal');
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: .4
+        }
+        const callbacks = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }
+        let observer = new IntersectionObserver(callbacks, options);
+        elements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>-->
 </body>
 
 </html>

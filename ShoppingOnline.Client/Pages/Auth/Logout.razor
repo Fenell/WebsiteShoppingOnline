@@ -1,0 +1,17 @@
+﻿@page "/logout"
+@using ShoppingOnline.Client.Services.Auth.Interface
+
+@code {
+    [Inject]
+    public IAuthService AuthService { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		await AuthService.Logout();
+
+        NavigationManager.NavigateTo("/");
+	}
+
+}

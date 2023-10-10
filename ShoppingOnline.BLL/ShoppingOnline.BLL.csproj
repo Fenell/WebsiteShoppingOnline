@@ -20,6 +20,8 @@
 
     <Folder Include="Features\CategoryFeature\" />
 
+    <Folder Include="Features\ExternalLogin\" />
+
     <Folder Include="MappingProfiles\" />
 
     <Folder Include="Paging\" />
@@ -32,6 +34,8 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
 </Project>
