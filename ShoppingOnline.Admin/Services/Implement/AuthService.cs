@@ -32,6 +32,7 @@ public class AuthService : IAuthService
 			var result = JsonConvert.DeserializeObject<SignInResponse>(responseContent);
 			await _localStorageService.SetItemAsync("token", result?.Token);
 			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result?.Token);
+
 			await ((AuthStateProvider)_authState).LogedIn();
 
 			return true;
@@ -44,6 +45,7 @@ public class AuthService : IAuthService
 	{
 		await _localStorageService.RemoveItemAsync("token");
 		_httpClient.DefaultRequestHeaders.Authorization = null;
+
 		await ((AuthStateProvider)_authState).LogedOut();
 	}
 }
