@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using ShoppingOnline.Admin.Provider;
 using ShoppingOnline.Admin.Services.Interface;
 using ShoppingOnline.Admin.ViewModels.Auth;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 namespace ShoppingOnline.Admin.Services.Implement;
@@ -30,6 +31,8 @@ public class AuthService : IAuthService
 		{
 			var result = JsonConvert.DeserializeObject<SignInResponse>(responseContent);
 			await _localStorageService.SetItemAsync("token", result?.Token);
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result?.Token);
+
 			await ((AuthStateProvider)_authState).LogedIn();
 
 			return true;
@@ -41,6 +44,8 @@ public class AuthService : IAuthService
 	public async Task Logout()
 	{
 		await _localStorageService.RemoveItemAsync("token");
+		_httpClient.DefaultRequestHeaders.Authorization = null;
+
 		await ((AuthStateProvider)_authState).LogedOut();
 	}
 }

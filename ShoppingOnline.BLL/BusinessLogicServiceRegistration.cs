@@ -12,6 +12,7 @@ using ShoppingOnline.BLL.OptionModels;
 using System.Reflection;
 using System.Text;
 using ShoppingOnline.BLL.Features.BrandFeature;
+using ShoppingOnline.BLL.Features.ExternalLogin;
 using ShoppingOnline.BLL.Features.OrderFeature;
 using ShoppingOnline.BLL.Features.OrderItemFeature;
 using ShoppingOnline.BLL.Features.ProductFeature;
@@ -31,8 +32,11 @@ public static class BusinessLogicServiceRegistration
 		services.AddScoped<ISizeService, SizeService>();
 
 		services.Configure<JwtSettings>(configuration.GetSection("JWTSettings"));
+		services.Configure<GoogleAuthSettings>(configuration.GetSection("GoogleSettings"));
+
 		
 		services.AddTransient<IAuthService, AuthService>();
+		services.AddTransient<IGoogleAuthService, GoogleAuthService>();
 
 		services.AddScoped<IProductServices, ProductServices>();
 		services.AddScoped<IProductItemServices, ProductItemsServices>();
