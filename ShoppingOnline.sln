@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7FADBF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingOnline.Client", "ShoppingOnline.Client\ShoppingOnline.Client.csproj", "{5AD99B53-3637-45E1-B783-87679C480EE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.Admin", "ShoppingOnline.Admin\ShoppingOnline.Admin.csproj", "{E972A075-0932-4815-884F-9FF9F8021E52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{5AD99B53-3637-45E1-B783-87679C480EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AD99B53-3637-45E1-B783-87679C480EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AD99B53-3637-45E1-B783-87679C480EE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E972A075-0932-4815-884F-9FF9F8021E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E972A075-0932-4815-884F-9FF9F8021E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E972A075-0932-4815-884F-9FF9F8021E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E972A075-0932-4815-884F-9FF9F8021E52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{F3E1DB45-20BC-4513-9E0C-456C2DD83884} = {D94E7321-BAE2-4D17-87C1-97935FB49D07}
 		{564AD7DD-6AF4-4EAF-948E-1FF06FE83CEA} = {D94E7321-BAE2-4D17-87C1-97935FB49D07}
 		{5AD99B53-3637-45E1-B783-87679C480EE5} = {7FADBFB8-B26E-48DE-AA66-DBDD39EE58D7}
+		{E972A075-0932-4815-884F-9FF9F8021E52} = {7FADBFB8-B26E-48DE-AA66-DBDD39EE58D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB38B0E7-3E68-4DC4-97CF-A7E10614A474}

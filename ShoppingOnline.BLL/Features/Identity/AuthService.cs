@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using ShoppingOnline.BLL.DataTransferObjects.Identity.Requests;
 using ShoppingOnline.BLL.DataTransferObjects.Identity.Response;
 using ShoppingOnline.BLL.Exceptions;
+using ShoppingOnline.BLL.Features.ExternalLogin;
 using ShoppingOnline.BLL.OptionModels;
 using ShoppingOnline.DAL.Entities.Identity;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,12 +17,15 @@ public class AuthService : IAuthService
 {
 	private readonly UserManager<ApplicationUser> _userManager;
 	private readonly SignInManager<ApplicationUser> _signInManager;
+	private readonly IGoogleAuthService _googleAuthService;
 	private readonly JwtSettings _jwtSettings;
 
-	public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<JwtSettings> jwtSettings)
+	public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+		IOptions<JwtSettings> jwtSettings, IGoogleAuthService googleAuthService)
 	{
 		_userManager = userManager;
 		_signInManager = signInManager;
+		_googleAuthService = googleAuthService;
 		_jwtSettings = jwtSettings.Value;
 	}
 
@@ -39,11 +43,11 @@ public class AuthService : IAuthService
 
 		var jwtSecurity = await GenerateToken(user);
 
-		return new() 
-		{ 
+		return new()
+		{
 			Id = user.Id,
-			Email = user.Email, 
-			Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurity) 
+			Email = user.Email,
+			Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurity)
 		};
 	}
 
@@ -80,6 +84,52 @@ public class AuthService : IAuthService
 		throw new BadRequestExpection($"{str}");
 	}
 
+	public async Task<SignInResponse> LoginWithGoogle(string accessToken)
+	{
+		var userGoogleInfo = await _googleAuthService.GetGoogleUserInfo(accessToken);
+		var existsUser = await _userManager.FindByEmailAsync(userGoogleInfo.Email);
+		string defaultPassword = "user123";
+
+		if (existsUser is null)
+		{
+			var user = new ApplicationUser()
+			{
+				Email = userGoogleInfo.Email,
+				FirstName = userGoogleInfo.FamilyName,
+				LastName = userGoogleInfo.GivenName,
+				UserName = userGoogleInfo.Email
+			};
+
+			var result = await _userManager.CreateAsync(user, defaultPassword);
+
+			if (!result.Succeeded)
+				throw new BadRequestExpection("Someting went wrong");
+
+			await _userManager.AddToRoleAsync(user, "User");
+
+			//login
+			var loginResult = await _signInManager.CheckPasswordSignInAsync(user, defaultPassword, false);
+			if (!loginResult.Succeeded)
+				throw new BadRequestExpection("Someting went wrong");
+
+			return new()
+			{
+				Email = user.Email,
+				Id = user.Id,
+				Token = new JwtSecurityTokenHandler().WriteToken(await GenerateToken(user))
+			};
+		}
+
+		await _signInManager.CheckPasswordSignInAsync(existsUser, defaultPassword, false);
+		return new()
+		{
+			Email = existsUser.Email,
+			Id = existsUser.Id,
+			Token = new JwtSecurityTokenHandler().WriteToken(await GenerateToken(existsUser))
+		};
+	}
+
+
 	private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
 	{
 		var userClaims = await _userManager.GetClaimsAsync(user);
@@ -88,9 +138,9 @@ public class AuthService : IAuthService
 
 		var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, user.UserName), 
+				new Claim(JwtRegisteredClaimNames.Sub, user.FirstName + " " + user.LastName),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-				new Claim(JwtRegisteredClaimNames.Email, user.Email), 
+				new Claim(JwtRegisteredClaimNames.Email, user.Email),
 				new Claim("uid", user.Id), new Claim("FirstName", user.FirstName ?? ""),
 				new Claim("LastName", user.LastName ?? "")
 			}

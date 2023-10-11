@@ -119,7 +119,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*//////////////////////////////////////////////////////////////////
 [ LOADDING ]*/
-.animsition-loading-1 {
+/*.animsition-loading-1 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -150,7 +150,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   100% {
     transform: scale(1);
     opacity: 0; } 
-}
+}*/
 
 /*//////////////////////////////////////////////////////////////////
 [ BUTTON BACK TO TOP ]*/

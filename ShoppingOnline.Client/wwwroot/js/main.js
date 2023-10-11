@@ -14,18 +14,18 @@
     /*------------------
         Preloader
     --------------------*/
-    $(window).on('load', function () {
-        $(".loader").fadeOut();
-        $("#preloder").delay(200).fadeOut("slow");
+    //$(window).on('load', function () {
+    //    $(".loader").fadeOut();
+    //    $("#preloder").delay(200).fadeOut("slow");
 
-        /*------------------
-		    Product filter
-	    --------------------*/
-        if ($('#product-list').length > 0) {
-            var containerEl = document.querySelector('#product-list');
-            var mixer = mixitup(containerEl);
-        }
-    });
+    //    /*------------------
+		  //  Product filter
+	   // --------------------*/
+    //    if ($('#product-list').length > 0) {
+    //        var containerEl = document.querySelector('#product-list');
+    //        var mixer = mixitup(containerEl);
+    //    }
+    //});
 
     /*------------------
         Background Set

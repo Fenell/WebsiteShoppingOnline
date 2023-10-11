@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div id="wrapper">
+    <NavMenu></NavMenu>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <_Header></_Header>
+            <div class="container-fluid">
+                @Body
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,4 +8,6 @@ public interface IAuthService
 	Task<SignInResponse> Login(SignInRequest request);
 
 	Task<RegistrationResponse> Register(RegistrationRequest request);
+
+	Task<SignInResponse> LoginWithGoogle(string accessToken);
 }
