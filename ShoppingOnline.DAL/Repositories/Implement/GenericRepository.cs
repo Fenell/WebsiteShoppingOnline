@@ -16,7 +16,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
 	public Task<IEnumerable<T>> GetAllAsync()
 	{
-		return Task.FromResult<IEnumerable<T>>(_context.Set<T>().AsNoTracking());
+		return Task.FromResult<IEnumerable<T>>(_context.Set<T>().AsNoTracking().Where(c => c.IsDeleted == false));
 	}
 
 	public async Task<T?> GetByIdAsync(Guid id)
