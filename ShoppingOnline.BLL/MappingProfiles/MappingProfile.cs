@@ -29,7 +29,7 @@ public class MappingProfile : Profile
 		#endregion
 		#region OrderMapping
 		CreateMap<Order, GetOrder>();
-		CreateMap<CreatedOrder, Order>();
+		CreateMap<CreatedOrder, Order>().ForMember(opt=> opt.OrderItems, cfg=> cfg.MapFrom(c=>c.OrderItems));
 		CreateMap<UpdateOrder, Order>();
 		#endregion
 		#region OrderItems

@@ -23,7 +23,7 @@ public class ProductsController : ControllerBase
 		return Ok(result);
 	}
 	[HttpGet]
-	[Route("productId")]
+	[Route("{productId}")]
 	public async Task<IActionResult> GetProductById(Guid productId)
 	{
 		var result = await _productServices.GetProductById(productId);
