@@ -11,8 +11,10 @@ namespace ShoppingOnline.DAL.Repositories.Implement;
 public class ProductItemRepository : GenericRepository<ProductItem>, IProductItemRepository
 {
 	private readonly IGenericRepository<ProductItem> _genericRepository;
+	private readonly ApplicationDbContext _context;
 	public ProductItemRepository(ApplicationDbContext context, IGenericRepository<ProductItem> genericRepository) : base(context)
 	{
+		_context = context;
 		_genericRepository = genericRepository;
 	}
 
@@ -26,6 +28,21 @@ public class ProductItemRepository : GenericRepository<ProductItem>, IProductIte
 		catch (Exception)
 		{
 			return false;
+			throw;
+		}
+	}
+
+	public async Task<bool> UpdateProductItemRange(ProductItem productItem)
+	{
+		try
+		{
+			_context.ProductItems.UpdateRange(productItem);
+			await _context.SaveChangesAsync();
+			return true;
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
 			throw;
 		}
 	}

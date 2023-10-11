@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
@@ -10,10 +11,15 @@ public class OrderServices : IOrderServices
 {
 	private readonly IOrderRepository _orderRepository;
 	private readonly IMapper _mapper;
-	public OrderServices(IOrderRepository orderRepository, IMapper mapper)
+	private readonly IOrderItemRepository _orderItemRepository;
+	private readonly IProductItemRepository _productItemRepository;
+
+	public OrderServices(IOrderRepository orderRepository, IMapper mapper, IOrderItemRepository orderItemRepository, IProductItemRepository productItemRepository)
 	{
 		_orderRepository = orderRepository;
 		_mapper = mapper;
+		_orderItemRepository = orderItemRepository;
+		_productItemRepository = productItemRepository;
 	}
 
 	public async Task<Guid> CreatedOrder(CreatedOrder createdOrder)
@@ -27,18 +33,31 @@ public class OrderServices : IOrderServices
 			Note = createdOrder.Note,
 			Total = createdOrder.Total,
 		};
-		request.OrderItems = new List<OrderItem>();
+		var idOrder = await _orderRepository.CreateOrder(request);
+
+		List<OrderItem> lstOrder = new List<OrderItem>();
 		foreach (var item in createdOrder.OrderItems)
 		{
 			var orderItem = new OrderItem()
 			{
+				OrderId = idOrder,
 				ProductItemId = item.ProductItemId,
 				Quantity = item.Quantity,
 				Price = item.Price,
 			};
+			lstOrder.Add(orderItem);
 		}
 
-		await _orderRepository.CreateOrder(request);
+		await _orderItemRepository.CreateRangeAsync(lstOrder);
+
+		List<UpdateProductItem> updateProductItems = new List<UpdateProductItem>();
+		foreach (var item in lstOrder)
+		{
+			var productItem = await _productItemRepository.GetProductItemById(item.ProductItemId);
+			productItem.Quantity -= item.Quantity;
+			await _productItemRepository.UpdateProductItem(productItem);
+		}
+
 
 		return request.Id;
 	}

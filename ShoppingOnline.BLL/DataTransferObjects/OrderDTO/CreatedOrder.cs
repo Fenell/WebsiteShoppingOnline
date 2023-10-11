@@ -8,9 +8,8 @@ public class CreatedOrder
 	public string Address { get; set; } = null!;
 	public string PhoneNumber { get; set; } = null!;
 	public string? Note { get; set; }
-	public string OrderStatus { get; set; }
 	public string? PaymentMethod { get; set; } = null!;
 	public decimal Total { get; set; }
 
-	public List<OrderItemDto>? OrderItems { get; set; }
+	public IEnumerable<OrderItemDto>? OrderItems { get; set; }
 }

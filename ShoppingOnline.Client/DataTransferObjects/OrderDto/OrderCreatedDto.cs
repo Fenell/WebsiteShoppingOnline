@@ -9,6 +9,6 @@ public class OrderCreatedDto
 	public string? Note { get; set; }
 	public decimal Total { get; set; }
 
-	public List<OrderItemDto> ListOrderItem { get; set; }
+	public List<OrderItemDto> OrderItems { get; set; }
 
 }

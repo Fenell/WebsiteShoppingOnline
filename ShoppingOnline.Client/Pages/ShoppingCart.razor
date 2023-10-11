@@ -1,11 +1,6 @@
 ﻿@page "/shopping-cart"
 
-@if (_cartDtos == null)
-{
-    _navigationManager.NavigateTo("/");
-    Snackbar.Add("Giỏ hàng đang rỗng !", Severity.Normal);
-}
-else if (_getColors == null && _getSizes == null)
+@if (_getColors == null && _getSizes == null)
 {
     <div>Đang load ...</div>
 }
@@ -177,7 +172,7 @@ else
                                                             <input type="radio" id="two">
                                                         </li>
                                                     </ul>
-                                                    <MudButton  class="hov-btn3 trans-04" @onclick="CheckOut">Place your order</MudButton>
+                                                    <MudButton class="hov-btn3 trans-04" @onclick="CheckOut">Place your order</MudButton>
                                                 </div>
                                             </div>
                                         </div>

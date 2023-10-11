@@ -16,4 +16,15 @@ public class ProductItemClientServices : IProductItemClientServices
 		var result = await _httpClient.GetFromJsonAsync<IEnumerable<ProductItemGet>>("https://localhost:7259/api/ProductItems");
 		return result;
 	}
+
+	public async Task<bool> UpdateProductItem(UpdateQuantity updateQuantity)
+	{
+		var result = await _httpClient.PutAsJsonAsync("https://localhost:7259/api/ProductItems", updateQuantity);
+		if (!result.IsSuccessStatusCode)
+		{
+			var responseContent = await result.Content.ReadAsStringAsync();
+		}
+		return result.IsSuccessStatusCode;
+	}
 }
+

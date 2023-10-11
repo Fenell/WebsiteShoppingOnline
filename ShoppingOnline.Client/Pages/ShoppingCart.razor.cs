@@ -34,7 +34,7 @@ public partial class ShoppingCart
 
 	protected override async Task OnInitializedAsync()
 	{
-		_cartDtos = await _localStorageService.GetItemAsync<List<CartDto>>("abc");
+		_cartDtos = await _localStorageService.GetItemAsync<List<CartDto>>("abc") ?? new();
 		_getSizes = await _sizeClientServices.GetAllSizes();
 		_getColors = await _colorClientServices.GetAllColors();
 		_getProductItems = await _productItemClientServices.GetProductsAsync();
@@ -88,26 +88,36 @@ public partial class ShoppingCart
 	{
 		_orderCreated.PromotionId = new Guid("6DFB12E5-04BC-4680-B953-4B53E8E56CB5");
 		_orderCreated.Total = totalAll;
-		_orderCreated.ListOrderItem = new List<OrderItemDto>();
-
+		_orderCreated.OrderItems = new List<OrderItemDto>();
+		bool check = false;
 		foreach (var cart in _cartDtos)
 		{
+			if (_getProductItems.Any(c => c.Id == cart.Id && c.Quantity <= 0))
+			{
+				check = true;
+				Snackbar.Add("Sản phẩm hết hàng !", Severity.Error);
+				return;
+			}
 			OrderItemDto orderItemDto = new OrderItemDto();
 			orderItemDto.ProductItemId = cart.Id;
 			orderItemDto.Quantity = cart.Quantity;
 			orderItemDto.Price = cart.Price;
-			_orderCreated.ListOrderItem.Add(orderItemDto);
+			_orderCreated.OrderItems.Add(orderItemDto);
 		}
-
-		var result = await _orderClientServices.CreatedOrder(_orderCreated);
-		if (result)
+		if (check == false)
 		{
-			Snackbar.Add("Mua thành công !", Severity.Success);
-			_navigationManager.NavigateTo("/");
-		}
-		else
-		{
-			Snackbar.Add("Mua thất bại !", Severity.Error);
+			var result = await _orderClientServices.CreatedOrder(_orderCreated);
+			if (result)
+			{
+				Snackbar.Add("Mua thành công !", Severity.Success);
+				_navigationManager.NavigateTo("/");
+				_cartDtos = await _localStorageService.GetItemAsync<List<CartDto>>("abc");
+				_localStorageService.RemoveItemAsync("abc");
+			}
+			else
+			{
+				Snackbar.Add("Mua thất bại !", Severity.Error);
+			}
 		}
 	}
 }
