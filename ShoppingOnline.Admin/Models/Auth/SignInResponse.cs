@@ -1,4 +1,4 @@
-﻿namespace ShoppingOnline.Admin.ViewModels.Auth;
+﻿namespace ShoppingOnline.Admin.Models.Auth;
 
 public class SignInResponse
 {

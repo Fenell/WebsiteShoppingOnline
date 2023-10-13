@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductDTO.Requests;
 using ShoppingOnline.BLL.Exceptions;
+using ShoppingOnline.DAL.Constants;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
 
@@ -9,29 +11,27 @@ public class ProductServices : IProductServices
 {
 	private readonly IProductRepository _productRepository;
 	private readonly IMapper _mapper;
-	public ProductServices(IProductRepository productRepository, IMapper mapper)
+	private readonly IBrandRepository _brandRepository;
+	private readonly ICategoryRepository _categoryRepository;
+
+	public ProductServices(IProductRepository productRepository, IMapper mapper, IBrandRepository brandRepository,
+		ICategoryRepository categoryRepository)
 	{
 		_productRepository = productRepository;
 		_mapper = mapper;
+		_brandRepository = brandRepository;
+		_categoryRepository = categoryRepository;
 	}
 
-	public async Task<Guid> CreateProduct(CreateProduct create)
+	public async Task<Guid> CreateProduct(CreateProduct request)
 	{
-		var product = _mapper.Map<CreateProduct, Product>(create);
-		product.ProductItems = new List<ProductItem>()
-		{
-			new ProductItem()
-			{
-				ColorId = create.ColorId,
-				SizeId = create.SizeId,
-				Quantity = create.Quantity
-			}
-		};
+		var product = _mapper.Map<CreateProduct, Product>(request);
 		await _productRepository.CreateProduct(product);
+
 		return product.Id;
 	}
 
-	public async Task<bool> DeleteHardProduct(DeleteProduct deleteProduct)
+	public async Task<bool> DeleteHardProduct(StatusChangeRequest deleteProduct)
 	{
 		var product = await _productRepository.GetByIdAsync(deleteProduct.Id);
 		if (product == null)
@@ -40,41 +40,79 @@ public class ProductServices : IProductServices
 		return await _productRepository.DeleteAsync(product);
 	}
 
-	public async Task<bool> DeleteProduct(DeleteProduct deleteProduct)
+	public async Task<bool> SwitchStatusProduct(StatusChangeRequest request)
 	{
-		var product = await _productRepository.GetProductById(deleteProduct.Id);
+		var product = await _productRepository.GetByIdAsync(request.Id);
 
 		if (product == null)
-			throw new NotFoundException(nameof(product), deleteProduct.Id);
-
-		product.IsDeleted = true;
-		return await _productRepository.DeleteProduct(product);
+			throw new NotFoundException(nameof(product), request.Id);
+		if (product.IsDeleted == false)
+		{
+			product.IsDeleted = true;
+			product.UpdateAt = DateTime.Now;
+			product.Status = EntityStatus.Deleted;
+			return await _productRepository.UpdateAsync(product);
+		}
+		product.IsDeleted = false;
+		product.UpdateAt = DateTime.Now;
+		product.Status = EntityStatus.Active;
+		return await _productRepository.UpdateAsync(product);
 	}
 
-	public async Task<IEnumerable<GetProducts>> GetAllProducts()
+	public async Task<IReadOnlyList<GetProducts>> GetAllProducts()
 	{
-		var products = await _productRepository.GetAllProducts();
-		var productsMap = _mapper.Map<IEnumerable<GetProducts>>(products);
-		return productsMap;
+		var products = await JoinProductWithBrandAndCate();
+
+		return products;
 	}
 
 	public async Task<GetProducts> GetProductById(Guid productId)
 	{
-		var product = await _productRepository.GetProductById(productId);
-		var productMap = _mapper.Map<GetProducts>(product);
-		return productMap;
-	}
-
-	public async Task<bool> UpdateProduct(UpdateProduct update)
-	{
-		var product = await _productRepository.GetProductById(update.Id);
+		var listProducts = await JoinProductWithBrandAndCate();
+		var product = listProducts.FirstOrDefault(c=>c.Id == productId);
 
 		if (product == null)
-			throw new NotFoundException(nameof(product), update.Id);
+			throw new NotFoundException(nameof(product), productId);
 
-		var productMap = _mapper.Map<UpdateProduct, Product>(update, product);
-		update.UpdateAt = DateTime.Now;
+		return product;
+	}
+
+	public async Task<bool> UpdateProduct(UpdateProduct request)
+	{
+		var product = await _productRepository.GetProductById(request.Id);
+
+		if (product == null)
+			throw new NotFoundException(nameof(product), request.Id);
+
+		var productMap = _mapper.Map<UpdateProduct, Product>(request, product);
+		request.UpdateAt = DateTime.Now;
 		var updateProduct = await _productRepository.UpdateProduct(productMap);
 		return updateProduct;
+	}
+
+	private async Task<List<GetProducts>> JoinProductWithBrandAndCate()
+	{
+		var products = await _productRepository.GetAllAsync();
+		var categories = await _categoryRepository.GetAllAsync();
+		var brands = await _brandRepository.GetAllAsync();
+
+		var productJoin = (from product in products
+			join brand in brands on product.BrandId equals brand.Id
+			join category in categories on product.CategoryId equals category.Id
+			select new GetProducts()
+			{
+				Id = product.Id,
+				Name = product.Name,
+				BrandId = brand.Id,
+				CategoryId = category.Id,
+				BrandName = brand.Name,
+				CategoryName = category.Name,
+				Description = product.Description,
+				Price = product.Price,
+				Status = product.Status,
+				IsDeleted = product.IsDeleted
+			}).ToList();
+
+		return productJoin;
 	}
 }

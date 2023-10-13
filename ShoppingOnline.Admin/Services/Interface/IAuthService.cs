@@ -1,4 +1,4 @@
-﻿using ShoppingOnline.Admin.ViewModels.Auth;
+﻿using ShoppingOnline.Admin.Models.Auth;
 
 namespace ShoppingOnline.Admin.Services.Interface;
 

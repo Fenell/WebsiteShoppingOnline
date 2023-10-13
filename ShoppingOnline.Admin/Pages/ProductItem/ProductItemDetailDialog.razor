@@ -1,0 +1,90 @@
+﻿@using ShoppingOnline.Admin.Services.Interface
+@using ShoppingOnline.Admin.Models.ProductItem
+
+<MudDialog>
+    <DialogContent>
+        <MudSelect @bind-Value="ProductItem.SizeId" Label="Chọn kích thước" Placeholder="Please Select" Text="@ProductItem.SizeName">
+            @foreach (var item in ListSizes)
+            {
+                <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+        <MudSelect @bind-Value="ProductItem.ColorId" Label="Chọn kích màu" Placeholder="Please Select" Text="@ProductItem.ColorName">
+            @foreach (var item in ListColors)
+            {
+                <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+        <MudNumericField @bind-Value="@ProductItem.Quantity" />
+    </DialogContent>
+    <DialogActions>
+        <DialogActions>
+            <MudButton Color="Color.Primary" OnClick="HandleAction">Lưu</MudButton>
+        </DialogActions>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public Guid ProductItemId { get; set; }
+    [Parameter]
+    public Guid ProductId { get; set; }
+    [Inject]
+    public IProductItemService ProductItemService { get; set; }
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+    public ProductItemVM ProductItem { get; set; } = new();
+
+    public List<ProductItemCreateRequest> ProductItemCreates { get; set; } = new();
+    public List<ColorVM> ListColors { get; set; } = new();
+    public List<SizeVM> ListSizes { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ProductItemId != Guid.Empty)
+            ProductItem = await ProductItemService.GetProductItemById(ProductItemId);
+        ListColors = await ProductItemService.GetAllColor();
+        ListSizes = await ProductItemService.GetAllSize();
+    }
+
+
+    private async Task HandleAction()
+    {
+        if (ProductItemId != Guid.Empty)
+        {
+            var productItemUpdate = new ProductItemUpdateRequest()
+            {
+                Id = ProductItemId,
+                SizeId = ProductItem.SizeId,
+                ColorId = ProductItem.ColorId,
+                Quantity = ProductItem.Quantity
+            };
+            var result = await ProductItemService.UpdateProductItem(productItemUpdate);
+
+            if (result)
+            {
+                Snackbar.Add("Cập nhật thành công", Severity.Success);
+	            MudDialog.Close(DialogResult.Ok(true));
+            }
+        }
+        else
+        {
+            var productItemCreate = new ProductItemCreateRequest()
+            {
+                SizeId = ProductItem.SizeId,
+                ColorId = ProductItem.ColorId,
+                Quantity = ProductItem.Quantity
+            };
+            ProductItemCreates.Add(productItemCreate);
+            var result = await ProductItemService.CreateProducItem(ProductId, ProductItemCreates);
+
+            if (result)
+            {
+	            Snackbar.Add("Tạo mới thành công", Severity.Success);
+	            MudDialog.Close(DialogResult.Ok(true));
+            }
+        }
+    }
+
+}

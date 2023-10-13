@@ -1,0 +1,49 @@
+﻿@page "/product-list"
+
+@if (IsProcessing)
+{
+    <Loading />
+}
+else
+{
+    <MudText Typo="Typo.h4" Class="mb-3">Danh sách sản phẩm</MudText>
+    <MudTable Items="@ListProducts" Hover="true">
+        <ToolBarContent>
+            <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add"
+                       IconColor="Color.Secondary" Color="Color.Primary" OnClick="AddProduct">
+                Thêm mới
+            </MudButton>
+            @*   <MudTextField  Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>*@
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh Style="font-weight: bold; font-size: 16px">Loại</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Thương hiệu</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Tên</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Giá</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Trạng thái</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Hành động</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.CategoryName</MudTd>
+            <MudTd DataLabel="Nr">@context.BrandName</MudTd>
+            <MudTd DataLabel="Nr">@context.Name</MudTd>
+            <MudTd DataLabel="Sign">@context.Price.ToString("N0")</MudTd>
+            <MudTd DataLabel="Name"><StatusComponent Status="@context.Status" /></MudTd>
+            <MudTd>
+                <MudIconButton Class="mr-3" Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Info" Size="Size.Small" OnClick="()=> ViewProductDetail(context.Id)" />
+                <MudIconButton Class="mr-3" Icon="@Icons.Material.Filled.Edit" Color="Color.Error" Size="Size.Small" OnClick="() => EditProduct(context.Id)" />
+                @if (context.IsDeleted)
+                {
+                    <MudIconButton Icon="@Icons.Material.Filled.Refresh" Color="Color.Warning" Size="Size.Small" @onclick="() => SwitchStatus(context.Id)" />
+                }
+                else
+                {
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Warning" Size="Size.Small" @onclick="() => SwitchStatus(context.Id)" />
+                }
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+}

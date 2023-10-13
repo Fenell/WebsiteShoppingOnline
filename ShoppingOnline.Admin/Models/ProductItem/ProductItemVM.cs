@@ -1,5 +1,6 @@
-﻿namespace ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
-public class GetProductItem
+﻿namespace ShoppingOnline.Admin.Models.ProductItem;
+
+public class ProductItemVM
 {
 	public Guid Id { get; set; }
 	public Guid ProductId { get; set; }
@@ -10,8 +11,4 @@ public class GetProductItem
 	public string SizeName { get; set; }
 	public int Quantity { get; set; }
 	public string Status { get; set; }
-	public DateTime CreatedAt { get; set; }
-	public string? CreatedBy { get; set; }
-	public DateTime UpdateAt { get; set; }
-	public string? UpdateBy { get; set; }
 }

@@ -14,15 +14,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 		_context = context;
 	}
 
-	public Task<IEnumerable<T>> GetAllAsync()
+	public async Task<IQueryable<T>> GetAllAsync()
 	{
-		return Task.FromResult<IEnumerable<T>>(_context.Set<T>().AsNoTracking());
+		return _context.Set<T>().AsNoTracking();
 	}
 
 	public async Task<T?> GetByIdAsync(Guid id)
 	{
 		var entity = await _context.Set<T>().AsNoTracking()
-			.FirstOrDefaultAsync(c => c.Id == id & !c.IsDeleted);
+			.FirstOrDefaultAsync(c => c.Id == id);
 
 		return entity;
 	}

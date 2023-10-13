@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductDTO.Requests;
 using ShoppingOnline.BLL.Features.ProductFeature;
 using ShoppingOnline.DAL.Entities;
 
@@ -16,19 +17,22 @@ public class ProductsController : ControllerBase
 	{
 		_productServices = productServices;
 	}
+
 	[HttpGet]
 	public async Task<IActionResult> GetProduct()
 	{
 		var result = await _productServices.GetAllProducts();
 		return Ok(result);
 	}
+
 	[HttpGet]
-	[Route("productId")]
+	[Route("{productId}")]
 	public async Task<IActionResult> GetProductById(Guid productId)
 	{
 		var result = await _productServices.GetProductById(productId);
 		return Ok(result);
 	}
+
 	[HttpPost]
 	public async Task<IActionResult> CreatedProduct(CreateProduct createProduct)
 	{
@@ -37,21 +41,27 @@ public class ProductsController : ControllerBase
 		var newProduct = await _productServices.GetProductById(request);
 		return CreatedAtAction(nameof(GetProductById), request, newProduct);
 	}
+
 	[HttpPut]
 	public async Task<IActionResult> UpdateProduct(UpdateProduct updateProduct)
 	{
 		var request = await _productServices.UpdateProduct(updateProduct);
 		return Ok(request);
 	}
-	[HttpDelete]
-	public async Task<IActionResult> DeleteProduct(DeleteProduct deleteProduct)
+
+	[HttpPatch]
+	[Route("{id}")]
+	public async Task<IActionResult> ChangeStatus(Guid id)
 	{
-		var request = await _productServices.DeleteProduct(deleteProduct);
+		var request = new StatusChangeRequest() { Id = id };
+		var result = await _productServices.SwitchStatusProduct(request);
+
 		return Ok(request);
 	}
+
 	[HttpDelete]
 	[Route("delete-hard-{id}")]
-	public async Task<IActionResult> DeleteHardProduct(DeleteProduct deleteProduct)
+	public async Task<IActionResult> DeleteHardProduct(StatusChangeRequest deleteProduct)
 	{
 		var request = await _productServices.DeleteHardProduct(deleteProduct);
 		return Ok(request);

@@ -1,18 +1,20 @@
-﻿using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
-public class GetProducts
+namespace ShoppingOnline.Admin.Models.Product;
+
+public class ProductVM
 {
 	public Guid Id { get; set; }
+	[Required]
 	public Guid CategoryId { get; set; }
+	[Required]
 	public Guid BrandId { get; set; }
 	public string CategoryName { get; set; }
 	public string BrandName { get; set; }
+	[Required]
 	public string Name { get; set; } = null!;
-	
-	public string? SeoTitle { get; set; }
-	public decimal Price { get; set; }
 	public string? Description { get; set; }
+	public decimal Price { get; set; }
 	public string Status { get; set; }
 	public bool IsDeleted { get; set; }
 

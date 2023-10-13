@@ -8,7 +8,7 @@ namespace ShoppingOnline.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class BrandsController : ControllerBase
 {
 	private readonly IBrandServices _brandServices;
