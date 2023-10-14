@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 namespace ShoppingOnline.BLL.Features.BrandFeature;
 public interface IBrandServices
 {
-	Task<IEnumerable<GetBrand>> GetAllBrands();
+	Task<List<GetBrand>> GetAllBrands();
 	Task<GetBrand> GetBrandById(Guid id);
 	Task<Guid> CreatedBrand(CreatedBrand brand);
-	Task<bool> UpdateBrand(UpdateBrand brand);
-	Task<bool> DeleteBrand(GetBrand brand);
+	Task<bool> UpdateBrand(Guid id, UpdateBrand brand);
+	Task<bool> DeleteBrand(Guid id);
+
+
 }
