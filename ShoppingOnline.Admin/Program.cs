@@ -18,6 +18,8 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
 var apiUrl = builder.Configuration.GetValue<string>("BaseApiUrl");

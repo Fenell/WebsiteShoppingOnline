@@ -33,10 +33,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Services\Interface\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <UpToDateCheckInput Remove="Pages\Authentication\Logout.razor" />
 	</ItemGroup>
 

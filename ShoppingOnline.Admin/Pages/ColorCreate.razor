@@ -1,0 +1,36 @@
+﻿@page "/ColorCreate"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@inject NavigationManager navigationManager
+<h3>Create</h3>
+
+<EditForm Model="_colorsVM" OnValidSubmit="SubmitCreateColor">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="_colorsVM.Name"></InputText>
+        <ValidationMessage For="()=>_colorsVM.Name" style="color:red"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Create By</label>
+        <InputText class="form-control" @bind-Value="_colorsVM.CreatedBy"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code{
+    [Inject] private IColorService _colorService { get; set; }
+    private ColorsVM _colorsVM = new ColorsVM();
+    private List<ColorsVM> colorsVMs;
+
+    private async Task<bool> SubmitCreateColor(EditContext context)
+    {
+        var result = await _colorService.CreateColor(_colorsVM);
+        if (result)
+        {
+            navigationManager.NavigateTo("/colors");
+        }
+        return true;
+    }
+}
+
