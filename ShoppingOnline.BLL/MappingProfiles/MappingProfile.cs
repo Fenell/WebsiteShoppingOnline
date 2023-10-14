@@ -29,8 +29,9 @@ public class MappingProfile : Profile
 		#endregion
 		#region OrderMapping
 		CreateMap<Order, GetOrder>();
-		CreateMap<CreatedOrder, Order>().ForMember(opt=> opt.OrderItems, cfg=> cfg.MapFrom(c=>c.OrderItems));
+		CreateMap<CreatedOrder, Order>().ForMember(opt => opt.OrderItems, cfg => cfg.MapFrom(c => c.OrderItems));
 		CreateMap<UpdateOrder, Order>();
+		CreateMap<UpdateStatus, Order>();
 		#endregion
 		#region OrderItems
 		CreateMap<OrderItem, GetOrderItems>().ReverseMap();

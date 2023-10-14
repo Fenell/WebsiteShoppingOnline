@@ -72,6 +72,26 @@ public class OrderServices : IOrderServices
 		return await _orderRepository.DeleteAsync(request);
 	}
 
+	public async Task<bool> UpdateOrderStatus(UpdateStatus updateStatus)
+	{
+		var order = await _orderRepository.GetOrderById(updateStatus.Id);
+
+		if (order == null)
+			throw new NotFoundException(nameof(order), updateStatus.Id);
+
+		var orderMap = _mapper.Map<UpdateStatus, Order>(updateStatus, order);
+
+		await _orderRepository.UpdateOrder(orderMap);
+
+		if (updateStatus.OrderStatus == "CANCEL")
+		{
+			var productItem = await _productItemRepository.GetProductItemById(updateStatus.IdProductItems);
+			productItem.Quantity += updateStatus.Quantity;
+			return await _productItemRepository.UpdateAsync(productItem);
+		}
+		return true;
+	}
+
 	public async Task<bool> DeleteOrder(DeleteOrder deleteOrder)
 	{
 		var request = await _orderRepository.GetByIdAsync(deleteOrder.Id);

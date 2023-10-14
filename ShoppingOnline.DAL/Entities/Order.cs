@@ -10,7 +10,7 @@ public class Order : BaseEntity
 	public string Address { get; set; } = null!;
 	public string PhoneNumber { get; set; } = null!;
 	public string? Note { get; set; }
-	public string OrderStatus { get; set; } = EntityStatus.Active;
+	public string OrderStatus { get; set; } = EntityStatus.PendingForComfirmation;
 	public string? PaymentMethod { get; set; } = null!;
 	public decimal Total { get; set; }
 

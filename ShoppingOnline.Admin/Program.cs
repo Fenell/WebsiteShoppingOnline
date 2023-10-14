@@ -18,6 +18,12 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderItemsServices, OrderItemsServices>();
+builder.Services.AddScoped<IProductItemsServices, ProductItemsServices>();
+builder.Services.AddScoped<IProductServices, ProductServices>();
+builder.Services.AddScoped<IColorServices, ColorServices>();
+builder.Services.AddScoped<ISizeServices, SizeServices>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
 
 var apiUrl = builder.Configuration.GetValue<string>("BaseApiUrl");
