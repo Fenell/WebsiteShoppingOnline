@@ -6,5 +6,4 @@ public class UpdateProductItem
 	public Guid SizeId { get; set; }
 	public Guid ColorId { get; set; }
 	public DateTime UpdateAt { get; set; } = DateTime.Now;
-	public bool IsDeleted { get; set; }
 }
