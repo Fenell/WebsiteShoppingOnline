@@ -11,7 +11,7 @@ public class ColorService : IColorService
 	public ColorService(HttpClient httpClient)
 	{
 		_httpClient = httpClient;
-		_httpClient.BaseAddress = new Uri("https://localhost:5004");
+		//_httpClient.BaseAddress = new Uri("https://localhost:5004");
 	}
 
 	public async Task<bool> CreateColor(ColorsVM Co)

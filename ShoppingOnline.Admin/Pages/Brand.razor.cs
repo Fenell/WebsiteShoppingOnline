@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShoppingOnline.Admin.Services.Interface;
 using ShoppingOnline.Admin.ViewModels.ViewModelClient;
-using static MudBlazor.CategoryTypes;
-using System.Net.Http;
-using System;
 
 namespace ShoppingOnline.Admin.Pages;
 

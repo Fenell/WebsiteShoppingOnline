@@ -10,7 +10,7 @@ public class SizeService : ISizeService
 	public SizeService(HttpClient httpClient)
 	{
 		_httpClient = httpClient;
-		_httpClient.BaseAddress = new Uri("https://localhost:5004");
+		//_httpClient.BaseAddress = new Uri("https://localhost:5004");
 	}
 	public async Task<bool> CreateSize(SizesVM si)
 	{

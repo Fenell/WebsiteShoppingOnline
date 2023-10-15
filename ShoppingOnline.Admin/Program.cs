@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using ShoppingOnline.Admin;
 using ShoppingOnline.Admin.Constants;
-using ShoppingOnline.Admin.Pages;
 using ShoppingOnline.Admin.Provider;
 using ShoppingOnline.Admin.Services.Implement;
 using ShoppingOnline.Admin.Services.Interface;
