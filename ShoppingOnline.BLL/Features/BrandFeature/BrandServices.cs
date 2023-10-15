@@ -2,6 +2,7 @@
 using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
+using ShoppingOnline.DAL.Repositories.Implement;
 using ShoppingOnline.DAL.Repositories.Interface;
 
 namespace ShoppingOnline.BLL.Features.BrandFeature;
@@ -21,18 +22,26 @@ public class BrandServices : IBrandServices
 		return requestMap.Id;
 	}
 
-	public async Task<bool> DeleteBrand(GetBrand brand)
+	public async Task<bool> DeleteBrand(Guid id)
 	{
-		var request = await _brandRepository.GetByIdAsync(brand.Id);
-		if (request == null)
-			throw new NotFoundException(nameof(request), brand.Id);
-		return await _brandRepository.DeleteBrand(request);
+		var br = await _brandRepository.GetByIdAsync(id);
+
+		if (br != null)
+		{
+			await _brandRepository.DeleteAsync(br);
+			return true;
+		}
+		else
+		{
+			throw new NotFoundException(nameof(Brand), id);
+			
+		}
 	}
 
-	public async Task<IEnumerable<GetBrand>> GetAllBrands()
+	public async Task<List<GetBrand>> GetAllBrands()
 	{
 		var request = await _brandRepository.GetAllBrands();
-		var requestMap = _mapper.Map<IEnumerable<GetBrand>>(request);
+		var requestMap = _mapper.Map<List<GetBrand>>(request);
 		return requestMap;
 	}
 
@@ -47,14 +56,18 @@ public class BrandServices : IBrandServices
 		return requestMap;
 	}
 
-	public async Task<bool> UpdateBrand(UpdateBrand brand)
+
+	public async Task<bool> UpdateBrand(Guid id, UpdateBrand updateBrand)
 	{
-		var request = await _brandRepository.GetBrandById(brand.Id);
-
-		if (request == null)
-			throw new NotFoundException(nameof(request), brand.Id);
-
-		var requestMap = _mapper.Map<UpdateBrand, Brand>(brand, request);
-		return await _brandRepository.UpdateBrand(requestMap);
+		if (id == updateBrand.Id)
+		{
+			var mapRs = _mapper.Map<Brand>(updateBrand);
+			await _brandRepository.UpdateAsync(mapRs);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

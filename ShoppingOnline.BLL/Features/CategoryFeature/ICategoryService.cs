@@ -8,6 +8,6 @@ public interface ICategoryService
 	Task<List<CategoryViewModel>> GetAll();
 	Task<CategoryViewModel> GetById(Guid id);
 	Task<Guid> CreateCategory(CategoryCreateRequest request);
-	Task<bool> UpdateCategory(CategoryUpdateRequest request);
+	Task<bool> UpdateCategory(Guid id, CategoryUpdateRequest request);
 	Task<bool> DeleteCategory(Guid id);
 }

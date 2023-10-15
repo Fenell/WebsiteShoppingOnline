@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO;
 using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
+using ShoppingOnline.DAL.Repositories.Implement;
 using ShoppingOnline.DAL.Repositories.Interface;
 
 namespace ShoppingOnline.BLL.Features.CategoryFeature;
@@ -44,27 +46,37 @@ public class CategoryService:ICategoryService
 		return result;
 	}
 
-	public async Task<bool> UpdateCategory(CategoryUpdateRequest request)
-	{
-		var categoryExists = await _categoryRepository.GetByIdAsync(request.Id);
 
-		if(categoryExists == null)
-			throw new NotFoundException(nameof(Category), request.Id);
-
-		var categoryUpdate = _mapper.Map<Category>(request);
-		categoryUpdate.CreatedAt = DateTime.Now;
-		var result = await _categoryRepository.UpdateAsync(categoryUpdate);
-
-		return result;
-	}
 
 	public async Task<bool> DeleteCategory(Guid id)
 	{
-		var categoryExists = await _categoryRepository.GetByIdAsync(id);
+		
 
-		if(categoryExists == null)
-			throw new NotFoundException(nameof(Category), id);
 
-		return await _categoryRepository.DeleteAsync(categoryExists);
+		var rs = await _categoryRepository.GetByIdAsync(id);
+
+		if (rs != null)
+		{
+			await _categoryRepository.DeleteAsync(rs);
+			return true;
+		}
+		else
+		{
+			return false; ;
+		}
+	}
+
+	public async Task<bool> UpdateCategory(Guid id, CategoryUpdateRequest request)
+	{
+		if (id == request.Id)
+		{
+			var mapRs =  _mapper.Map<Category>(request);
+			await _categoryRepository.UpdateAsync(mapRs);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
