@@ -10,4 +10,5 @@ public class SizeViewModel
 	public Guid Id { get; set; }
 	public string Name { get; set; }
 	public string Status { get; set; }
+	public string? CreatedBy { get; set; }
 }

@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7FADBF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingOnline.Client", "ShoppingOnline.Client\ShoppingOnline.Client.csproj", "{5AD99B53-3637-45E1-B783-87679C480EE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingOnline.Admin", "ShoppingOnline.Admin\ShoppingOnline.Admin.csproj", "{E972A075-0932-4815-884F-9FF9F8021E52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingOnline.Admin", "ShoppingOnline.Admin\ShoppingOnline.Admin.csproj", "{E972A075-0932-4815-884F-9FF9F8021E52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

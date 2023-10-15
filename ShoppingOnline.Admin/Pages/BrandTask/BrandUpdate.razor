@@ -1,0 +1,24 @@
+﻿@page "/brandUpdate/{id:guid}"
+<h3>BrandUpdate</h3>
+
+<EditForm Model="_brandVM" OnValidSubmit="SubmitBrandUpdate">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name" HelperText="Max. 8 characters"
+                                  @bind-Value="_brandVM.Name" For="@(() => _brandVM.Name)" />
+                    <MudTextField Label="Status" Class="mt-3"
+                                  @bind-Value="_brandVM.Status" For="@(() => _brandVM.Status)" />
+                    <MudTextField Label="CreateBy" Class="mt-3"
+                                  @bind-Value="_brandVM.CreateBy" For="@(() => _brandVM.CreateBy)" />
+
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Update</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>

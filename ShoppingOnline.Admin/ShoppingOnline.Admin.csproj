@@ -47,7 +47,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+
 	  <UpToDateCheckInput Remove="Pages\ProductItem\ProductItemDetailDialog.razor" />
+	  <Folder Include="Pages\Authentication\N\" />
 	</ItemGroup>
 	
 	
