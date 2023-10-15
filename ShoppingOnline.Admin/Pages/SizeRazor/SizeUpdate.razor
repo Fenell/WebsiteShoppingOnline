@@ -1,0 +1,45 @@
+﻿@page "/SizeUpdate/{id:guid}"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@inject NavigationManager navigationManager
+<h3>Updates</h3>
+
+@if (_sizesVM == null)
+{
+    <Loading></Loading>
+}
+else
+{
+    <EditForm Model="_sizesVM" OnValidSubmit="SubmitUpdateSize">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <InputText class="form-control" @bind-Value="_sizesVM.Name"></InputText>
+            <ValidationMessage For="()=>_sizesVM.Name" style="color:red"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public Guid id { get; set; }
+    [Inject] public ISizeService _sizeService { get; set; }
+    public SizesVM _sizesVM { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var sizeUpdate = await _sizeService.GetSize(id);
+        _sizesVM = new SizesVM();
+        _sizesVM.Id = id;
+        _sizesVM.Name = sizeUpdate.Name;
+    }
+
+    public async Task SubmitUpdateSize(EditContext context)
+    {
+        var result = await _sizeService.UpdateSize(_sizesVM);
+        if (result)
+        {
+            navigationManager.NavigateTo("/sizes");
+        }
+    }
+}

@@ -20,6 +20,10 @@ builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 
+
+builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();

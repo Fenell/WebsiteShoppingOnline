@@ -8,5 +8,5 @@ namespace ShoppingOnline.BLL.DataTransferObjects.SizeDTO.Requests;
 public class SizeCreateRequest
 {
 	public string Name { get; set; }
-	public string? CreateBy { get; set; }
+	public string? CreatedBy { get; set; }
 }
