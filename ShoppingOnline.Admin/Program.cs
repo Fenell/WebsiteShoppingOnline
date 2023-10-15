@@ -27,6 +27,7 @@ builder.Services.AddHttpClient(ApplicationConstant.ClientName, config =>
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductItemService, ProductItemService>();
+builder.Services.AddScoped<IProductImageService,  ProductImageService>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();

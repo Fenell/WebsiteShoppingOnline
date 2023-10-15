@@ -1,6 +1,4 @@
-﻿@using ShoppingOnline.Admin.Services.Interface
-@using ShoppingOnline.Admin.Models.ProductItem
-
+﻿
 <MudDialog>
     <DialogContent>
         <MudSelect @bind-Value="ProductItem.SizeId" Label="Chọn kích thước" Placeholder="Please Select" Text="@ProductItem.SizeName">
@@ -15,76 +13,35 @@
                 <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
             }
         </MudSelect>
-        <MudNumericField @bind-Value="@ProductItem.Quantity" />
+        <MudNumericField @bind-Value="@ProductItem.Quantity" Label="Số lượng" />
+        <MudStack Style="width: 100%; margin-top: 10px">
+            <MudExpansionPanels DisableGutters="true">
+                <MudExpansionPanel Text="Chọn ảnh">
+                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" AppendMultipleFiles="false">
+                        <ButtonTemplate>
+	                        <MudButton HtmlTag="label"
+	                                   Variant="Variant.Filled"
+	                                   Color="Color.Primary"
+	                                   StartIcon="@Icons.Material.Filled.CloudUpload"
+	                                   for="@context">
+                                Upload file
+	                        </MudButton>
+                        </ButtonTemplate>
+                        <SelectedTemplate>
+                            @if (LstImageUrl != null)
+                            {
+                                @foreach (var item in LstImageUrl)
+                                {
+                                    <MudImage Src="@item" Width="120" Style="margin: 7px" @onclick="Edit" />
+                                }
+                            }
+                        </SelectedTemplate>
+                    </MudFileUpload>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        </MudStack>
     </DialogContent>
     <DialogActions>
-        <DialogActions>
-            <MudButton Color="Color.Primary" OnClick="HandleAction">Lưu</MudButton>
-        </DialogActions>
+        <MudButton Color="Color.Primary" OnClick="HandleAction">Lưu</MudButton>
     </DialogActions>
 </MudDialog>
-@code {
-    [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
-    [Parameter]
-    public Guid ProductItemId { get; set; }
-    [Parameter]
-    public Guid ProductId { get; set; }
-    [Inject]
-    public IProductItemService ProductItemService { get; set; }
-    [Inject]
-    public ISnackbar Snackbar { get; set; }
-    public ProductItemVM ProductItem { get; set; } = new();
-
-    public List<ProductItemCreateRequest> ProductItemCreates { get; set; } = new();
-    public List<ColorVM> ListColors { get; set; } = new();
-    public List<SizeVM> ListSizes { get; set; } = new();
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (ProductItemId != Guid.Empty)
-            ProductItem = await ProductItemService.GetProductItemById(ProductItemId);
-        ListColors = await ProductItemService.GetAllColor();
-        ListSizes = await ProductItemService.GetAllSize();
-    }
-
-
-    private async Task HandleAction()
-    {
-        if (ProductItemId != Guid.Empty)
-        {
-            var productItemUpdate = new ProductItemUpdateRequest()
-            {
-                Id = ProductItemId,
-                SizeId = ProductItem.SizeId,
-                ColorId = ProductItem.ColorId,
-                Quantity = ProductItem.Quantity
-            };
-            var result = await ProductItemService.UpdateProductItem(productItemUpdate);
-
-            if (result)
-            {
-                Snackbar.Add("Cập nhật thành công", Severity.Success);
-	            MudDialog.Close(DialogResult.Ok(true));
-            }
-        }
-        else
-        {
-            var productItemCreate = new ProductItemCreateRequest()
-            {
-                SizeId = ProductItem.SizeId,
-                ColorId = ProductItem.ColorId,
-                Quantity = ProductItem.Quantity
-            };
-            ProductItemCreates.Add(productItemCreate);
-            var result = await ProductItemService.CreateProducItem(ProductId, ProductItemCreates);
-
-            if (result)
-            {
-	            Snackbar.Add("Tạo mới thành công", Severity.Success);
-	            MudDialog.Close(DialogResult.Ok(true));
-            }
-        }
-    }
-
-}

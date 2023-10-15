@@ -63,7 +63,7 @@ public class ProductServices : IProductServices
 	{
 		var products = await JoinProductWithBrandAndCate();
 
-		return products;
+		return products.ToList();
 	}
 
 	public async Task<GetProducts> GetProductById(Guid productId)
@@ -90,7 +90,7 @@ public class ProductServices : IProductServices
 		return updateProduct;
 	}
 
-	private async Task<List<GetProducts>> JoinProductWithBrandAndCate()
+	private async Task<IQueryable<GetProducts>> JoinProductWithBrandAndCate()
 	{
 		var products = await _productRepository.GetAllAsync();
 		var categories = await _categoryRepository.GetAllAsync();
@@ -111,7 +111,7 @@ public class ProductServices : IProductServices
 				Price = product.Price,
 				Status = product.Status,
 				IsDeleted = product.IsDeleted
-			}).ToList();
+			});
 
 		return productJoin;
 	}
