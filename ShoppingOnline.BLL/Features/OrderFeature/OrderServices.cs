@@ -31,6 +31,7 @@ public class OrderServices : IOrderServices
 			Address = createdOrder.Address,
 			PhoneNumber = createdOrder.PhoneNumber,
 			Note = createdOrder.Note,
+			PaymentMethod = createdOrder.PaymentMethod,
 			Total = createdOrder.Total,
 		};
 		var idOrder = await _orderRepository.CreateOrder(request);

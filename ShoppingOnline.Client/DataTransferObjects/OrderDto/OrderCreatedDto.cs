@@ -7,6 +7,7 @@ public class OrderCreatedDto
 	public string Address { get; set; } = null!;
 	public string PhoneNumber { get; set; } = null!;
 	public string? Note { get; set; }
+	public string PaymentMethod { get; set; }
 	public decimal Total { get; set; }
 
 	public List<OrderItemDto> OrderItems { get; set; }

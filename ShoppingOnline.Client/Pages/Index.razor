@@ -2,7 +2,7 @@
 
 @if (_getProducts == null)
 {
-    <div>Loadding...</div>
+    <Loading></Loading>
 }
 else
 {
@@ -23,7 +23,7 @@ else
                         <img src="img/product/product-01.jpg" alt="IMG-PRODUCT">
 
                         <a href="/product-detail/@item.Id" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
+                            Add To Cart
                         </a>
                     </div>
 
@@ -34,12 +34,12 @@ else
                             </a>
 
                             <span class="stext-105 cl3">
-                                @item.Price
+                                @item.Price.ToString("N0") VNĐ
                             </span>
                         </div>
 
                         <div class="block2-txt-child2 flex-r p-t-3">
-                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                            <a href="/product-detail/@item.Id" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
                                 <img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png" alt="ICON">
                                 <img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png" alt="ICON">
                             </a>
