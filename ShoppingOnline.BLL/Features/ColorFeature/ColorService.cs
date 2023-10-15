@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.DataTransferObjects.ColorDTO;
 using ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
@@ -48,17 +49,17 @@ public class ColorService : IColorService
 	{
 		var listColor = await _colorRepository.GetAllAsync();
 
-		var listColorDto = _mapper.Map<List<ColorViewModel>>(listColor);
+		var listColorDto = _mapper.Map<List<ColorViewModel>>(await listColor.ToListAsync());
 
 		return listColorDto;
 	}
 
 
-	public async Task UpdateColor(Guid id,ColorUpdateRequest request)
+	public async Task UpdateColor(Guid id, ColorUpdateRequest request)
 	{
 		if (id == request.Id)
 		{
-			var updateColor =  _mapper.Map<Color>(request);
+			var updateColor = _mapper.Map<Color>(request);
 			await _colorRepository.UpdateAsync(updateColor);
 		}
 		else

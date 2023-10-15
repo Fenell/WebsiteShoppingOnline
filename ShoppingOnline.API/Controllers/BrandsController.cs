@@ -10,7 +10,7 @@ namespace ShoppingOnline.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-
+//[Authorize]
 public class BrandsController : ControllerBase
 {
 

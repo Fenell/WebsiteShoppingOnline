@@ -11,6 +11,6 @@ public interface IProductRepository : IGenericRepository<Product>
 	Task<Guid> CreateProduct(Product product);
 	Task<bool> UpdateProduct(Product product);
 	Task<bool> DeleteProduct(Product product);
-	Task<IEnumerable<Product>> GetAllProducts();
+	Task<IEnumerable<Product>> GetAllProductsWithProductItem();
 	Task<Product> GetProductById(Guid productId);
 }

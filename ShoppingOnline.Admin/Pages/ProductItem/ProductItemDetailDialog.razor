@@ -1,0 +1,47 @@
+﻿
+<MudDialog>
+    <DialogContent>
+        <MudSelect @bind-Value="ProductItem.SizeId" Label="Chọn kích thước" Placeholder="Please Select" Text="@ProductItem.SizeName">
+            @foreach (var item in ListSizes)
+            {
+                <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+        <MudSelect @bind-Value="ProductItem.ColorId" Label="Chọn kích màu" Placeholder="Please Select" Text="@ProductItem.ColorName">
+            @foreach (var item in ListColors)
+            {
+                <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+            }
+        </MudSelect>
+        <MudNumericField @bind-Value="@ProductItem.Quantity" Label="Số lượng" />
+        <MudStack Style="width: 100%; margin-top: 10px">
+            <MudExpansionPanels DisableGutters="true">
+                <MudExpansionPanel Text="Chọn ảnh">
+                    <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" AppendMultipleFiles="false">
+                        <ButtonTemplate>
+	                        <MudButton HtmlTag="label"
+	                                   Variant="Variant.Filled"
+	                                   Color="Color.Primary"
+	                                   StartIcon="@Icons.Material.Filled.CloudUpload"
+	                                   for="@context">
+                                Upload file
+	                        </MudButton>
+                        </ButtonTemplate>
+                        <SelectedTemplate>
+                            @if (LstImageUrl != null)
+                            {
+                                @foreach (var item in LstImageUrl)
+                                {
+                                    <MudImage Src="@item" Width="120" Style="margin: 7px" @onclick="Edit" />
+                                }
+                            }
+                        </SelectedTemplate>
+                    </MudFileUpload>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="HandleAction">Lưu</MudButton>
+    </DialogActions>
+</MudDialog>

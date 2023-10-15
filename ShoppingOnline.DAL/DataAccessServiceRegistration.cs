@@ -13,7 +13,7 @@ public static class DataAccessServiceRegistration
 {
 	public static IServiceCollection AddDataAccessLayerService(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddDbContext<ApplicationDbContext>(otp =>
+		services.AddDbContextPool<ApplicationDbContext>(otp =>
 			otp.UseSqlServer(configuration.GetConnectionString("ShoppingOnline")));
 		services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 		

@@ -5,7 +5,9 @@ using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
 using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 using ShoppingOnline.BLL.DataTransferObjects.OrderItemDTO;
 using ShoppingOnline.BLL.DataTransferObjects.ProductDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductDTO.Requests;
 using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO.Requests;
 using ShoppingOnline.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,8 @@ public class MappingProfile : Profile
 		#region ProductItems
 		CreateMap<ProductItem, GetProductItem>();
 		CreateMap<UpdateProductItem, ProductItem>();
+		CreateMap<UpdateProductItem, ProductItem>();
+		CreateMap<ProductItemCreateRequest, ProductItem>();
 		#endregion
 		#region OrderMapping
 		CreateMap<Order, GetOrder>();

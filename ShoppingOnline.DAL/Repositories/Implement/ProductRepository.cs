@@ -1,4 +1,5 @@
-﻿using ShoppingOnline.DAL.Database.AppDbContext;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingOnline.DAL.Database.AppDbContext;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
 using System;
@@ -10,9 +11,11 @@ using System.Threading.Tasks;
 namespace ShoppingOnline.DAL.Repositories.Implement;
 public class ProductRepository : GenericRepository<Product>, IProductRepository
 {
+	private readonly ApplicationDbContext _context;
 	private readonly IGenericRepository<Product> _genericRepository;
 	public ProductRepository(ApplicationDbContext context, IGenericRepository<Product> genericRepository) : base(context)
 	{
+		_context = context;
 		_genericRepository = genericRepository;
 	}
 
@@ -43,9 +46,11 @@ public class ProductRepository : GenericRepository<Product>, IProductRepository
 		}
 	}
 
-	public async Task<IEnumerable<Product>> GetAllProducts()
+	public async Task<IEnumerable<Product>> GetAllProductsWithProductItem()
 	{
-		return await _genericRepository.GetAllAsync();
+		var product = _context.Products.Include(c => c.ProductItems).ToList();
+
+		return product;
 	}
 
 	public async Task<Product> GetProductById(Guid productId)

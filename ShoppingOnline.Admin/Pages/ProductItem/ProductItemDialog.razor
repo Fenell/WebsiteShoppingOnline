@@ -1,0 +1,30 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudButton Variant="Variant.Outlined" OnClick="()=> AddProductItem(ProductId)">
+            Thêm mới
+        </MudButton>
+
+	    <MudTable Items="@ListProductItems" Hover="true" Breakpoint="Breakpoint.Sm">
+		    <HeaderContent>
+			    <MudTh Style="font-weight: bold; font-size: 14px">Màu sắc</MudTh>
+			    <MudTh Style="font-weight: bold; font-size: 14px">Kích cỡ</MudTh>
+			    <MudTh Style="font-weight: bold; font-size: 14px">Số lượng</MudTh>
+			    <MudTh Style="font-weight: bold; font-size: 14px">Hành động</MudTh>
+		    </HeaderContent>
+		    <RowTemplate>
+			    <MudTd>@context.ColorName</MudTd>
+			    <MudTd>@context.SizeName</MudTd>
+			    <MudTd>@context.Quantity</MudTd>
+			    <MudTd>
+				    <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => ViewProductItemDetail(context.Id)" />
+			    </MudTd>
+		    </RowTemplate>
+	    </MudTable>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
