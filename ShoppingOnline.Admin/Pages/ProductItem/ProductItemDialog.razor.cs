@@ -2,7 +2,6 @@
 using MudBlazor;
 using ShoppingOnline.Admin.Models.ProductItem;
 using ShoppingOnline.Admin.Services.Interface;
-using static MudBlazor.CategoryTypes;
 
 namespace ShoppingOnline.Admin.Pages.ProductItem;
 

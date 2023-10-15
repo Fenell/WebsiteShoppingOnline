@@ -4,7 +4,6 @@ using MudBlazor;
 using ShoppingOnline.Admin.Models.ProductImage;
 using ShoppingOnline.Admin.Models.ProductItem;
 using ShoppingOnline.Admin.Services.Interface;
-using System.Net.Http.Headers;
 
 namespace ShoppingOnline.Admin.Pages.ProductItem;
 
