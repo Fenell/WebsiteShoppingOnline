@@ -39,10 +39,12 @@ public partial class ProductDetail
 	protected override async Task OnInitializedAsync()
 	{
 		_getProducts = await _productClientServices.GetProductById(ProductId);
-		_getSizes = await _sizeClientServices.GetAllSizes();
-		_getColors = await _colorClientServices.GetAllColors();
-		_getProductItems = await _productItemClientServices.GetProductsAsync();
-
+		_getProductItems = (await _productItemClientServices.GetProductsAsync()).Where(c => c.ProductId == _getProducts.Id);
+		foreach (var color in _getProductItems)
+		{
+			_getColors = (await _colorClientServices.GetAllColors()).Where(c => c.Id == color.ColorId);
+			_getSizes = (await _sizeClientServices.GetAllSizes()).Where(c => c.Id == color.SizeId);
+		}
 	}
 
 	public async Task AddToCard()

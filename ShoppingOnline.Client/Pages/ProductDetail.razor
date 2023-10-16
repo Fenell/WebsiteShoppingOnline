@@ -1,9 +1,14 @@
 ﻿@page "/product-detail/{ProductId:guid}"
 
 <!-- Product Detail -->
-@if (_getProducts == null || _getSizes == null)
+@if (_getProducts == null)
 {
     <Loading></Loading>
+}
+else if (_getColors == null || _getSizes == null)
+{
+    Snackbar.Add("Sản phẩm hết hàng", Severity.Normal);
+    _navigationManager.NavigateTo("/");
 }
 else
 {
@@ -79,7 +84,7 @@ else
 
                 <div class="col-md-8 col-lg-6 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14" >
+                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
                             @_getProducts.Name
                         </h4>
 
