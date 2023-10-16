@@ -8,7 +8,7 @@ public interface IProductItemServices
 	Task<List<GetProductItem>> GetProductItems();
 	Task<List<GetProductItem>> GetProductItemWithProductId(Guid productId);
 	Task<GetProductItem?> GetProductItemById(Guid id);
-
+	Task<GetProductItem> GetProductItemChienById(Guid id);
 	Task<bool> CreateListProductItem(Guid productId, List<ProductItemCreateRequest> requests);
 	Task<bool> UpdateProductItem(UpdateProductItem updateProductItem);
 	Task<bool> DeleteProductItem(DeleteProductItem deleteProductItem);

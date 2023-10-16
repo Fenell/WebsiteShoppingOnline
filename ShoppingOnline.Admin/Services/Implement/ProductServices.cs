@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 
 namespace ShoppingOnline.Admin.Services.Implement;
 
-public class ProductServices : IProductServices
+public class ProductServices : IProductChienServices
 {
 	private readonly HttpClient _httpClient;
 

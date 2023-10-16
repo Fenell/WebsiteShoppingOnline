@@ -29,10 +29,10 @@ public partial class OrderDetailsDialog
 
 	[Inject] private IOrderServices _orderServices { get; set; }
 	[Inject] private IOrderItemsServices _OrderItemsServices { get; set; }
-	[Inject] private IProductItemsServices _ProductItemsServices { get; set; }
-	[Inject] private IProductServices _ProductServices { get; set; }
-	[Inject] private IColorServices _ColorServices { get; set; }
-	[Inject] private ISizeServices _SizeServices { get; set; }
+	[Inject] private IProductItemsChienServices _ProductItemsServices { get; set; }
+	[Inject] private IProductChienServices _ProductServices { get; set; }
+	[Inject] private IColorChienServices _ColorServices { get; set; }
+	[Inject] private ISizeChienServices _SizeServices { get; set; }
 
 	[Inject] private ISnackbar Snackbar { get; set; }
 

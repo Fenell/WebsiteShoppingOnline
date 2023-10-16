@@ -2,7 +2,7 @@
 
 namespace ShoppingOnline.Admin.Services.Interface;
 
-public interface ISizeServices
+public interface ISizeChienServices
 {
 	Task<SizeDtos> GetSizeById(Guid id);
 	Task<List<SizeDtos>> GetAllSize();

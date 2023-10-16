@@ -67,7 +67,7 @@ public partial class ProductDetail
 			{
 
 				check1 = true;
-				if (_lstcartDto == null)
+				if (_lstcartDto == null || _lstcartDto.Count <= 0)
 				{
 					if (_cartDto.Quantity > x.Quantity)
 					{
@@ -82,6 +82,11 @@ public partial class ProductDetail
 				else
 				{
 					bool check = false;
+					if (_cartDto.Quantity >x.Quantity)
+					{
+						Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Normal);
+						return;
+					}
 					_cartDto.Name = _getProducts.Name;
 					_cartDto.Price = _getProducts.Price;
 					foreach (var item in _lstcartDto)

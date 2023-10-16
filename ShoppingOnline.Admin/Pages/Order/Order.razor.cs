@@ -14,7 +14,7 @@ public partial class Order
 	private HashSet<OrderGetDtos> selectedItems = new HashSet<OrderGetDtos>();
 	[Inject] private IOrderServices _orderServices { get; set; }
 	[Inject] private IOrderItemsServices _orderItemsServices { get; set; }
-	[Inject] private IProductItemsServices _productItemsServices { get; set; }
+	[Inject] private IProductItemsChienServices _productItemsServices { get; set; }
 	[Inject] private IDialogService DialogService { get; set; }
 
 	private List<OrderGetDtos> _orderGetDtosEnumerabl = new List<OrderGetDtos>();
@@ -59,7 +59,7 @@ public partial class Order
 					var editStatus = await _orderServices.EditOrderStatus(_orderStatusDtos);
 					if (editStatus)
 					{
-						Snackbar.Add("Xác nhận đơn hàng thành công", Severity.Success);
+						Snackbar.Add("Xác nhận đơn hàng thành công", Severity.Info);
 						await LoadData();
 						return;
 					}
