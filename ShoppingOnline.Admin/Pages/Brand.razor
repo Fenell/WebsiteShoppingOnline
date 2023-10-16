@@ -16,9 +16,13 @@
         <MudTd DataLabel="Nr">@context.Name </MudTd>
         <MudTd DataLabel="Sign">@context.Status</MudTd>
         <MudTd DataLabel="Name">@context.CreateBy</MudTd>
-            <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/BrandDetail/{context.Id}") />
-            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/BrandUpdate/{context.Id}")/>
-            <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteBrands(context.Id)" />
+
+
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success"  Href=@($"/BrandUpdate/{context.Id}")>
+            </MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> DeleteBrands(context.Id)"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/BrandDetail/{context.Id}")>
+            </MudIconButton>
 
 
     </RowTemplate>
