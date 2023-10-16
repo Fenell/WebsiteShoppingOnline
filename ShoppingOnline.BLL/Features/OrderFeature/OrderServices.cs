@@ -116,7 +116,7 @@ public class OrderServices : IOrderServices
 
 	public async Task<IEnumerable<GetOrder>> GetOrders()
 	{
-		var orders = await _orderRepository.GetAllOrders();
+		var orders = (await _orderRepository.GetAllOrders()).OrderByDescending(c => c.CreatedAt);
 		var ordersMap = _mapper.Map<IEnumerable<GetOrder>>(orders);
 		return ordersMap;
 	}
