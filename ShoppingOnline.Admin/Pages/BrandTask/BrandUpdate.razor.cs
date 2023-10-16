@@ -19,7 +19,7 @@ public partial class BrandUpdate
 		_brandVM.Id = id;
 		_brandVM.Name = rs.Name;
 		_brandVM.Status = rs.Status;
-		_brandVM.CreateBy = rs.CreateBy;
+		_brandVM.CreatedBy = rs.CreatedBy;
 
 	}
 

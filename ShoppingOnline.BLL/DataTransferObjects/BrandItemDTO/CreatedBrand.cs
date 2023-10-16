@@ -2,5 +2,6 @@
 public class CreatedBrand
 {
 	public string Name { get; set; } = null!;
-	public string Status { get; set; }
+	//public string Status { get; set; }
+	public string? CreatedBy { get; set; }
 }

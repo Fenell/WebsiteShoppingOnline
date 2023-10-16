@@ -1,4 +1,5 @@
 ﻿@page "/BrandCreate"
+@using ShoppingOnline.Admin.ViewModels.ViewModelClient
 <h3>BrandCreate</h3>
 
 <EditForm Model="@_brandVMclient" OnValidSubmit="SubmidBrandCreate">
@@ -9,10 +10,15 @@
                 <MudCardContent>
                     <MudTextField Label="Name" HelperText="Max. 8 characters"
                                   @bind-Value="_brandVMclient.Name" For="@(() => _brandVMclient.Name)" />
-                    <MudTextField Label="Status" Class="mt-3"
-                                  @bind-Value="_brandVMclient.Status" For="@(() => _brandVMclient.Status)" />
-                    <MudTextField Label="CreateBy" Class="mt-3"
-                                  @bind-Value="_brandVMclient.CreateBy" For="@(() => _brandVMclient.CreateBy)" />
+@*                    <InputSelect class="form-control" @bind-Value="_brandVMclient.Status">
+                        <option>Select Status</option>
+                        @foreach (string item in Enum.GetNames(typeof(Status)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </InputSelect>*@
+                    <MudTextField Label="CreatedBy" Class="mt-3"
+                                  @bind-Value="_brandVMclient.CreatedBy" For="@(() => _brandVMclient.CreatedBy)" />
 
                 </MudCardContent>
                 <MudCardActions>

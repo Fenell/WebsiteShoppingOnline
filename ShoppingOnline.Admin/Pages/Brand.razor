@@ -9,13 +9,13 @@
     <HeaderContent>
         <MudTh>Name</MudTh>
         <MudTh>Status</MudTh>
-        <MudTh>CreateBy</MudTh>
+        <MudTh>CreatedBy</MudTh>
 
     </HeaderContent>
     <RowTemplate >
         <MudTd DataLabel="Nr">@context.Name </MudTd>
         <MudTd DataLabel="Sign">@context.Status</MudTd>
-        <MudTd DataLabel="Name">@context.CreateBy</MudTd>
+            <MudTd DataLabel="CreatedBy">@context.CreatedBy</MudTd>
 
 
             <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success"  Href=@($"/BrandUpdate/{context.Id}")>

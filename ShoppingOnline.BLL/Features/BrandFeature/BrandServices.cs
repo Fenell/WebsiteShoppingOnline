@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Implement;
@@ -15,11 +17,13 @@ public class BrandServices : IBrandServices
 		_brandRepository = brandRepository;
 		_mapper = mapper;
 	}
+
+
 	public async Task<Guid> CreatedBrand(CreatedBrand brand)
 	{
-		var requestMap = _mapper.Map<CreatedBrand, Brand>(brand);
-		await _brandRepository.CreateAsync(requestMap);
-		return requestMap.Id;
+		var brandCreate = _mapper.Map<Brand>(brand);
+		var result = await _brandRepository.CreateAsync(brandCreate);
+		return result;
 	}
 
 	public async Task<bool> DeleteBrand(Guid id)
