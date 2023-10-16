@@ -4,7 +4,7 @@ namespace ShoppingOnline.DAL.Repositories.Interface;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
-	Task<IEnumerable<T>> GetAllAsync();
+	Task<IQueryable<T>> GetAllAsync();
 	Task<T?> GetByIdAsync(Guid id);
 
 	Task<Guid> CreateAsync(T entity);

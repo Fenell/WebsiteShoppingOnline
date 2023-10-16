@@ -1,0 +1,24 @@
+﻿@page "/brandDetail/{BrandId:guid}"
+
+
+<h3>BrandDetail</h3>
+@if (_BrandVM.Name != null)
+{
+    <h3>Detail @_BrandVM.Name</h3>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@_BrandVM.Name</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@_BrandVM.Status</td>
+        </tr>
+        <tr>
+            <td>CreateBy</td>
+            <td>@_BrandVM.CreateBy</td>
+        </tr>
+
+
+    </table>
+}

@@ -1,0 +1,30 @@
+﻿@page "/colors"
+
+@if (colorsVMs == null)
+{
+	<Loading></Loading>
+}
+else
+{
+	<div class="col pt-4">
+		<a href="/ColorCreate" class="btn btn-success">Create</a>
+	</div>
+	<br>
+	<MudTable Items="@colorsVMs" Hover="true" Breakpoint="Breakpoint.Sm">
+		<HeaderContent>
+			<MudTh>Name</MudTh>
+			<MudTh>Status</MudTh>
+			<MudTh>Create by</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Nr">@context.Name</MudTd>
+			<MudTd DataLabel="Sign">@context.Status</MudTd>
+			<MudTd DataLabel="Name">@context.CreatedBy</MudTd>
+			<MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" Href=@($"/ColorUpdate/{context.Id}")>
+			</MudIconButton>
+			<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> OnDeleteColor(context.Id)"></MudIconButton>
+			<MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/ColorDetails/{@context.Id}")>
+			</MudIconButton>
+		</RowTemplate>
+	</MudTable>
+}

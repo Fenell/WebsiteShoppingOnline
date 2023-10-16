@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO.Requests;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;

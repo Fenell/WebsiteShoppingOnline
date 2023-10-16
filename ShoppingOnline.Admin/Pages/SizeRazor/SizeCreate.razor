@@ -1,0 +1,35 @@
+﻿@page "/SizeCreate"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@inject NavigationManager navigationManager
+<h3>Create</h3>
+
+<EditForm Model="_sizeVM" OnValidSubmit="SubmitCreateSize">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <InputText class="form-control" @bind-Value="_sizeVM.Name"></InputText>
+        <ValidationMessage For="()=>_sizeVM.Name" style="color:red"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Create By</label>
+        <InputText class="form-control" @bind-Value="_sizeVM.CreatedBy"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@code {
+    [Inject] private ISizeService _sizeService { get; set; }
+    private SizesVM _sizeVM = new SizesVM();
+    private List<SizesVM> sizeVMs;
+
+    private async Task<bool> SubmitCreateSize(EditContext context)
+    {
+        var result = await _sizeService.CreateSize(_sizeVM);
+        if (result)
+        {
+            navigationManager.NavigateTo("/sizes");
+        }
+        return true;
+    }
+}

@@ -1,0 +1,37 @@
+﻿@page "/brands" 
+
+@if (_brandVM.Count == 0)
+{
+    <span class="loaderAnimation" ></span>
+}else{
+
+    <MudTable Items="_brandVM" Hover="true" Breakpoint="Breakpoint.Sm">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Status</MudTh>
+        <MudTh>CreateBy</MudTh>
+
+    </HeaderContent>
+    <RowTemplate >
+        <MudTd DataLabel="Nr">@context.Name </MudTd>
+        <MudTd DataLabel="Sign">@context.Status</MudTd>
+        <MudTd DataLabel="Name">@context.CreateBy</MudTd>
+
+
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success"  Href=@($"/BrandUpdate/{context.Id}")>
+            </MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> DeleteBrands(context.Id)"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/BrandDetail/{context.Id}")>
+            </MudIconButton>
+
+
+    </RowTemplate>
+    
+</MudTable>
+    <br>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="BrandCreate">Create New</MudButton>
+}
+
+
+
+

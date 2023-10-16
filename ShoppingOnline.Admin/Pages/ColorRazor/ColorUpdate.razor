@@ -1,0 +1,45 @@
+﻿@page "/ColorUpdate/{id:guid}"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@inject NavigationManager navigationManager
+<h3>Updates</h3>
+
+@if (_colorsVM == null)
+{
+    <Loading></Loading>
+}
+else
+{
+    <EditForm Model="_colorsVM" OnValidSubmit="SubmitUpdateColor">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <InputText class="form-control" @bind-Value="_colorsVM.Name"></InputText>
+            <ValidationMessage For="()=>_colorsVM.Name" style="color:red"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public Guid id { get; set; }
+    [Inject] public IColorService _colorService { get; set; }
+    public ColorsVM _colorsVM { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var colorUpdate = await _colorService.GetColor(id);
+        _colorsVM = new ColorsVM();
+        _colorsVM.Id = id;
+        _colorsVM.Name = colorUpdate.Name;
+    }
+
+    public async Task SubmitUpdateColor(EditContext context)
+    {
+        var result = await _colorService.UpdateColor(_colorsVM);
+        if (result)
+        {
+            navigationManager.NavigateTo("/colors");
+        }
+    }
+}
