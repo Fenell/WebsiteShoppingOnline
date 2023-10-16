@@ -1,0 +1,40 @@
+﻿@page "/SizeDetails/{id:guid}"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@if (_sizesVM == null)
+{
+	<Loading></Loading>
+}
+else
+{
+	<h3>SizeDetail</h3>
+	<table style="color:black">
+		<tr>
+			<td>Id :</td>
+			<td> @_sizesVM.Id</td>
+		</tr>
+		<tr>
+			<td>Name : </td>
+			<td>@_sizesVM.Name</td>
+		</tr>
+		<tr>
+			<td>Status :</td>
+			<td>@_sizesVM.Status</td>
+		</tr>
+		<tr>
+			<td>Create By :</td>
+			<td>@_sizesVM.CreatedBy</td>
+		</tr>
+	</table>
+}
+
+@code {
+	[Parameter] public Guid id { get; set; }
+	[Inject] public ISizeService _sizeService { get; set; }
+	public SizesVM _sizesVM;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_sizesVM = await _sizeService.GetSize(id);
+	}
+}

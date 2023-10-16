@@ -1,0 +1,41 @@
+﻿@page "/ColorDetails/{id:guid}"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+@if(_colorsVM == null)
+{
+	<Loading></Loading>
+}
+else
+{
+	<h3>ColorDetails</h3>
+	<table style="color:black">
+		<tr>
+			<td>Id :</td>
+			<td> @_colorsVM.Id</td>
+		</tr>
+		<tr>
+			<td>Name : </td>
+			<td>@_colorsVM.Name</td>
+		</tr>
+		<tr>
+			<td>Status :</td>
+			<td>@_colorsVM.Status</td>
+		</tr>
+		<tr>
+			<td>Create By :</td>
+			<td>@_colorsVM.CreatedBy</td>
+		</tr>
+	</table>
+}
+
+@code{
+	[Parameter] public Guid id { get; set; }
+	[Inject] public IColorService _colorService { get; set; }
+	public ColorsVM _colorsVM;
+
+	protected override async Task OnInitializedAsync()
+	{
+		_colorsVM = await _colorService.GetColor(id);
+	}
+}
+

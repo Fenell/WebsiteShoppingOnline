@@ -43,6 +43,10 @@
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Shared\Loading.razor" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\Authentication\N\" />
+	</ItemGroup>
 	
 	
 </Project>

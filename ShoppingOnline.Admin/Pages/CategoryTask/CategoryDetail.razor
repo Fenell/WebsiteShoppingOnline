@@ -1,0 +1,24 @@
+﻿@page "/categoryDetail/{CategoryId:guid}"
+
+
+<h3>CategoryDetail</h3>
+@if (_CategoryVM.Name != null)
+{
+    <h3>Detail @_CategoryVM.Name</h3>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@_CategoryVM.Name</td>
+        </tr>
+        <tr>
+            <td>SeoTitle</td>
+            <td>@_CategoryVM.SeoTitle</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@_CategoryVM.Status</td>
+        </tr>
+
+
+    </table>
+}
