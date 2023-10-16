@@ -9,4 +9,6 @@ public class ProductImage : BaseEntity
 	public int Position { get; set; }
 	public string Status { get; set; } = EntityStatus.Active;
 	public virtual ProductItem? ProductItem { get; set; }
+
+
 }

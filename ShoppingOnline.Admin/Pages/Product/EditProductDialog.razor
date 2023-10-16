@@ -1,0 +1,130 @@
+﻿@using ShoppingOnline.Admin.Models.Product
+@using ShoppingOnline.Admin.Services.Interface
+
+<MudDialog>
+    <DialogContent>
+        <MudForm @ref="Form" Model="@ProductVm">
+            <MudSelect T="Guid" Label="Category" AnchorOrigin="Origin.BottomCenter" @bind-Value="@ProductVm.CategoryId"
+                       Text="@ProductVm.CategoryName" Validation="new Func<Guid, string>(ValidCategory)">
+                @foreach (var item in ListCategoies)
+                {
+                    <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <MudSelect T="Guid" Label="Brand" AnchorOrigin="Origin.BottomCenter" @bind-Value="@ProductVm.BrandId" Required="true"
+                       Text="@ProductVm.BrandName" Validation="new Func<Guid, string>(ValidBrand)">
+                @foreach (var item in ListBands)
+                {
+                    <MudSelectItem Value="item.Id">@item.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <MudTextField T="string" @bind-Value="ProductVm.Name" Label="Name" Variant="Variant.Text" RequiredError="Nhập tên sản phẩm" Required="true" />
+            <MudNumericField HideSpinButtons="true" T="decimal" @bind-Value="ProductVm.Price" Label="Price"
+                             Variant="Variant.Text" Required="true" RequiredError="Nhập giá sản phẩm" Min="Decimal.One"/>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public ProductVM ProductVm { get; set; } = new();
+    [Parameter]
+    public string ActionName { get; set; }
+    [Inject]
+    public IProductService ProductService { get; set; }
+    [Inject]
+    public ISnackbar SnackbarService { get; set; }
+
+    private MudForm Form;
+
+    private List<BrandVM> ListBands = new();
+    private List<CategoryVM> ListCategoies = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListBands = await ProductService.GetAllBrand();
+        ListCategoies = await ProductService.GetAllCategoy();
+    }
+
+    async Task Submit()
+    {
+        await Form.Validate();
+        if (Form.IsValid)
+        {
+            if (ActionName == "add")
+            {
+                await HandleCreate();
+            }
+            else
+            {
+                await HandleUpdate();
+            }
+        }
+
+    }
+
+    void Cancel() => MudDialog.Cancel();
+
+
+    private async Task HandleCreate()
+    {
+        var request = new ProductCreateRequest()
+        {
+            BrandId = ProductVm.BrandId,
+            CategoryId = ProductVm.CategoryId,
+            Name = ProductVm.Name,
+            Price = ProductVm.Price,
+            Description = ProductVm.Description
+        };
+        var result = await ProductService.CreateProduct(request);
+
+        if (result)
+        {
+            SnackbarService.Add("Cập nhật thành công", Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+
+    private async Task HandleUpdate()
+    {
+        var productUdate = new ProductUpdateRequest()
+        {
+            Id = ProductVm.Id,
+            Name = ProductVm.Name,
+            BrandId = ProductVm.BrandId,
+            CategoryId = ProductVm.CategoryId,
+            Price = ProductVm.Price
+        };
+        var result = await ProductService.UpdateProduct(productUdate);
+
+        if (result)
+        {
+            SnackbarService.Add("Cập nhật thành công", Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+
+    private string ValidCategory(Guid arg)
+    {
+        if (arg == Guid.Empty)
+            return "Chọn loại sản phẩm";
+        return null;
+    }
+
+	private string ValidBrand(Guid arg)
+	{
+		if (arg == Guid.Empty)
+			return "Chọn thương hiệu";
+		return null;
+	}
+
+}

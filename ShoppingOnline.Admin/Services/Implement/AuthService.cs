@@ -1,9 +1,9 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Newtonsoft.Json;
+using ShoppingOnline.Admin.Models.Auth;
 using ShoppingOnline.Admin.Provider;
 using ShoppingOnline.Admin.Services.Interface;
-using ShoppingOnline.Admin.ViewModels.Auth;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 

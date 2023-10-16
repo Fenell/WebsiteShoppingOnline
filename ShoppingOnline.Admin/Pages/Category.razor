@@ -1,0 +1,33 @@
+﻿@page "/categorys"
+@if (_categoryVM.Count == 0)
+{
+        <span class="loaderAnimation2" ></span>
+}
+else
+{
+
+    <MudTable Items="_categoryVM" Hover="true" Breakpoint="Breakpoint.Sm">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>SeoTitle</MudTh>
+            <MudTh>Status</MudTh>
+            
+
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.Name</MudTd>
+            <MudTd DataLabel="Sign">@context.SeoTitle</MudTd>
+            <MudTd DataLabel="Name">@context.Status</MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" Href=@($"/categoryUpdate/{context.Id}")>
+            </MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> DeleteCategorys(context.Id)"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/categoryDetail/{context.Id}")>
+            </MudIconButton>
+        </RowTemplate>
+     
+    </MudTable>
+    <br>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="CategoryCreate">Create New</MudButton>
+}
+
+

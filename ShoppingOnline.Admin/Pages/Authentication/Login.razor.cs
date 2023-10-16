@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using ShoppingOnline.Admin.Models.Auth;
 using ShoppingOnline.Admin.Services.Interface;
-using ShoppingOnline.Admin.ViewModels.Auth;
 
 namespace ShoppingOnline.Admin.Pages.Authentication;
 

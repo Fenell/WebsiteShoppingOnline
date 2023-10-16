@@ -11,6 +11,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.7" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+
 		<PackageReference Include="MudBlazor" Version="6.11.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
@@ -24,6 +26,7 @@
 	  <_ContentIncludedByDefault Remove="Pages\Authentication\LoadingDialog.razor" />
 	  <_ContentIncludedByDefault Remove="Pages\Authentication\Logout.razor" />
 	  <_ContentIncludedByDefault Remove="Pages\Login.razor" />
+	  <_ContentIncludedByDefault Remove="Pages\ProductItem\ProductItemDetailDialog.razor" />
 	  <_ContentIncludedByDefault Remove="Shared\Loading.razor" />
 	  <_ContentIncludedByDefault Remove="Shared\NullLayout.razor" />
 	</ItemGroup>
@@ -42,6 +45,12 @@
 
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Shared\Loading.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+	  <UpToDateCheckInput Remove="Pages\ProductItem\ProductItemDetailDialog.razor" />
+	  <Folder Include="Pages\Authentication\N\" />
 	</ItemGroup>
 	
 	

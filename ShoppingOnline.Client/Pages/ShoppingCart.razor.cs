@@ -109,14 +109,14 @@ public partial class ShoppingCart
 			var result = await _orderClientServices.CreatedOrder(_orderCreated);
 			if (result)
 			{
-				Snackbar.Add("Mua thành công !", Severity.Success);
+				Snackbar.Add("Đặt hàng thành công !", Severity.Success);
 				_navigationManager.NavigateTo("/");
 				_cartDtos = await _localStorageService.GetItemAsync<List<CartDto>>("abc");
 				_localStorageService.RemoveItemAsync("abc");
 			}
 			else
 			{
-				Snackbar.Add("Mua thất bại !", Severity.Error);
+				Snackbar.Add("Đặt hàng thất bại !", Severity.Error);
 			}
 		}
 	}

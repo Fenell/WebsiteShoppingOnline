@@ -1,0 +1,49 @@
+﻿@page "/sizes"
+@using ShoppingOnline.Admin.Services.Interface;
+@using ShoppingOnline.Admin.ViewModels.Models;
+<h3>Sizes</h3>
+
+@if (sizesVMs == null)
+{
+	<Loading></Loading>
+}
+else
+{
+	<div class="col pt-4">
+		<a href="/SizeCreate" class="btn btn-success">Create</a>
+	</div>
+	<br>
+	<MudTable Items="@sizesVMs" Hover="true" Breakpoint="Breakpoint.Sm">
+		<HeaderContent>
+			<MudTh>Name</MudTh>
+			<MudTh>Status</MudTh>
+			<MudTh>Create by</MudTh>
+		</HeaderContent>
+		<RowTemplate>
+			<MudTd DataLabel="Nr">@context.Name</MudTd>
+			<MudTd DataLabel="Sign">@context.Status</MudTd>
+			<MudTd DataLabel="Name">@context.CreatedBy</MudTd>
+			<MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" Href=@($"/SizeUpdate/{context.Id}")>
+			</MudIconButton>
+			<MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> OnDeleteSize(context.Id)"></MudIconButton>
+			<MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/SizeDetails/{@context.Id}")>
+			</MudIconButton>
+		</RowTemplate>
+	</MudTable>
+}
+@code{
+	[Inject] private ISizeService _sizeService { get; set; }
+	public List<SizesVM> sizesVMs { get; set; }
+	protected async override Task OnInitializedAsync()
+	{
+		sizesVMs = await _sizeService.GetAllSizes();
+		StateHasChanged();
+	}
+
+	public async Task<bool> OnDeleteSize(Guid id)
+	{
+		await _sizeService.DeleteSize(id);
+		await OnInitializedAsync();
+		return true;
+	}
+}

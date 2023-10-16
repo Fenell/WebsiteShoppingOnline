@@ -2,58 +2,67 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ColorDTO.Requests;
 using ShoppingOnline.BLL.Features.BrandFeature;
+using ShoppingOnline.BLL.Features.ColorFeature;
 
 namespace ShoppingOnline.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class BrandsController : ControllerBase
 {
-	private readonly IBrandServices _brandServices;
+
+	private readonly IBrandServices _brandService;
 
 	public BrandsController(IBrandServices brandServices)
 	{
-		_brandServices = brandServices;
+		_brandService = brandServices;
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> GetAllBrands()
+	public async Task<IActionResult> GetAllBrand()
 	{
-		var request = await _brandServices.GetAllBrands();
-		return Ok(request);
-	}
+		var result = await _brandService.GetAllBrands();
 
-	[HttpGet]
-	[Route("brand-by-{id}")]
-	public async Task<IActionResult> GetBrandById(Guid id)
-	{
-		var request = await _brandServices.GetBrandById(id);
-		return Ok(request);
+		return Ok(result);
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> CreatedBrand(CreatedBrand createdBrand)
+	public async Task<IActionResult> Create(CreatedBrand request)
 	{
-		var request = await _brandServices.CreatedBrand(createdBrand);
 
-		var requestNew = await _brandServices.GetBrandById(request);
+		var result = await _brandService.CreatedBrand(request);
 
-		return CreatedAtAction(nameof(GetBrandById), requestNew, request);
+		return Ok(result);
+	}
+
+	[HttpGet]
+	[Route("get-by-id-{id}")]
+	public async Task<IActionResult> GetBrandById(Guid id)
+	{
+		var result = await _brandService.GetBrandById(id);
+		return Ok(result);
 	}
 
 	[HttpPut]
-	public async Task<IActionResult> UpdateBrand(UpdateBrand updateBrand)
+	[Route("put-by-id-{id}")]
+	public async Task<IActionResult> Update(Guid id, UpdateBrand request)
 	{
-		var request = await _brandServices.UpdateBrand(updateBrand);
-		return Ok(request);
+		if (id != request.Id)
+		{
+			return NotFound();
+		}
+		await _brandService.UpdateBrand(id, request);
+		return Ok();
 	}
 
 	[HttpDelete]
-	public async Task<IActionResult> DeleteBrand(GetBrand getBrand)
+	[Route("Delete-by-id-{id}")]
+	public async Task<IActionResult> Delete(Guid id)
 	{
-		var request = await _brandServices.DeleteBrand(getBrand);
-		return Ok(request);
+		await _brandService.DeleteBrand(id);
+		return Ok();
 	}
 }

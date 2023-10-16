@@ -24,7 +24,7 @@ public class CategoriesController : ControllerBase
 	}
 
 	[HttpGet]
-	[Route("{id}")]
+	[Route("get-by-id-{id}")]
 	public async Task<IActionResult> Get(Guid id)
 	{
 		var obj = await _categoryService.GetById(id);
@@ -40,19 +40,23 @@ public class CategoriesController : ControllerBase
 	}
 
 	[HttpPut]
-	public async Task<IActionResult> Update(CategoryUpdateRequest request)
+	[Route("put-by-id-{id}")]
+	public async Task<IActionResult> Update(Guid id, CategoryUpdateRequest request)
 	{
-		var result = await _categoryService.UpdateCategory(request);
-
-		return Ok(result);
+		if (id != request.Id)
+		{
+			return NotFound();
+		}
+		await _categoryService.UpdateCategory(id, request);
+		return Ok();
 	}
 
 	[HttpDelete]
+	[Route("Delete-by-id-{id}")]
 	public async Task<IActionResult> Delete(Guid id)
 	{
-		var result = await _categoryService.DeleteCategory(id);
-
-		return Ok(result);
+		await _categoryService.DeleteCategory(id);
+		return Ok();
 	}
 
 }

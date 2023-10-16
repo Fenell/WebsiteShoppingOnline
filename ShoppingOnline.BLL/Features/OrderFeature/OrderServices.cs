@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ShoppingOnline.BLL.DataTransferObjects.OrderDTO;
 using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO;
+using ShoppingOnline.BLL.DataTransferObjects.ProductItemDTO.Requests;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
 using ShoppingOnline.DAL.Repositories.Interface;
@@ -31,6 +32,7 @@ public class OrderServices : IOrderServices
 			Address = createdOrder.Address,
 			PhoneNumber = createdOrder.PhoneNumber,
 			Note = createdOrder.Note,
+			PaymentMethod = createdOrder.PaymentMethod,
 			Total = createdOrder.Total,
 		};
 		var idOrder = await _orderRepository.CreateOrder(request);

@@ -2,11 +2,11 @@
 
 @if (_getColors == null && _getSizes == null)
 {
-    <div>Đang load ...</div>
+    <Loading></Loading>
 }
 else
 {
-    <h2 style="text-align:center" class="m-t-50 m-b-50">Shopping Cart</h2>
+    <h2 style="text-align:center" class="m-t-50 m-b-50">Giỏ hàng</h2>
     <!-- Cart Page Section Begin -->
     <div class="cart-page">
         <div class="container">
@@ -14,13 +14,12 @@ else
                 <table>
                     <thead>
                         <tr>
-                            <th class="product-h">Product</th>
-                            <th>Price</th>
-                            <th>Color</th>
-                            <th>Size</th>
-                            <th class="quan">Quantity</th>
-                            <th>Total</th>
-                            <th></th>
+                            <th class="product-h">Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Màu sắc</th>
+                            <th>Kích cỡ</th>
+                            <th class="quan">Số lượng</th>
+                            <th>Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,16 +73,16 @@ else
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="flex-w flex-m m-r-20 m-tb-5">
-                            <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Coupon Code">
+                            <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Mã giảm giá">
 
                             <div class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                                Apply coupon
+                                Giảm giá
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 offset-lg-1 text-left text-lg-right">
-                        <button @onclick="ClearCart" class="site-btn clear-btn">Clear Cart</button>
-                        <div class="site-btn update-btn hov-btn3 trans-04" @onclick="UpdateCard">Update Cart</div>
+                        <button @onclick="ClearCart" class="site-btn clear-btn">Xoá giỏ hàng</button>
+                        <div class="site-btn update-btn hov-btn3 trans-04" @onclick="UpdateCard">Cập nhật giỏ hàng</div>
                     </div>
                 </div>
             </div>
@@ -97,10 +96,10 @@ else
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Total</th>
-                                            <th>Subtotal</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Tổng phụ</th>
                                             <th>Shipping</th>
-                                            <th class="total-cart">Total Cart</th>
+                                            <th class="total-cart">Tổng tiền giỏ hàng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,20 +120,20 @@ else
                                     <form action="#" class="checkout-form">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <h3>Your Information</h3>
+                                                <h3>Thông tin nhận hàng</h3>
                                             </div>
                                             <div class="col-lg-8">
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <p class="in-name">Name*</p>
+                                                        <p class="in-name">Họ và tên*</p>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <input type="text" @bind-value="_orderCreated.CustomerName">
+                                                        <input type="text" required="true" @bind-value="_orderCreated.CustomerName">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <p class="in-name">Street Address*</p>
+                                                        <p class="in-name">Địa chỉ*</p>
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <input type="text" @bind-value="_orderCreated.Address">
@@ -145,7 +144,7 @@ else
 
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <p class="in-name">Phone*</p>
+                                                        <p class="in-name">Số điện thoại*</p>
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <input type="text" @bind-value="_orderCreated.PhoneNumber">
@@ -154,7 +153,7 @@ else
 
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <p class="in-name">Note</p>
+                                                        <p class="in-name">Ghi chú</p>
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <input type="text" @bind-value="_orderCreated.Note">
@@ -163,16 +162,20 @@ else
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="payment-method">
-                                                    <h3>Payment</h3>
+                                                    <h3>Thanh toán</h3>
                                                     <ul>
-                                                        <li>Paypal <img src="img/paypal.jpg" alt=""></li>
-                                                        <li>Credit / Debit card <img src="img/mastercard.jpg" alt=""></li>
-                                                        <li>
-                                                            <label for="two">Pay when you get the package</label>
-                                                            <input type="radio" id="two">
-                                                        </li>
+                                                        <div class="form-check ">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="inlineRadio1" value="Paypal">
+                                                            <label class="form-check-label" for="inlineRadio1"> Paypal <img src="img/paypal.jpg" alt=""></label>
+                                                        </div>
+
+
+                                                        <div class="form-check ">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="inlineRadio1" value="Mommo">
+                                                            <label class="form-check-label" for="inlineRadio2"> Credit / Debit card <img src="img/mastercard.jpg" alt=""></label>
+                                                        </div>
                                                     </ul>
-                                                    <MudButton class="hov-btn3 trans-04" @onclick="CheckOut">Place your order</MudButton>
+                                                    <MudButton class="hov-btn3 trans-04" @onclick="CheckOut">Đặt hàng</MudButton>
                                                 </div>
                                             </div>
                                         </div>

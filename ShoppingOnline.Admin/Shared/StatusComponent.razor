@@ -1,0 +1,15 @@
+﻿@switch (Status)
+{
+    case "ACTIVE":
+        <MudChip Color="Color.Success">Đang kinh doanh</MudChip>
+        break;
+    case "DELETED":
+        <MudChip Color="Color.Dark">Ngừng kinh doanh</MudChip>
+        break;
+}
+
+@code
+{
+    [Parameter]
+    public string Status { get; set; }
+}
