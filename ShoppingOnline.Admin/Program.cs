@@ -24,10 +24,10 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderServices, OrderServices>();
 builder.Services.AddScoped<IOrderItemsServices, OrderItemsServices>();
-builder.Services.AddScoped<IProductItemsServices, ProductItemsServices>();
-builder.Services.AddScoped<IProductServices, ProductServices>();
-builder.Services.AddScoped<IColorServices, ColorServices>();
-builder.Services.AddScoped<ISizeServices, SizeServices>();
+builder.Services.AddScoped<IProductItemsChienServices, ProductItemsServices>();
+builder.Services.AddScoped<IProductChienServices, ProductServices>();
+builder.Services.AddScoped<IColorChienServices, ColorServices>();
+builder.Services.AddScoped<ISizeChienServices, SizeServices>();
 
 builder.Services.AddHttpClient(ApplicationConstant.ClientName, config =>
 {

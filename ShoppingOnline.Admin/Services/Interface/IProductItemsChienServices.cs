@@ -2,7 +2,7 @@
 
 namespace ShoppingOnline.Admin.Services.Interface;
 
-public interface IProductItemsServices
+public interface IProductItemsChienServices
 {
 	Task<ProductItemsGetDtos> GetProductItemById(Guid id);
 	Task<List<ProductItemsGetDtos>> GetProductItems();

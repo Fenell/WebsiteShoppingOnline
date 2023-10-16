@@ -2,7 +2,7 @@
 
 namespace ShoppingOnline.Admin.Services.Interface;
 
-public interface IProductServices
+public interface IProductChienServices
 {
 	Task<ProductGetDtos> GetProductById(Guid id);
 }
