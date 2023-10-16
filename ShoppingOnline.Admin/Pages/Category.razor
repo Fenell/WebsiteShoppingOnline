@@ -18,10 +18,11 @@ else
             <MudTd DataLabel="Nr">@context.Name</MudTd>
             <MudTd DataLabel="Sign">@context.SeoTitle</MudTd>
             <MudTd DataLabel="Name">@context.Status</MudTd>
-
-            <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/categoryDetail/{context.Id}") />
-            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/categoryUpdate/{context.Id}") />
-            <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteCategorys(context.Id)" />
+            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Success" Href=@($"/categoryUpdate/{context.Id}")>
+            </MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" @onclick="()=> DeleteCategorys(context.Id)"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" Color="Color.Dark" Href=@($"/categoryDetail/{context.Id}")>
+            </MudIconButton>
         </RowTemplate>
      
     </MudTable>
