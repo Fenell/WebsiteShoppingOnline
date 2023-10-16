@@ -6,26 +6,26 @@
 @inject HttpClient HttpClient
 @inject IAuthService AuthService
 
-@if(IsProcessing)
+@if (IsProcessing)
 {
-	<Loading></Loading>
+    <Loading></Loading>
 }
 
 @code {
-	public bool IsProcessing { get; set; }
-	protected override async Task OnInitializedAsync()
-	{
-		IsProcessing = true;
-		var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-		var collectionParsed = QueryHelpers.ParseQuery(uri.Query);
-		if (collectionParsed.Any())
-		{
-			var authoCode = collectionParsed.First(c => c.Key == "code").Value.ToString();
-			bool isLoginSuccess = await AuthService.LoginWithGoogle(authoCode);
+    public bool IsProcessing { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        IsProcessing = true;
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var collectionParsed = QueryHelpers.ParseQuery(uri.Query);
+        if (collectionParsed.Any())
+        {
+            var authoCode = collectionParsed.First(c => c.Key == "code").Value.ToString();
+            bool isLoginSuccess = await AuthService.LoginWithGoogle(authoCode);
 
-			NavigationManager.NavigateTo("/");
-		}
+            NavigationManager.NavigateTo("/");
+        }
 
-	}
+    }
 
 }

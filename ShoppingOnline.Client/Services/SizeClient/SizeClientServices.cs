@@ -13,7 +13,7 @@ public class SizeClientServices : ISizeClientServices
 	}
 	public async Task<IEnumerable<GetSize>> GetAllSizes()
 	{
-		var result = await _httpClient.GetFromJsonAsync<IEnumerable<GetSize>>("https://localhost:7259/api/Sizes/Get-all");
+		var result = await _httpClient.GetFromJsonAsync<IEnumerable<GetSize>>("https://localhost:5004/api/Sizes/Get-all");
 		return result;
 	}
 }

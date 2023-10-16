@@ -54,4 +54,12 @@ public class OrderItemsController : ControllerBase
 		var requestNew = await _orderItemServices.GetOrderItemsById(request);
 		return CreatedAtAction(nameof(GetOrderItemById), request, requestNew);
 	}
+
+	[HttpPut("update-quantity")]
+	public async Task<IActionResult> EditQuantity(OrderItemEdit quantityEdit)
+	{
+		var request = await _orderItemServices.EditOrderItem(quantityEdit);
+		return Ok(request);
+	}
+
 }

@@ -1,0 +1,40 @@
+﻿@page "/order"
+@using ShoppingOnline.Admin.ViewModels.Order
+
+@if (_orderGetDtosEnumerabl.Count() == 0)
+{
+    <Loading></Loading>
+}
+else
+{
+    <MudTable Items="@_orderGetDtosEnumerabl" Hover="@hover" Filter="new Func<OrderGetDtos,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Order</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>CustomerName</MudTh>
+            <MudTh>PhoneNumber</MudTh>
+            <MudTh>Address</MudTh>
+            <MudTh>Total</MudTh>
+            <MudTh>OrderStatus</MudTh>
+            <MudTh>Button</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="CustomerName">@context.CustomerName</MudTd>
+            <MudTd DataLabel="PhoneNumber">@context.PhoneNumber</MudTd>
+            <MudTd DataLabel="Address">@context.Address</MudTd>
+            <MudTd DataLabel="Total">@context.Total.ToString("N0") VND</MudTd>
+            <MudTd DataLabel="OrderStatus">@context.OrderStatus</MudTd>
+            <MudTd DataLabel="Button">
+                <MudIconButton Color="Color.Success" Icon="@Icons.Material.Filled.CheckCircle" @onclick="()=>Confirmed(context.Id)"></MudIconButton>
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" @onclick="()=>Cancel(context.Id)"></MudIconButton>
+                <MudIconButton Color="Color.Default" Icon="@Icons.Material.Filled.RemoveRedEye" @onclick="@((e) => OpenDialog(context))" Variant="Variant.Filled" Size="Size.Small"></MudIconButton>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+}

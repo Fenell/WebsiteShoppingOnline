@@ -1,0 +1,51 @@
+﻿@using ShoppingOnline.Admin.ViewModels.Details
+@if (_lstDetailsAll.Count == 0)
+{
+    <Loading></Loading>
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <MudTable Items="@_lstDetailsAll" Hover="@hover" Filter="new Func<OrderDetailsAll,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+                <HeaderContent>
+                    <MudTh>Name</MudTh>
+                    <MudTh>ColorName</MudTh>
+                    <MudTh>SizeName</MudTh>
+                    <MudTh>Quantity</MudTh>
+                    <MudTh>Button</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@context.Name</MudTd>
+                    <MudTd DataLabel="ColorName">
+                        <MudSelect Margin="Margin.Dense" T="Guid" Label="Màu sắc" Variant="Variant.Outlined" @bind-Value="@context.ColorId">
+                            @foreach (var item in lstColorDtos)
+                            {
+                                <MudSelectItem Value="@(item.Id)">@item.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+                    <MudTd DataLabel="SizeName">
+
+                        <MudSelect Margin="Margin.Dense" T="Guid" Label="Size" Variant="Variant.Outlined" @bind-Value="@context.SizeId">
+                            @foreach (var item in lstSizeDtos)
+                            {
+                                <MudSelectItem Value="@(item.Id)">@item.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudTd>
+                    <MudTd DataLabel="Quantity">
+                        <MudNumericField Variant="Variant.Outlined" Margin="Margin.Dense" Min="1" @bind-Value="@context.Quantity" />
+                    </MudTd>
+                    <MudTd DataLabel="Button">
+                        <MudIconButton Color="Color.Default" Icon="@Icons.Material.Filled.EditNote" @onclick="()=>EditOderItem(context.Id)"></MudIconButton>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+        </DialogActions>
+    </MudDialog>
+}
