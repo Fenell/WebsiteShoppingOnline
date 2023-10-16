@@ -9,4 +9,5 @@ public class OrderGetDtos
 	public string Note { get; set; }
 	public string OrderStatus { get; set; }
 	public decimal Total { get; set; }
+	public DateTime CreatedAt { get; set; }
 }

@@ -43,6 +43,7 @@ public partial class OrderDetailsDialog
 	List<OrderItemsGet> OrderItemsGet = new List<OrderItemsGet>();
 
 	ProductItemsGetDtos ProductItemsGetDtos = new ProductItemsGetDtos();
+	private List<ProductItemsGetDtos> lstProductItemsGetDtos = new List<ProductItemsGetDtos>();
 
 	ProductGetDtos Product = new ProductGetDtos();
 
@@ -69,13 +70,13 @@ public partial class OrderDetailsDialog
 	{
 		OrderGetDtos = await _orderServices.GetOrderById(OrderId);
 		OrderItemsGet = await _OrderItemsServices.GetOrderItems();
-		lstColorDtos = await _ColorServices.GetAllColor();
-		lstSizeDtos = await _SizeServices.GetAllSize();
+		lstProductItemsGetDtos = await _ProductItemsServices.GetProductItems();
 		foreach (var item in OrderItemsGet)
 		{
 			if (item.OrderId == OrderGetDtos.Id)
 			{
 				DetailsAll.Quantity = item.Quantity;
+				DetailsAll.IdProdctItems = item.ProductItemId;
 				ProductItemsGetDtos = await _ProductItemsServices.GetProductItemById(item.ProductItemId);
 				Product = await _ProductServices.GetProductById(ProductItemsGetDtos.ProductId);
 				ColorDtos = await _ColorServices.GetColorById(ProductItemsGetDtos.ColorId);
@@ -89,6 +90,26 @@ public partial class OrderDetailsDialog
 				_lstDetailsAll.Add(DetailsAll);
 				DetailsAll = new OrderDetailsAll();
 			}
+		}
+		LoadSizeColor();
+	}
+
+	protected async void LoadSizeColor()
+	{
+		foreach (var details in _lstDetailsAll)
+		{
+			ProductItemsGetDtos = await _ProductItemsServices.GetProductItemById(details.IdProdctItems);
+			var resultColor = await _ColorServices.GetColorById(ProductItemsGetDtos.ColorId);
+			ColorDtos.Id = resultColor.Id;
+			ColorDtos.Name = resultColor.Name;
+			lstColorDtos.Add(ColorDtos);
+			ColorDtos = new ColorDtos();
+
+			var resultSize = await _SizeServices.GetSizeById(details.SizeId);
+			SizeDtos.Id = resultSize.Id;
+			SizeDtos.Name = resultSize.Name;
+			lstSizeDtos.Add(SizeDtos);
+			SizeDtos = new SizeDtos();
 		}
 	}
 
