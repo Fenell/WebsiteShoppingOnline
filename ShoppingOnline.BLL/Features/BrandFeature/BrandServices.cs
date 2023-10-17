@@ -2,6 +2,7 @@
 using ShoppingOnline.BLL.DataTransferObjects.BrandItemDTO;
 using ShoppingOnline.BLL.Exceptions;
 using ShoppingOnline.DAL.Entities;
+using ShoppingOnline.DAL.Repositories.Identity;
 using ShoppingOnline.DAL.Repositories.Implement;
 using ShoppingOnline.DAL.Repositories.Interface;
 
@@ -10,10 +11,13 @@ public class BrandServices : IBrandServices
 {
 	private readonly IBrandRepository _brandRepository;
 	private readonly IMapper _mapper;
-	public BrandServices(IBrandRepository brandRepository, IMapper mapper)
+	private readonly IUserService _userService;
+
+	public BrandServices(IBrandRepository brandRepository, IMapper mapper, IUserService userService)
 	{
 		_brandRepository = brandRepository;
 		_mapper = mapper;
+		_userService = userService;
 	}
 	public async Task<Guid> CreatedBrand(CreatedBrand brand)
 	{
@@ -40,8 +44,15 @@ public class BrandServices : IBrandServices
 
 	public async Task<List<GetBrand>> GetAllBrands()
 	{
-		var request = await _brandRepository.GetAllBrands();
+		var request = await _brandRepository.GetAllAsync();
 		var requestMap = _mapper.Map<List<GetBrand>>(request);
+
+		foreach (var item in requestMap)
+		{
+			item.CreatedUserName = await _userService.GetUserNameAsync(item.CreatedBy);
+			item.UpdatedUserName = await _userService.GetUserNameAsync(item.UpdateBy);
+		}
+
 		return requestMap;
 	}
 
@@ -53,6 +64,9 @@ public class BrandServices : IBrandServices
 			throw new NotFoundException(nameof(request), id);
 
 		var requestMap = _mapper.Map<GetBrand>(request);
+		requestMap.CreatedUserName = await _userService.GetUserNameAsync(request.CreatedBy);
+		requestMap.UpdatedUserName = await _userService.GetUserNameAsync(request.UpdateBy);
+
 		return requestMap;
 	}
 
@@ -61,8 +75,9 @@ public class BrandServices : IBrandServices
 	{
 		if (id == updateBrand.Id)
 		{
-			var mapRs = _mapper.Map<Brand>(updateBrand);
-			await _brandRepository.UpdateAsync(mapRs);
+			var brandInDb = await _brandRepository.GetByIdAsync(id);
+			_mapper.Map(updateBrand, brandInDb);
+			await _brandRepository.UpdateAsync(brandInDb);
 			return true;
 		}
 		else

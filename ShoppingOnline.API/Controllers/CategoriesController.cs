@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingOnline.BLL.DataTransferObjects.CategoryDTO.Request;
 using ShoppingOnline.BLL.Features.CategoryFeature;
@@ -6,6 +7,7 @@ using ShoppingOnline.BLL.Features.CategoryFeature;
 namespace ShoppingOnline.API.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CategoriesController : ControllerBase
 {
 	private readonly ICategoryService _categoryService;

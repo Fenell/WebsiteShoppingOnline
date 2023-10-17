@@ -1,4 +1,6 @@
 ﻿@page "/BrandCreate"
+@attribute [Authorize(Roles = "Administrator")]
+
 <h3>BrandCreate</h3>
 
 <EditForm Model="@_brandVMclient" OnValidSubmit="SubmidBrandCreate">
@@ -9,11 +11,6 @@
                 <MudCardContent>
                     <MudTextField Label="Name" HelperText="Max. 8 characters"
                                   @bind-Value="_brandVMclient.Name" For="@(() => _brandVMclient.Name)" />
-                    <MudTextField Label="Status" Class="mt-3"
-                                  @bind-Value="_brandVMclient.Status" For="@(() => _brandVMclient.Status)" />
-                    <MudTextField Label="CreateBy" Class="mt-3"
-                                  @bind-Value="_brandVMclient.CreateBy" For="@(() => _brandVMclient.CreateBy)" />
-
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Create</MudButton>
