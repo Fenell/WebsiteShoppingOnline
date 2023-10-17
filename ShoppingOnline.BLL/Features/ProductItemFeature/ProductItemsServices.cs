@@ -94,7 +94,7 @@ public class ProductItemsServices : IProductItemServices
 
 		return await _productItemRepository.DeleteProductItem(request);
 	}
-	
+
 	public async Task<bool> UpdateProductItem(UpdateProductItem updateProductItem)
 	{
 		var request = await _productItemRepository.GetByIdAsync(updateProductItem.Id);
@@ -102,15 +102,15 @@ public class ProductItemsServices : IProductItemServices
 		if (request == null)
 			throw new NotFoundException(nameof(request), updateProductItem.Id);
 
-		var listProductItem = await GetProductItemWithProductId(updateProductItem.Id);
+		var listProductItem = await GetProductItemWithProductId(updateProductItem.ProductId);
 
 		if (listProductItem.Any(c => c.SizeId == updateProductItem.SizeId && c.ColorId == updateProductItem.ColorId))
 			throw new BadRequestExpection(
 				$"The product item with color id:{updateProductItem.ColorId} and size id: {updateProductItem.SizeId}  already exists");
-		
+
 		var productItemMap = _mapper.Map<UpdateProductItem, ProductItem>(updateProductItem, request);
 		var productItemUpdate = await _productItemRepository.UpdateProductItem(productItemMap);
-		
+
 		return productItemUpdate;
 	}
 
@@ -123,22 +123,24 @@ public class ProductItemsServices : IProductItemServices
 		var listProducts = await _productRepository.GetAllAsync();
 
 		var listJoin = (from productItem in listProductItems
-			join product in listProducts on productItem.ProductId equals product.Id
-			join color in listColors on productItem.ColorId equals color.Id
-			join size in listSizes on productItem.SizeId equals size.Id
-			select new GetProductItem()
-			{
-				Id = productItem.Id,
-				ProductId = product.Id,
-				ProductName = product.Name,
-				ColorId = color.Id,
-				ColorName = color.Name,
-				SizeId = size.Id,
-				SizeName = size.Name,
-				Quantity = productItem.Quantity,
-				Status = productItem.Status
-			});
+						join product in listProducts on productItem.ProductId equals product.Id
+						join color in listColors on productItem.ColorId equals color.Id
+						join size in listSizes on productItem.SizeId equals size.Id
+						select new GetProductItem()
+						{
+							Id = productItem.Id,
+							ProductId = product.Id,
+							ProductName = product.Name,
+							ColorId = color.Id,
+							ColorName = color.Name,
+							SizeId = size.Id,
+							SizeName = size.Name,
+							Quantity = productItem.Quantity,
+							Status = productItem.Status
+						});
 
 		return listJoin;
 	}
+
+	
 }

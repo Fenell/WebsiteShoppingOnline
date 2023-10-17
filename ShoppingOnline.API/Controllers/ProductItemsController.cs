@@ -53,7 +53,7 @@ public class ProductItemsController : ControllerBase
 	public async Task<IActionResult> CreateListProductItem(Guid productId, List<ProductItemCreateRequest> requests)
 	{
 		var isSuccess = await _services.CreateListProductItem(productId, requests);
-		
+
 		if (isSuccess)
 			return Ok();
 		return BadRequest();
@@ -63,7 +63,11 @@ public class ProductItemsController : ControllerBase
 	public async Task<IActionResult> UpdateProductItems(UpdateProductItem updateProductItem)
 	{
 		var request = await _services.UpdateProductItem(updateProductItem);
-		return Ok(request);
+
+		if (request)
+			return Ok();
+		return BadRequest();
+
 	}
 
 	[HttpDelete]

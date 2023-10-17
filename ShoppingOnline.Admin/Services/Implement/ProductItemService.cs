@@ -46,11 +46,14 @@ public class ProductItemService:IProductItemService
 		var httpClient = _clientFactory.CreateClient(ApplicationConstant.ClientName);
 
 		var response = await httpClient.PutAsJsonAsync("api/ProductItems", request);
+		return response.IsSuccessStatusCode;
 		if (!response.IsSuccessStatusCode)
 		{
 			var responseContent = await response.Content.ReadAsStringAsync();
+			return false;
 		}
-		return response.IsSuccessStatusCode;
+
+		return true;
 	}
 
 	public async Task<List<ColorVM>> GetAllColor()

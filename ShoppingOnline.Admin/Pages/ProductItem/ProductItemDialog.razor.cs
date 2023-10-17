@@ -38,6 +38,7 @@ public partial class ProductItemDialog
 		var parameters = new DialogParameters<ProductItemDetailDialog>();
 		var options = new DialogOptions() { FullWidth = true };
 		parameters.Add(c => c.ProductItemId, productItemId);
+		parameters.Add(c => c.ProductId, ProductId);
 		var dialog = await DialogService.ShowAsync<ProductItemDetailDialog>("Chi tiết biến thể", parameters, options);
 		var result = await dialog.Result;
 
