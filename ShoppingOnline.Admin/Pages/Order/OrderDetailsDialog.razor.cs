@@ -26,7 +26,7 @@ public partial class OrderDetailsDialog
 			return true;
 		return false;
 	}
-
+	[CascadingParameter] MudDialogInstance MudDialog { get; set; }
 	[Inject] private IOrderServices _orderServices { get; set; }
 	[Inject] private IOrderItemsServices _OrderItemsServices { get; set; }
 	[Inject] private IProductItemsChienServices _ProductItemsServices { get; set; }
@@ -38,12 +38,9 @@ public partial class OrderDetailsDialog
 
 	OrderGetDtos OrderGetDtos = new OrderGetDtos();
 
-	OrderItemsGet orderItem = new OrderItemsGet();
-
 	List<OrderItemsGet> OrderItemsGet = new List<OrderItemsGet>();
 
 	ProductItemsGetDtos ProductItemsGetDtos = new ProductItemsGetDtos();
-	private List<ProductItemsGetDtos> lstProductItemsGetDtos = new List<ProductItemsGetDtos>();
 
 	ProductGetDtos Product = new ProductGetDtos();
 
@@ -56,10 +53,8 @@ public partial class OrderDetailsDialog
 	private OrderDetailsAll DetailsAll = new OrderDetailsAll();
 	private List<OrderDetailsAll> _lstDetailsAll = new List<OrderDetailsAll>();
 
-	OrderItemEditQuantity editQuantity = new OrderItemEditQuantity();
 
-	[CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
+	private int quantityDau;
 
 	void Submit() => MudDialog.Close(DialogResult.Ok(true));
 	void Cancel() => MudDialog.Cancel();
@@ -70,7 +65,6 @@ public partial class OrderDetailsDialog
 	{
 		OrderGetDtos = await _orderServices.GetOrderById(OrderId);
 		OrderItemsGet = await _OrderItemsServices.GetOrderItems();
-		lstProductItemsGetDtos = await _ProductItemsServices.GetProductItems();
 		foreach (var item in OrderItemsGet)
 		{
 			if (item.OrderId == OrderGetDtos.Id)
@@ -98,6 +92,7 @@ public partial class OrderDetailsDialog
 	{
 		foreach (var details in _lstDetailsAll)
 		{
+			
 			ProductItemsGetDtos = await _ProductItemsServices.GetProductItemById(details.IdProdctItems);
 			var resultColor = await _ColorServices.GetColorById(ProductItemsGetDtos.ColorId);
 			ColorDtos.Id = resultColor.Id;
@@ -133,6 +128,7 @@ public partial class OrderDetailsDialog
 							orderItem.ColorId = item.ColorId;
 							await _OrderItemsServices.EditQuantity(orderItem);
 							Snackbar.Add("Đã sửa", Severity.Success);
+							MudDialog.Close(DialogResult.Ok(true));
 						}
 						else
 						{
