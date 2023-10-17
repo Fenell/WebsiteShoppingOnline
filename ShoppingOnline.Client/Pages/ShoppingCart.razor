@@ -14,12 +14,12 @@ else
                 <table>
                     <thead>
                         <tr>
-                            <th class="product-h">Sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Màu sắc</th>
-                            <th>Kích cỡ</th>
-                            <th class="quan">Số lượng</th>
-                            <th>Thành tiền</th>
+                            <th class="product-h" Style="font-weight: bold; font-size: 16px">Sản phẩm</th>
+                            <th Style="font-weight: bold; font-size: 16px">Giá</th>
+                            <th Style="font-weight: bold; font-size: 16px">Màu sắc</th>
+                            <th Style="font-weight: bold; font-size: 16px">Kích cỡ</th>
+                            <th class="quan" Style="font-weight: bold; font-size: 16px">Số lượng</th>
+                            <th Style="font-weight: bold; font-size: 16px">Thành tiền</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +129,7 @@ else
                                                     </div>
                                                     <div class="col-lg-10">
                                                         <input type="text" required="true" @bind-value="_orderCreated.CustomerName">
+                                                        <ValidationMessage For="()=>_orderCreated.CustomerName" style="color:red"></ValidationMessage>
                                                     </div>
                                                 </div>
                                                 <div class="row">
