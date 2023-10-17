@@ -70,7 +70,6 @@ public class BrandServices : IBrandServices
 		return requestMap;
 	}
 
-
 	public async Task<bool> UpdateBrand(Guid id, UpdateBrand updateBrand)
 	{
 		if (id == updateBrand.Id)

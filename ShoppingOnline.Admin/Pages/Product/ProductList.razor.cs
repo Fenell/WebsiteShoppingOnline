@@ -80,8 +80,8 @@ public partial class ProductList
 	private void ViewProductDetail(Guid productId)
 	{
 		var parameter = new DialogParameters<ProductItemDialog>();
-		var options = new DialogOptions() { FullWidth = true};
+		var options = new DialogOptions() { FullWidth = true };
 		parameter.Add(c => c.ProductId, productId);
-		DialogService.ShowAsync<ProductItemDialog>("adsad", parameter, options);
+		DialogService.ShowAsync<ProductItemDialog>("Chi tiết", parameter, options);
 	}
 }

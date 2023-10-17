@@ -44,7 +44,7 @@ public partial class ProductItemDetailDialog
 
 		if (ProductItemId != Guid.Empty)
 		{
-			if (BrowserFiles.Any())
+			if (BrowserFiles != null)
 			{
 				await ProductImageService.CreateProductItem(ProductItemId, BrowserFiles);
 			}
@@ -54,7 +54,8 @@ public partial class ProductItemDetailDialog
 				Id = ProductItemId,
 				SizeId = ProductItem.SizeId,
 				ColorId = ProductItem.ColorId,
-				Quantity = ProductItem.Quantity
+				Quantity = ProductItem.Quantity,
+				ProductId = ProductId
 			};
 			var result = await ProductItemService.UpdateProductItem(productItemUpdate);
 
@@ -62,6 +63,10 @@ public partial class ProductItemDetailDialog
 			{
 				Snackbar.Add("Cập nhật thành công", Severity.Success);
 				MudDialog.Close(DialogResult.Ok(true));
+			}
+			else
+			{
+				Snackbar.Add("Biến thể đã tồn tại", Severity.Error);
 			}
 		}
 		else
