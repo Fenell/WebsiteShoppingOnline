@@ -30,7 +30,6 @@ else
             <MudTd DataLabel="Total">@context.Total.ToString("N0") VND</MudTd>
             <MudTd DataLabel="OrderStatus"><StatusLable OrderStatus="@context.OrderStatus"></StatusLable></MudTd>
             <MudTd DataLabel="OrderStatus">@context.CreatedAt.ToString("dd-MM-yyyy h:mm:ss tt")</MudTd>
-            <MudTd DataLabel="OrderStatus">@context.CreatedAt</MudTd>
             <MudTd DataLabel="Button">
                 <MudIconButton Color="Color.Success" Icon="@Icons.Material.Filled.CheckCircle" @onclick="()=>Confirmed(context.Id)"></MudIconButton>
                 <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" @onclick="()=>Cancel(context.Id)"></MudIconButton>

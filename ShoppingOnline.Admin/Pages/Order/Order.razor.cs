@@ -139,11 +139,19 @@ public partial class Order
 			}
 		}
 	}
-	private void OpenDialog(OrderGetDtos orderGetDtos)
+	private async Task OpenDialog(OrderGetDtos orderGetDtos)
 	{
 		var parameters = new DialogParameters<OrderDetailsDialog>();
 		parameters.Add(c => c.OrderId, orderGetDtos.Id);
-		DialogService.ShowAsync<OrderDetailsDialog>("Chi tiết đơn hàng", parameters);
+		var option = new DialogOptions() { MaxWidth = MaxWidth.ExtraLarge};
+		var dialog = await DialogService.ShowAsync<OrderDetailsDialog>("Chi tiết đơn hàng", parameters, option);
+		var result = await dialog.Result;
+
+		if (!result.Canceled)
+		{
+			await LoadData();
+		}
+
 	}
 
 }
