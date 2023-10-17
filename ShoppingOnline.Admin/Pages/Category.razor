@@ -20,10 +20,9 @@ else
             <MudTd DataLabel="Name">
                 <StatusComponent Status="@context.Status" />
             </MudTd>
-
-            <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/categoryDetail/{context.Id}") />
-            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/categoryUpdate/{context.Id}") />
-            <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteCategorys(context.Id)" />
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.RemoveRedEye" Href=@($"/categoryDetail/{context.Id}") />
+            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Edit" Href=@($"/categoryUpdate/{context.Id}") />
+            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Delete" DisableElevation="true" @onclick="()=> DeleteCategorys(context.Id)" />
         </RowTemplate>
     </MudTable>
     <br>

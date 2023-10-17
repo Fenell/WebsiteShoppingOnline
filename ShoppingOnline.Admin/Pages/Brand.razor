@@ -23,9 +23,9 @@ else
             <MudTd DataLabel="Sign">
                 <StatusComponent Status="@context.Status" />
             </MudTd>
-            <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/BrandDetail/{context.Id}") />
-            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/BrandUpdate/{context.Id}") />
-            <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteBrands(context.Id)" />
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.RemoveRedEye" Href=@($"/BrandDetail/{context.Id}") />
+            <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Edit" Href=@($"/BrandUpdate/{context.Id}") />
+            <MudIconButton Color="Color.Tertiary" Icon="@Icons.Material.Filled.Delete" DisableElevation="true" @onclick="()=> DeleteBrands(context.Id)" />
         </RowTemplate>
 
     </MudTable>
