@@ -32,6 +32,7 @@ public class OrderServices : IOrderServices
 			Address = createdOrder.Address,
 			PhoneNumber = createdOrder.PhoneNumber,
 			Note = createdOrder.Note,
+			PaymentMethod = createdOrder.PaymentMethod,
 			Total = createdOrder.Total,
 		};
 		var idOrder = await _orderRepository.CreateOrder(request);
@@ -73,6 +74,26 @@ public class OrderServices : IOrderServices
 		return await _orderRepository.DeleteAsync(request);
 	}
 
+	public async Task<bool> UpdateOrderStatus(UpdateStatus updateStatus)
+	{
+		var order = await _orderRepository.GetOrderById(updateStatus.Id);
+
+		if (order == null)
+			throw new NotFoundException(nameof(order), updateStatus.Id);
+
+		var orderMap = _mapper.Map<UpdateStatus, Order>(updateStatus, order);
+
+		await _orderRepository.UpdateOrder(orderMap);
+
+		if (updateStatus.OrderStatus == "CANCEL")
+		{
+			var productItem = await _productItemRepository.GetProductItemById(updateStatus.IdProductItems);
+			productItem.Quantity += updateStatus.Quantity;
+			return await _productItemRepository.UpdateAsync(productItem);
+		}
+		return true;
+	}
+
 	public async Task<bool> DeleteOrder(DeleteOrder deleteOrder)
 	{
 		var request = await _orderRepository.GetByIdAsync(deleteOrder.Id);
@@ -95,7 +116,7 @@ public class OrderServices : IOrderServices
 
 	public async Task<IEnumerable<GetOrder>> GetOrders()
 	{
-		var orders = await _orderRepository.GetAllOrders();
+		var orders = (await _orderRepository.GetAllOrders()).OrderByDescending(c => c.CreatedAt);
 		var ordersMap = _mapper.Map<IEnumerable<GetOrder>>(orders);
 		return ordersMap;
 	}

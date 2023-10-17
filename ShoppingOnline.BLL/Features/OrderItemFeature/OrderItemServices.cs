@@ -9,10 +9,15 @@ public class OrderItemServices : IOrderItemServices
 {
 	private readonly IOrderItemRepository _orderItemRepository;
 	private readonly IMapper _mapper;
-	public OrderItemServices(IOrderItemRepository orderItemRepository, IMapper mapper)
+	private readonly IProductItemRepository _productItemRepository;
+	private readonly IOrderRepository _orderRepository;
+
+	public OrderItemServices(IOrderItemRepository orderItemRepository, IMapper mapper, IProductItemRepository productItemRepository, IOrderRepository orderRepository)
 	{
 		_orderItemRepository = orderItemRepository;
 		_mapper = mapper;
+		_productItemRepository = productItemRepository;
+		_orderRepository = orderRepository;
 	}
 
 	public async Task<Guid> CreatedOrderItem(CreatedOrderItem item)
@@ -29,6 +34,32 @@ public class OrderItemServices : IOrderItemServices
 			throw new NotFoundException(nameof(request), deletedHardOrderItem.Id);
 
 		return await _orderItemRepository.DeleteAsync(request);
+	}
+
+	public async Task<bool> EditOrderItem(OrderItemEdit orderItemEdit)
+	{
+		var request = await _orderItemRepository.GetByIdAsync(orderItemEdit.Id);
+		var QuantityDau = request.Quantity;
+		request.Quantity = orderItemEdit.Quantity;
+		await _orderItemRepository.UpdateAsync(request);
+
+		var requestProduct = await _productItemRepository.GetByIdAsync(request.ProductItemId);
+		requestProduct.Quantity -= (orderItemEdit.Quantity - QuantityDau);
+		requestProduct.ColorId = orderItemEdit.ColorId;
+		requestProduct.SizeId = orderItemEdit.SizeId;
+		await _productItemRepository.UpdateAsync(requestProduct);
+
+		var order = await _orderRepository.GetOrderById(request.OrderId);
+		var orderItems = await _orderItemRepository.GetAllAsync();
+		foreach (var item in orderItems)
+		{
+			if (order.Id == item.OrderId)
+			{
+				order.Total = 0;
+				order.Total += (item.Quantity * item.Price);
+			}
+		}
+		return await _orderRepository.UpdateAsync(order);
 	}
 
 	public async Task<bool> DeleteOrderItem(DeleteOrderItem deleteOrderItem)

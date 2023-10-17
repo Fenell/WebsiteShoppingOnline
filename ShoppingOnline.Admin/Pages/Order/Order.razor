@@ -1,0 +1,43 @@
+﻿@page "/order"
+@using ShoppingOnline.Admin.ViewModels.Order
+@using ShoppingOnline.Admin.Pages.Component
+
+@if (_orderGetDtosEnumerabl.Count() == 0)
+{
+    <Loading></Loading>
+}
+else
+{
+    <MudTable Items="@_orderGetDtosEnumerabl" Hover="@hover" Filter="new Func<OrderGetDtos,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Hoá đơn</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Họ tên</MudTh>
+            <MudTh>Số điện thoại</MudTh>
+            <MudTh>Địa chỉ</MudTh>
+            <MudTh>Tổng tiền</MudTh>
+            <MudTh>Trạng thái đơn hàng</MudTh>
+            <MudTh>Ngày tạo</MudTh>
+            <MudTh>Thao tác</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="CustomerName">@context.CustomerName</MudTd>
+            <MudTd DataLabel="PhoneNumber">@context.PhoneNumber</MudTd>
+            <MudTd DataLabel="Address">@context.Address</MudTd>
+            <MudTd DataLabel="Total">@context.Total.ToString("N0") VND</MudTd>
+            <MudTd DataLabel="OrderStatus"><StatusLable OrderStatus="@context.OrderStatus"></StatusLable></MudTd>
+            <MudTd DataLabel="OrderStatus">@context.CreatedAt</MudTd>
+            <MudTd DataLabel="Button">
+                <MudIconButton Color="Color.Success" Icon="@Icons.Material.Filled.CheckCircle" @onclick="()=>Confirmed(context.Id)"></MudIconButton>
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" @onclick="()=>Cancel(context.Id)"></MudIconButton>
+                <MudIconButton Color="Color.Default" Icon="@Icons.Material.Filled.RemoveRedEye" @onclick="@((e) => OpenDialog(context))" Variant="Variant.Filled" Size="Size.Small"></MudIconButton>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+}

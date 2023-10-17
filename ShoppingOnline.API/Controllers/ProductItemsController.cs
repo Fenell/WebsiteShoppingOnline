@@ -32,6 +32,14 @@ public class ProductItemsController : ControllerBase
 	}
 
 	[HttpGet]
+	[Route("product-item-id")]
+	public async Task<IActionResult> GetProductItemsChienById(Guid id)
+	{
+		var request = await _services.GetProductItemChienById(id);
+		return Ok(request);
+	}
+
+	[HttpGet]
 	[Route("get-all/{productId}")]
 	public async Task<IActionResult> GetPoductItemWithProductId(Guid productId)
 	{

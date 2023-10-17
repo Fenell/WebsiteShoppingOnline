@@ -39,10 +39,12 @@ public partial class ProductDetail
 	protected override async Task OnInitializedAsync()
 	{
 		_getProducts = await _productClientServices.GetProductById(ProductId);
-		_getSizes = await _sizeClientServices.GetAllSizes();
-		_getColors = await _colorClientServices.GetAllColors();
-		_getProductItems = await _productItemClientServices.GetProductsAsync();
-
+		_getProductItems = (await _productItemClientServices.GetProductsAsync()).Where(c => c.ProductId == _getProducts.Id);
+		foreach (var color in _getProductItems)
+		{
+			_getColors = (await _colorClientServices.GetAllColors()).Where(c => c.Id == color.ColorId);
+			_getSizes = (await _sizeClientServices.GetAllSizes()).Where(c => c.Id == color.SizeId);
+		}
 	}
 
 	public async Task AddToCard()
@@ -65,7 +67,7 @@ public partial class ProductDetail
 			{
 
 				check1 = true;
-				if (_lstcartDto == null)
+				if (_lstcartDto == null || _lstcartDto.Count <= 0)
 				{
 					if (_cartDto.Quantity > x.Quantity)
 					{
@@ -80,6 +82,11 @@ public partial class ProductDetail
 				else
 				{
 					bool check = false;
+					if (_cartDto.Quantity >x.Quantity)
+					{
+						Snackbar.Add($"Trong kho chỉ còn {x.Quantity} sản phẩm !", Severity.Normal);
+						return;
+					}
 					_cartDto.Name = _getProducts.Name;
 					_cartDto.Price = _getProducts.Price;
 					foreach (var item in _lstcartDto)

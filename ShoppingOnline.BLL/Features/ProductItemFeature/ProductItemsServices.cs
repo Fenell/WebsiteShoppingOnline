@@ -44,6 +44,12 @@ public class ProductItemsServices : IProductItemServices
 
 		return productItemWithJoin;
 	}
+	public async Task<GetProductItem> GetProductItemChienById(Guid id)
+	{
+		var productItem = await _productItemRepository.GetByIdAsync(id);
+		var productItemMap = _mapper.Map<GetProductItem>(productItem);
+		return productItemMap;
+	}
 
 	public async Task<bool> CreateListProductItem(Guid productId, List<ProductItemCreateRequest> requests)
 	{

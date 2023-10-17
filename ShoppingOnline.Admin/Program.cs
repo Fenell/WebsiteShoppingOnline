@@ -22,6 +22,14 @@ builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrderServices, OrderServices>();
+builder.Services.AddScoped<IOrderItemsServices, OrderItemsServices>();
+builder.Services.AddScoped<IProductItemsChienServices, ProductItemsServices>();
+builder.Services.AddScoped<IProductChienServices, ProductServices>();
+builder.Services.AddScoped<IColorChienServices, ColorServices>();
+builder.Services.AddScoped<ISizeChienServices, SizeServices>();
+
 builder.Services.AddHttpClient(ApplicationConstant.ClientName, config =>
 {
 	config.BaseAddress = new Uri(apiUrl);

@@ -13,7 +13,7 @@ public class ColorClientServices : IColorClientServices
 	}
 	public async Task<IEnumerable<GetColor>> GetAllColors()
 	{
-		var result = await _httpClient.GetFromJsonAsync<IEnumerable<GetColor>>("https://localhost:7259/api/Colors");
+		var result = await _httpClient.GetFromJsonAsync<IEnumerable<GetColor>>("https://localhost:5004/api/Colors");
 		return result;
 	}
 }

@@ -14,7 +14,7 @@ public class OrderClientServices : IOrderClientServices
 
 	public async Task<bool> CreatedOrder(OrderCreatedDto createdDto)
 	 {
-		var result = await _httpClient.PostAsJsonAsync("https://localhost:7259/api/Orders", createdDto);
+		var result = await _httpClient.PostAsJsonAsync("https://localhost:5004/api/Orders", createdDto);
 
 		if (!result.IsSuccessStatusCode)
 		{

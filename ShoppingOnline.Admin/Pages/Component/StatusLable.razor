@@ -1,0 +1,20 @@
+﻿@switch (OrderStatus)
+{
+    case "PENDINGFORCOMFIRMATION":
+        <MudChip Size="Size.Medium" Style="width:110px" Color="Color.Dark">Chờ Xác Nhận</MudChip>
+        break;
+    case "CONFIRMED":
+        <MudChip Size="Size.Medium" Style="width:110px" Color="Color.Info">Đã Xác Nhận</MudChip>
+        break;
+    case "SUCCESS":
+        <MudChip Size="Size.Medium" Style="width:110px" Color="Color.Success">Thành Công</MudChip>
+        break;
+    case "CANCEL":
+        <MudChip Size="Size.Medium" Style="width:110px" Color="Color.Error">Huỷ</MudChip>
+        break;
+}
+
+@code {
+    [Parameter]
+    public string OrderStatus { get; set; }
+}

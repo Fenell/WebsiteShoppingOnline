@@ -9,4 +9,5 @@ public interface IOrderServices
 	Task<bool> UpdateOrder(UpdateOrder updateOrder);
 	Task<bool> DeleteOrder(DeleteOrder deleteOrder);
 	Task<bool> DeleteHardOrder(DeleteOrder deletedOrder);
+	Task<bool> UpdateOrderStatus(UpdateStatus updateStatus);
 }
