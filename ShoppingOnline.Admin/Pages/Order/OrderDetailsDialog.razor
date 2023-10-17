@@ -9,11 +9,11 @@ else
         <DialogContent>
             <MudTable Items="@_lstDetailsAll" Hover="@hover" Filter="new Func<OrderDetailsAll,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
                 <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    <MudTh>ColorName</MudTh>
-                    <MudTh>SizeName</MudTh>
-                    <MudTh>Quantity</MudTh>
-                    <MudTh>Button</MudTh>
+                    <MudTh Style="font-weight: bold; font-size: 16px">Name</MudTh>
+                    <MudTh Style="font-weight: bold; font-size: 16px">ColorName</MudTh>
+                    <MudTh Style="font-weight: bold; font-size: 16px">SizeName</MudTh>
+                    <MudTh Style="font-weight: bold; font-size: 16px">Quantity</MudTh>
+                    <MudTh Style="font-weight: bold; font-size: 16px">Button</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Name">@context.Name</MudTd>

@@ -15,6 +15,13 @@ else
             <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         </ToolBarContent>
         <HeaderContent>
+            <MudTh Style="font-weight: bold; font-size: 16px">Họ tên</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Số điện thoại</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Địa chỉ</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Tổng tiền</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Trạng thái đơn hàng</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Ngày tạo</MudTh>
+            <MudTh Style="font-weight: bold; font-size: 16px">Thao tác</MudTh>
             <MudTh>Họ tên</MudTh>
             <MudTh>Số điện thoại</MudTh>
             <MudTh>Địa chỉ</MudTh>
@@ -29,6 +36,7 @@ else
             <MudTd DataLabel="Address">@context.Address</MudTd>
             <MudTd DataLabel="Total">@context.Total.ToString("N0") VND</MudTd>
             <MudTd DataLabel="OrderStatus"><StatusLable OrderStatus="@context.OrderStatus"></StatusLable></MudTd>
+            <MudTd DataLabel="OrderStatus">@context.CreatedAt.ToString("dd-MM-yyyy h:mm:ss tt")</MudTd>
             <MudTd DataLabel="OrderStatus">@context.CreatedAt</MudTd>
             <MudTd DataLabel="Button">
                 <MudIconButton Color="Color.Success" Icon="@Icons.Material.Filled.CheckCircle" @onclick="()=>Confirmed(context.Id)"></MudIconButton>
