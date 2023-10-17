@@ -53,8 +53,7 @@ public partial class OrderDetailsDialog
 	private OrderDetailsAll DetailsAll = new OrderDetailsAll();
 	private List<OrderDetailsAll> _lstDetailsAll = new List<OrderDetailsAll>();
 
-
-	private int quantityDau;
+	private List<OrderDetailsAll> lstQuantityDau = new List<OrderDetailsAll>();
 
 	void Submit() => MudDialog.Close(DialogResult.Ok(true));
 	void Cancel() => MudDialog.Cancel();
@@ -86,13 +85,25 @@ public partial class OrderDetailsDialog
 			}
 		}
 		LoadSizeColor();
+		QuantityDau();
+	}
+
+	protected async void QuantityDau()
+	{
+		foreach (var item in _lstDetailsAll)
+		{
+			DetailsAll = new OrderDetailsAll();
+			DetailsAll.Id = item.Id;
+			DetailsAll.Quantity = item.Quantity;
+			lstQuantityDau.Add(DetailsAll);
+		}
 	}
 
 	protected async void LoadSizeColor()
 	{
 		foreach (var details in _lstDetailsAll)
 		{
-			
+
 			ProductItemsGetDtos = await _ProductItemsServices.GetProductItemById(details.IdProdctItems);
 			var resultColor = await _ColorServices.GetColorById(ProductItemsGetDtos.ColorId);
 			ColorDtos.Id = resultColor.Id;
@@ -114,13 +125,15 @@ public partial class OrderDetailsDialog
 		{
 			var orderItem = await _OrderItemsServices.GetOrderItemEditQuantity(id);
 			var productItem = await _ProductItemsServices.GetProductItemById(orderItem.ProductItemId);
+			var quantityDau = lstQuantityDau.FirstOrDefault(c => c.Id == orderItem.Id);
+			var total = quantityDau.Quantity + productItem.Quantity;
 			foreach (var item in _lstDetailsAll)
 			{
 				if (orderItem.Id == item.Id)
 				{
 					if (item.Quantity > 0)
 					{
-						if (productItem.Quantity >= item.Quantity && productItem.SizeId == item.SizeId &&
+						if (total >= item.Quantity && productItem.SizeId == item.SizeId &&
 							productItem.ColorId == item.ColorId)
 						{
 							orderItem.Quantity = item.Quantity;
@@ -132,7 +145,7 @@ public partial class OrderDetailsDialog
 						}
 						else
 						{
-							Snackbar.Add("Không đủ hàng", Severity.Error);
+							Snackbar.Add($"Không đủ hàng, trong kho còn {productItem.Quantity} sản phẩm", Severity.Error);
 						}
 					}
 					else
