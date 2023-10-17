@@ -11,10 +11,12 @@ namespace ShoppingOnline.DAL.Repositories.Implement;
 public class BrandRepository : GenericRepository<Brand>, IBrandRepository
 {
 	private readonly IGenericRepository<Brand> _genericRepository;
-	public BrandRepository(ApplicationDbContext context, IGenericRepository<Brand> genericRepository) : base(context)
+	private readonly ExtendedApplicationDbContext _extendedApplicationDb;
+
+	public BrandRepository(ApplicationDbContext context, IGenericRepository<Brand> genericRepository, ExtendedApplicationDbContext extendedApplicationDb) : base(context)
 	{
 		_genericRepository = genericRepository;
-
+		_extendedApplicationDb = extendedApplicationDb;
 	}
 
 	public Task<Guid> CreatedBrand(Brand brand)

@@ -1,6 +1,6 @@
 ﻿@page "/CategoryUpdate/{id:guid}"
 <h3>CategoryUpdate</h3>
-
+@attribute [Authorize(Roles = "Administrator")]
 <EditForm Model="_categoryVM" OnValidSubmit="SubmitCategoryUpdate">
     <DataAnnotationsValidator />
     <MudGrid>

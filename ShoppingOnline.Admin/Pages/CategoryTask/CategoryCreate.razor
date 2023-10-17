@@ -1,4 +1,6 @@
 ﻿@page "/CategoryCreate"
+@attribute [Authorize(Roles = "Administrator")]
+
 <h3>CategoryCreate</h3>
 
 <EditForm Model="@_CategoryVM" OnValidSubmit="SubmidBrandCreate">

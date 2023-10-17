@@ -26,12 +26,18 @@ public partial class Login
 	private async Task LoginClick(SignInVM signInVm)
 	{
 		var optionDialog = new DialogOptions() { CloseOnEscapeKey = true};
-		DialogService.Show<LoadingDialog>("Đang đăng nhập", optionDialog);
+		var loginDialog = await DialogService.ShowAsync<LoadingDialog>("Đang đăng nhập", optionDialog);
 		var result = await AuthService.Login(signInVm);
 
 		if (result)
 		{
 			NavigationManager.NavigateTo("/");
+		}
+		else
+		{
+			loginDialog.Close();
+			var parameters = new DialogParameters<LoadingDialog> { { c => c.Content, "Sai tài khoản hoặc mật khẩu" } };
+			await DialogService.ShowAsync<LoadingDialog>("Lỗi", parameters);
 		}
 	}
 }

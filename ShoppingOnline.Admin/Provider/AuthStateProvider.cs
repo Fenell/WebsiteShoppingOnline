@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace ShoppingOnline.Admin.Provider;
@@ -8,11 +9,13 @@ namespace ShoppingOnline.Admin.Provider;
 public class AuthStateProvider : AuthenticationStateProvider
 {
 	private readonly ILocalStorageService _localStorageService;
+	private readonly HttpClient _httpClient;
 	private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
 
-	public AuthStateProvider(ILocalStorageService localStorageService)
+	public AuthStateProvider(ILocalStorageService localStorageService, HttpClient httpClient)
 	{
 		_localStorageService = localStorageService;
+		_httpClient = httpClient;
 		_jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
 	}
 
@@ -33,6 +36,7 @@ public class AuthStateProvider : AuthenticationStateProvider
 		if (DateTime.UtcNow > tokenContent.ValidTo)
 			return new AuthenticationState(user);
 
+	//	_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
 		user = new ClaimsPrincipal(new ClaimsIdentity(userClaims, "jwt"));
 
 		return new AuthenticationState(user);

