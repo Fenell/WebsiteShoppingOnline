@@ -4,5 +4,5 @@ public class CategoryUpdateRequest
 {
 	public Guid Id { get; set; }
 	public string Name { get; set; }
-	public string UpdatedBy { get; set; }
+	public string? UpdatedBy { get; set; }
 }

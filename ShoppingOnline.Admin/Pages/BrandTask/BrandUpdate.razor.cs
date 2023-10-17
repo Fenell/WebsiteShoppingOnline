@@ -18,9 +18,6 @@ public partial class BrandUpdate
 		var rs = await _brandClientService.GetAllBrandClientById(id);
 		_brandVM.Id = id;
 		_brandVM.Name = rs.Name;
-		_brandVM.Status = rs.Status;
-		_brandVM.CreateBy = rs.CreateBy;
-
 	}
 
 	public async Task SubmitBrandUpdate(EditContext context)

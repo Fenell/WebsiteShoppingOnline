@@ -1,29 +1,34 @@
-﻿@page "/brands" 
+﻿@page "/brands"
+@attribute [Authorize(Roles = "Administrator")]
 
 @if (_brandVM.Count == 0)
 {
-    <span class="loaderAnimation" ></span>
-}else{
+    <span class="loaderAnimation"></span>
+}
+else
+{
 
     <MudTable Items="_brandVM" Hover="true" Breakpoint="Breakpoint.Sm">
-    <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Status</MudTh>
-        <MudTh>CreateBy</MudTh>
+        <HeaderContent>
+            <MudTh>Tên</MudTh>
+            <MudTh>Ngày tạo</MudTh>
+            <MudTh>Người tạo</MudTh>
+            <MudTh>Trạng thái</MudTh>
 
-    </HeaderContent>
-    <RowTemplate >
-        <MudTd DataLabel="Nr">@context.Name </MudTd>
-        <MudTd DataLabel="Sign">@context.Status</MudTd>
-        <MudTd DataLabel="Name">@context.CreateBy</MudTd>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.Name </MudTd>
+            <MudTd DataLabel="Name">@context.CreatedAt.ToString("dd/MM/yyy h:mm tt")</MudTd>
+            <MudTd DataLabel="Sign">@context.CreatedUserName</MudTd>
+            <MudTd DataLabel="Sign">
+                <StatusComponent Status="@context.Status" />
+            </MudTd>
             <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/BrandDetail/{context.Id}") />
-            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/BrandUpdate/{context.Id}")/>
+            <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/BrandUpdate/{context.Id}") />
             <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteBrands(context.Id)" />
+        </RowTemplate>
 
-
-    </RowTemplate>
-    
-</MudTable>
+    </MudTable>
     <br>
     <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="BrandCreate">Create New</MudButton>
 }

@@ -1,29 +1,30 @@
 ﻿@page "/categorys"
+@attribute [Authorize(Roles = "Administrator")]
 @if (_categoryVM.Count == 0)
 {
-        <span class="loaderAnimation2" ></span>
+    <span class="loaderAnimation2"></span>
 }
 else
 {
-
     <MudTable Items="_categoryVM" Hover="true" Breakpoint="Breakpoint.Sm">
         <HeaderContent>
             <MudTh>Name</MudTh>
-            <MudTh>SeoTitle</MudTh>
+            <MudTh>Người tạo</MudTh>
+            <MudTh>Thời gian tạo</MudTh>
             <MudTh>Status</MudTh>
-            
-
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Nr">@context.Name</MudTd>
-            <MudTd DataLabel="Sign">@context.SeoTitle</MudTd>
-            <MudTd DataLabel="Name">@context.Status</MudTd>
+            <MudTd DataLabel="Sign">@context.CreatedUserName</MudTd>
+            <MudTd DataLabel="Name">@context.CreatedAt</MudTd>
+            <MudTd DataLabel="Name">
+                <StatusComponent Status="@context.Status" />
+            </MudTd>
 
             <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.FullscreenExit" Href=@($"/categoryDetail/{context.Id}") />
             <MudFab Color="Color.Secondary" StartIcon="@Icons.Material.Filled.BorderColor" Href=@($"/categoryUpdate/{context.Id}") />
             <MudFab Color="Color.Tertiary" StartIcon="@Icons.Material.Filled.DeleteSweep" DisableElevation="true" @onclick="()=> DeleteCategorys(context.Id)" />
         </RowTemplate>
-     
     </MudTable>
     <br>
     <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="CategoryCreate">Create New</MudButton>

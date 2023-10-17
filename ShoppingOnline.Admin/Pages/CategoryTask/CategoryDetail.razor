@@ -7,18 +7,25 @@
     <h3>Detail @_CategoryVM.Name</h3>
     <table class="table">
         <tr>
-            <td>Name</td>
+            <td>Tên</td>
             <td>@_CategoryVM.Name</td>
         </tr>
-        <tr>
-            <td>SeoTitle</td>
-            <td>@_CategoryVM.SeoTitle</td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>@_CategoryVM.Status</td>
-        </tr>
-
+	    <tr>
+		    <td>Ngày tạo</td>
+		    <td>@_CategoryVM.CreatedAt.ToString("dd/MM/yyyy h:mm tt")</td>
+	    </tr>
+	    <tr>
+		    <td>Người tạo</td>
+		    <td>@_CategoryVM.CreatedUserName</td>
+	    </tr>
+	    <tr>
+		    <td>Ngày sửa</td>
+		    <td>@_CategoryVM.UpdateAt.ToString("dd/MM/yyyy h:mm tt")</td>
+	    </tr>
+	    <tr>
+		    <td>Người sửa</td>
+		    <td>@_CategoryVM.UpdatedUserName</td>
+	    </tr>
 
     </table>
 }

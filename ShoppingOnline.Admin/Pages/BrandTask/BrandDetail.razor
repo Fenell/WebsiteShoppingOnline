@@ -1,24 +1,29 @@
 ﻿@page "/brandDetail/{BrandId:guid}"
 
-
-<h3>BrandDetail</h3>
 @if (_BrandVM.Name != null)
 {
-    <h3>Detail @_BrandVM.Name</h3>
+    <h3>Chi tiết @_BrandVM.Name</h3>
     <table class="table">
         <tr>
             <td>Name</td>
             <td>@_BrandVM.Name</td>
         </tr>
         <tr>
-            <td>Status</td>
-            <td>@_BrandVM.Status</td>
+            <td>Ngày tạo</td>
+            <td>@_BrandVM.CreatedAt.ToString("dd/MM/yyyy h:mm tt")</td>
         </tr>
-        <tr>
-            <td>CreateBy</td>
-            <td>@_BrandVM.CreateBy</td>
-        </tr>
-
+	    <tr>
+		    <td>Người tạo</td>
+		    <td>@_BrandVM.CreatedUserName</td>
+	    </tr>
+	    <tr>
+		    <td>Thời gian sửa mới nhất</td>
+		    <td>@_BrandVM.UpdateAt.ToString("dd/MM/yyyy h:mm tt")</td>
+	    </tr>
+	    <tr>
+		    <td>Người sửa</td>
+		    <td>@_BrandVM.UpdatedUserName</td>
+	    </tr>
 
     </table>
 }

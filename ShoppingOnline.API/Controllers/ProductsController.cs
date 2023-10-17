@@ -27,6 +27,7 @@ public class ProductsController : ControllerBase
 
 	[HttpGet]
 	[Route("{productId}")]
+	[ActionName(nameof(GetProductById))]
 	public async Task<IActionResult> GetProductById(Guid productId)
 	{
 		var result = await _productServices.GetProductById(productId);
@@ -38,8 +39,7 @@ public class ProductsController : ControllerBase
 	{
 		var request = await _productServices.CreateProduct(createProduct);
 
-		var newProduct = await _productServices.GetProductById(request);
-		return CreatedAtAction(nameof(GetProductById), request, newProduct);
+		return CreatedAtAction(nameof(GetProductById), new {productId = request}, new GetProducts());
 	}
 
 	[HttpPut]

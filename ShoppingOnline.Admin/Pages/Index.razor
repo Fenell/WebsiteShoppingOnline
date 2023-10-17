@@ -1,5 +1,6 @@
 ﻿@page "/"
-@*@attribute [Authorize]*@
+
+@attribute [Authorize(Roles = "Administrator")]
 <!-- Begin Page Content -->
 <!-- Page Heading -->
 @if (IsProcessing)
